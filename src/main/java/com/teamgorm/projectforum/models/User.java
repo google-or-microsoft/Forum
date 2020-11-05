@@ -19,4 +19,7 @@ public class User {
     private Integer privilege;
     private String user_name;
     private String email_address;
+
+
+
 }
