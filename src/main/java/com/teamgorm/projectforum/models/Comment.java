@@ -13,4 +13,8 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String text;
+    private String date;
+    private Long user_id;
+    private Long post_id;
 }

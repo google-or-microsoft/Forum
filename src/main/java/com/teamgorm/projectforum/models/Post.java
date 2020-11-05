@@ -13,4 +13,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String date;
+    private String text;
+    private Long user_id;
 }
