@@ -8,11 +8,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Entity(name = "commments")
+@Entity(name = "comments")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-
+    private Long id;
 }
