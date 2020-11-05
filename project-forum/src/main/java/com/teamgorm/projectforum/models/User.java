@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//just a test
     private Integer id;
     private String password;
     private Integer privilege;
