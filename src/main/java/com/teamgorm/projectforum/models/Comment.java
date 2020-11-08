@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "comments")
-
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +19,5 @@ public class Comment {
     private String date;
     private Long user_id;
     private Long post_id;
+
 }
