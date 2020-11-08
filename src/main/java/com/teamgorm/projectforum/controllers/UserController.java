@@ -3,6 +3,7 @@ package com.teamgorm.projectforum.controllers;
 
 import com.teamgorm.projectforum.models.User;
 import com.teamgorm.projectforum.repositories.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,4 +35,10 @@ public class UserController {
         userRepository.deleteById(id);
     }
 
+    @PutMapping("/api/v1/users/{id}")
+    public User update(@PathVariable Long id, @RequestBody User user){
+        User existingUser = userRepository.getOne(id);
+        BeanUtils.copyProperties(user, existingUser, "id");
+        return userRepository.saveAndFlush(existingUser);
+    }
 }
