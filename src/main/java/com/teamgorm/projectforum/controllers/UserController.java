@@ -25,7 +25,7 @@ public class UserController {
         return userRepository.getOne(id);
     }
 
-    @PostMapping("/api/v1/user")
+    @PostMapping("/api/v1/users")
     public User create(@RequestBody User user){
         return userRepository.saveAndFlush(user);
     }
