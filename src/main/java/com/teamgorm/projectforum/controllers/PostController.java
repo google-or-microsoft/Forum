@@ -36,7 +36,7 @@ public class PostController {
     @PutMapping("/api/v1/posts/{id}")
     public Post update(@PathVariable Long id, @RequestBody Post post){
         Post existingPost = postRepository.getOne(id);
-        BeanUtils.copyProperties(post, existingPost, "post_id");
+        BeanUtils.copyProperties(post, existingPost, "id");
         return postRepository.saveAndFlush(existingPost);
     }
 }
