@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
+import { Link } from 'react-router-dom';
 
 class PostList extends Component {
 
@@ -44,12 +45,12 @@ class PostList extends Component {
             return <tr key={post.id}>
                 <td>{post.text}</td>
                 <td>
-                    {post.user_name}
                     {post.date}
                 </td>
                 <td>
                     <ButtonGroup>
-                        <Button size="sm" color="primary" onClick={() => this.remove(post.id)}>
+                        <Button size="sm" color="primary" tag={Link} to={"/posts/" + post.id}>Edit</Button>
+                        <Button size="sm" color="danger" onClick={() => this.remove(post.id)}>
                             Delete
                         </Button>
                     </ButtonGroup>
@@ -61,9 +62,9 @@ class PostList extends Component {
             <div>
                 <AppNavbar />
                 <Container fluid>
-                    {/* <div className="float-right">
+                    <div className="float-right">
                         <Button color="success" tag={Link} to="/posts/new">Add Post</Button>
-                    </div> */}
+                    </div>
                     <h3>My Post List</h3>
                     <Table className="mt-4">
                         <thead>
