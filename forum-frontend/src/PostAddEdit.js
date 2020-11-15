@@ -9,7 +9,13 @@ class PostAddEdit extends Component {
     id: '',
     date: '',
     text: '',
-    user_id: '1'
+    user: {
+      "id": 1,
+      "password": "admin01",
+      "privilege": 0,
+      "user_name": "admin1",
+      "email_address": "admin1@gmail.com"
+    }
   };
 
   constructor(props) {

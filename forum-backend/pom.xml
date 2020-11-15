@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.rainyforest</groupId>
-	<artifactId>project-forum</artifactId>
+	<artifactId>forum-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>project-forum</name>
+	<name>forum-backend</name>
 	<description>Team project for Spring Boot</description>
 
 	<properties>
