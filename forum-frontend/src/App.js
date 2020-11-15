@@ -1,10 +1,10 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, { Component } from 'react';
-import Home from './Home';
-import PostList from './PostList';
-import PostAddEdit from './PostAddEdit';
-import PostView from "./PostView";
+import Home from './components/home/Home';
+import PostList from './components/post/PostList';
+import PostAddEdit from './components/post/PostAddEdit';
+import PostView from "./components/post/PostView";
 
 class App extends Component {
 
