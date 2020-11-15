@@ -6,6 +6,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -22,7 +24,8 @@ public class Post {
 
     private String text;
 
-    private Long user_id;
+    @ManyToOne
+    private User user;
 }
 
 

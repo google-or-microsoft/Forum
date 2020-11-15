@@ -45,6 +45,7 @@ class PostList extends Component {
             return <tr key={post.id}>
                 <td>{post.text}</td>
                 <td>
+                    {post.user.user_name}
                     {post.date}
                 </td>
                 <td>
