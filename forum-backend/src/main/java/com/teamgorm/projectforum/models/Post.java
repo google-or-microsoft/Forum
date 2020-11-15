@@ -22,6 +22,8 @@ public class Post {
     @CreatedDate
     private Date date;
 
+    private String title;
+
     private String text;
 
     @ManyToOne

@@ -27,10 +27,11 @@ class PostAddEdit extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (this.props.match.params.id !== 'new') {
-      const post = await (await fetch(`/api/v1/posts/${this.props.match.params.id}`)).json();
-      this.setState({post: post});
+      fetch(`/api/v1/posts/${this.props.match.params.id}`)
+          .then(response => response.json())
+          .then(data => this.setState({post: data}));
     }
   }
 
