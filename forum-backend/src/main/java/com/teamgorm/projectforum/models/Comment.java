@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,6 +20,11 @@ public class Comment {
 
     @CreatedDate
     private Date date;
-    private Long user_id;
-    private Long post_id;
+
+    @JsonIgnore
+    @ManyToOne
+    private Post post;
+
+    @ManyToOne
+    private User user;
 }
