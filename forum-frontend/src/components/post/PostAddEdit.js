@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import AppNavbar from './AppNavbar';
+import AppNavbar from '../common/AppNavbar';
 
 class PostAddEdit extends Component {
 
@@ -27,10 +27,11 @@ class PostAddEdit extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (this.props.match.params.id !== 'new') {
-      const post = await (await fetch(`/api/v1/posts/${this.props.match.params.id}`)).json();
-      this.setState({post: post});
+      fetch(`/api/v1/posts/${this.props.match.params.id}`)
+          .then(response => response.json())
+          .then(data => this.setState({post: data}));
     }
   }
 
