@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import AppNavbar from '../common/AppNavbar';
 
 class PostAddEdit extends Component {
@@ -74,8 +76,16 @@ class PostAddEdit extends Component {
                    onChange={this.handleChange} autoComplete="text"/>
           </FormGroup>
           <FormGroup>
-            <Button color="primary" type="submit">Save</Button>{' '}
-            <Button color="secondary" tag={Link} to="/posts">Cancel</Button>
+            <Button
+            variant="contained"
+            color="primary"
+            type="submit">Save</Button>{' '}
+
+            <Button
+            variant="contained"
+            color="secondary"
+            component={Link} to={'/posts'}>Cancel</Button>
+
           </FormGroup>
         </Form>
       </Container>
