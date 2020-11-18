@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import {  ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from '../common/AppNavbar';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 class PostList extends Component {
 
@@ -51,12 +52,15 @@ class PostList extends Component {
                     {post.date}
                 </td>
                 <td>
-                    <ButtonGroup>
-                        <Button size="sm" color="primary" tag={Link} to={"/posts/" + post.id + "/edit"}>Edit</Button>
-                        <Button size="sm" color="danger" onClick={() => this.remove(post.id)}>
+
+                <ButtonGroup>
+                        <Button size="sm" variant="outlined" color="primary"  tag={Link} href={"/posts/" + post.id + "/edit"}>Edit
+                        </Button>
+                          &nbsp;
+                        <Button size="sm" variant="outlined" color="secondary" onClick={() => this.remove(post.id)}>
                             Delete
                         </Button>
-                    </ButtonGroup>
+                  </ButtonGroup>
                 </td>
             </tr>
         });
@@ -66,7 +70,7 @@ class PostList extends Component {
                 <AppNavbar />
                 <Container fluid>
                     <div className="float-right">
-                        <Button color="success" tag={Link} to="/posts/new/edit">Add Post</Button>
+                        <Button variant="outlined" color="primary" component={Link} to="/posts/new/edit">Add Post</Button>
                     </div>
                     <h3>My Post List</h3>
                     <Table className="mt-4">
