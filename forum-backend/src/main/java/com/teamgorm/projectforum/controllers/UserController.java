@@ -16,27 +16,27 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/api/v1/users")
-    public List<User> list(){
+    public List<User> list() {
         return userRepository.findAll();
     }
 
     @GetMapping("/api/v1/users/{id}")
-    public User get(@PathVariable (value="id") Long id){
+    public User get(@PathVariable(value = "id") Long id) {
         return userRepository.getOne(id);
     }
 
     @PostMapping("/api/v1/users")
-    public User create(@RequestBody User user){
+    public User create(@RequestBody User user) {
         return userRepository.saveAndFlush(user);
     }
 
     @DeleteMapping("/api/v1/users/{id}")
-    public void delete(@PathVariable (value="id") Long id){
+    public void delete(@PathVariable(value = "id") Long id) {
         userRepository.deleteById(id);
     }
 
     @PutMapping("/api/v1/users/{id}")
-    public User update(@PathVariable Long id, @RequestBody User user){
+    public User update(@PathVariable Long id, @RequestBody User user) {
         User existingUser = userRepository.getOne(id);
         BeanUtils.copyProperties(user, existingUser, "id");
         return userRepository.saveAndFlush(existingUser);

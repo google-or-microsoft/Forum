@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "users")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,6 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
-
-
 
 
 }

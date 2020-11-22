@@ -1,40 +1,39 @@
-import React, { Component } from 'react';
-import {  ButtonGroup, Container, Table } from 'reactstrap';
+import React, {Component} from 'react';
+import {ButtonGroup, Container, Table} from 'reactstrap';
 import AppNavbar from '../common/AppNavbar';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import {Link} from 'react-router-dom';
+import {Button} from '@material-ui/core';
+import axios from "axios";
 
 class PostList extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { posts: [], isLoading: true };
+        this.state = {posts: [], isLoading: true};
         this.remove = this.remove.bind(this);
     }
 
     componentDidMount() {
-        this.setState({ isLoading: true });
+        this.setState({isLoading: true});
 
-        fetch('/api/v1/posts')
-            .then(response => response.json())
-            .then(data => this.setState({ posts: data, isLoading: false }));
+        axios
+            .get(`/api/v1/posts`)
+            .then(res => {
+                this.setState({posts: res.data, isLoading: false});
+            })
     }
 
-     remove(id) {
-         fetch(`/api/v1/posts/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then(() => {
-            let updatedPosts = [...this.state.posts].filter(i => i.id !== id);
-            this.setState({ posts: updatedPosts });
-        });
+    remove(id) {
+        axios
+            .delete(`/api/v1/posts/${id}`)
+            .then(() => {
+                let updatedPosts = [...this.state.posts].filter(i => i.id !== id);
+                this.setState({posts: updatedPosts});
+            });
     }
 
     render() {
-        const { posts, isLoading } = this.state;
+        const {posts, isLoading} = this.state;
 
         if (isLoading) {
             return <p>Loading Content...</p>;
@@ -45,7 +44,7 @@ class PostList extends Component {
         const postList = posts.map(post => {
             return <tr key={post.id}>
                 <td>
-                    <Link to={"/posts/"+post.id}>{post.title}</Link><br/>
+                    <Link to={"/posts/" + post.id}>{post.title}</Link><br/>
                 </td>
                 <td>
                     {post.user.user_name}
@@ -53,36 +52,38 @@ class PostList extends Component {
                 </td>
                 <td>
 
-                <ButtonGroup>
-                        <Button size="sm" variant="outlined" color="primary"  tag={Link} href={"/posts/" + post.id + "/edit"}>Edit
+                    <ButtonGroup>
+                        <Button size="sm" variant="outlined" color="primary" tag={Link}
+                                href={"/posts/" + post.id + "/edit"}>Edit
                         </Button>
-                          &nbsp;
+                        &nbsp;
                         <Button size="sm" variant="outlined" color="secondary" onClick={() => this.remove(post.id)}>
                             Delete
                         </Button>
-                  </ButtonGroup>
+                    </ButtonGroup>
                 </td>
             </tr>
         });
 
         return (
             <div>
-                <AppNavbar />
+                <AppNavbar/>
                 <Container fluid>
                     <div className="float-right">
-                        <Button variant="outlined" color="primary" component={Link} to="/posts/new/edit">Add Post</Button>
+                        <Button variant="outlined" color="primary" component={Link} to="/posts/new/edit">Add
+                            Post</Button>
                     </div>
                     <h3>My Post List</h3>
                     <Table className="mt-4">
                         <thead>
-                            <tr>
-                                <th width="20%">Title</th>
-                                <th width="50%">Text</th>
-                                <th width="10%">Actions</th>
-                            </tr>
+                        <tr>
+                            <th width="20%">Title</th>
+                            <th width="50%">Text</th>
+                            <th width="10%">Actions</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {postList}
+                        {postList}
                         </tbody>
                     </Table>
                 </Container>
