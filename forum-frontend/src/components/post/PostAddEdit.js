@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
 import AppNavbar from '../common/AppNavbar';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class PostAddEdit extends Component {
 
@@ -71,9 +72,16 @@ class PostAddEdit extends Component {
         {title}
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-            <Label for="text">Text</Label>
-            <Input type="text" name="text" id="text" value={post.text || ''}
-                   onChange={this.handleChange} autoComplete="text"/>
+            <Label for="text">Title</Label>
+            <Input type="text" name="title" id="title" value={post.title || ''}
+                   onChange={this.handleChange} autoComplete="text"/><br/>
+            <CKEditor
+                editor={ ClassicEditor }
+                data={ post.text }
+                onChange={ ( event, editor ) => {
+                  post.text = editor.getData();
+                }}
+            />
           </FormGroup>
           <FormGroup>
             <Button
@@ -85,7 +93,6 @@ class PostAddEdit extends Component {
             variant="contained"
             color="secondary"
             component={Link} to={'/posts'}>Cancel</Button>
-
           </FormGroup>
         </Form>
       </Container>
