@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import AppNavbar from '../common/AppNavbar';
 import { Redirect } from "react-router-dom";
 import axios from 'axios';
+import parse from 'html-react-parser';
+
 
 class PostView extends Component {
 
@@ -34,17 +36,16 @@ class PostView extends Component {
             return <Redirect to="/PageNotFound"/>
         }
         const title = <h2>{post.title}</h2>;
-        const text = <h2>{post.text}</h2>;
+        const text = <p>{parse(post.text)}</p>;
 
-        const commentsList = (post.comments !== null) ?
-            post.comments.map(comment =>{
-                return <tr key={comment.id}>
-                            <td>
-                                {comment.text}<br/>
-                                {comment.user.user_name}
-                            </td>
-                       </tr>
-            }) : <div></div>;
+        const commentsList = post.comments.map(comment =>{
+            return <tr key={comment.id}>
+                        <td>
+                            {comment.text}<br/>
+                            {comment.user.user_name}
+                        </td>
+                   </tr>
+            })
 
 
         return <div>
