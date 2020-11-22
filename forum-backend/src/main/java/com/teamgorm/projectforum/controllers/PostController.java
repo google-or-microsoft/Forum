@@ -14,27 +14,27 @@ public class PostController {
     private PostRepository postRepository;
 
     @GetMapping("/api/v1/posts")
-    public List<Post> getAll(){
+    public List<Post> getAll() {
         return postRepository.findAll();
     }
 
     @GetMapping("/api/v1/posts/{id}")
-    public Post get(@PathVariable(value="id") Long id){
+    public Post get(@PathVariable(value = "id") Long id) {
         return postRepository.getOne(id);
     }
 
     @PostMapping("/api/v1/posts")
-    public Post create(@RequestBody final Post post){
+    public Post create(@RequestBody final Post post) {
         return postRepository.saveAndFlush(post);
     }
 
     @DeleteMapping("/api/v1/posts/{id}")
-    public void delete(@PathVariable(value="id") Long id){
+    public void delete(@PathVariable(value = "id") Long id) {
         postRepository.deleteById(id);
     }
 
     @PutMapping("/api/v1/posts/{id}")
-    public Post update(@PathVariable Long id, @RequestBody Post post){
+    public Post update(@PathVariable Long id, @RequestBody Post post) {
         Post existingPost = postRepository.getOne(id);
         BeanUtils.copyProperties(post, existingPost, "id");
         return postRepository.saveAndFlush(existingPost);

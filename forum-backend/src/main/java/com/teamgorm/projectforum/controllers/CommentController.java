@@ -16,29 +16,29 @@ public class CommentController {
     private CommentRepository commentRepository;
 
     @GetMapping("/api/v1/comments")
-    public List<Comment> list(){
+    public List<Comment> list() {
         return commentRepository.findAll();
     }
 
     @GetMapping("/api/v1/comments/{id}")
-    public Comment get(@PathVariable (value="id") Long id){
+    public Comment get(@PathVariable(value = "id") Long id) {
         return commentRepository.getOne(id);
     }
 
     @PostMapping("/api/v1/comments")
-    public Comment create(@RequestBody Comment comment){
+    public Comment create(@RequestBody Comment comment) {
         return commentRepository.saveAndFlush(comment);
     }
 
     @DeleteMapping("/api/v1/comments/{id}")
-    public void delete(@PathVariable (value="id") Long id){
+    public void delete(@PathVariable(value = "id") Long id) {
         commentRepository.deleteById(id);
     }
 
     @PutMapping("/api/v1/comments/{id}")
-    public Comment update(@PathVariable Long id, @RequestBody Comment comment){
+    public Comment update(@PathVariable Long id, @RequestBody Comment comment) {
         Comment existingComment = commentRepository.getOne(id);
-        BeanUtils.copyProperties(comment, existingComment,"id");
+        BeanUtils.copyProperties(comment, existingComment, "id");
         return commentRepository.saveAndFlush(existingComment);
     }
 }

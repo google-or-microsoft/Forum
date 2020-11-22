@@ -1,14 +1,14 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="project-forum" type="CompoundRunConfigurationType" folderName="New Folder">
-    <toRun name="start" type="js.build_tools.npm" />
-    <toRun name="ProjectForumApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="open-browser" type="JavascriptDebugType" />
-    <method v="2" />
-  </configuration>
-  <configuration default="false" name="project-forum" type="CompoundRunConfigurationType">
-    <toRun name="start" type="js.build_tools.npm" />
-    <toRun name="ProjectForumApplication" type="SpringBootApplicationConfigurationType" />
-    <toRun name="open-browser" type="JavascriptDebugType" />
-    <method v="2" />
-  </configuration>
+    <configuration default="false" name="project-forum" type="CompoundRunConfigurationType" folderName="New Folder">
+        <toRun name="start" type="js.build_tools.npm"/>
+        <toRun name="ProjectForumApplication" type="SpringBootApplicationConfigurationType"/>
+        <toRun name="open-browser" type="JavascriptDebugType"/>
+        <method v="2"/>
+    </configuration>
+    <configuration default="false" name="project-forum" type="CompoundRunConfigurationType">
+        <toRun name="start" type="js.build_tools.npm"/>
+        <toRun name="ProjectForumApplication" type="SpringBootApplicationConfigurationType"/>
+        <toRun name="open-browser" type="JavascriptDebugType"/>
+        <method v="2"/>
+    </configuration>
 </component>

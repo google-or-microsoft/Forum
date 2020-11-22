@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Redirect, withRouter} from 'react-router-dom';
 import AppNavbar from '../common/AppNavbar';
-import { Redirect } from "react-router-dom";
 import axios from 'axios';
-import parse from 'html-react-parser';
-
 
 class PostView extends Component {
 
@@ -15,7 +12,7 @@ class PostView extends Component {
 
     componentDidMount() {
         let curr = this;
-        curr.setState({ isLoading: true });
+        curr.setState({isLoading: true});
         axios
             .get(`/api/v1/posts/${curr.props.match.params.id}`)
             .then(res => {
@@ -28,11 +25,11 @@ class PostView extends Component {
     }
 
     render() {
-        const { post, isLoading, redirect} = this.state;
-        if (isLoading){
+        const {post, isLoading, redirect} = this.state;
+        if (isLoading) {
             return <p>Loading detailed page....</p>;
         }
-        if (redirect){
+        if (redirect) {
             return <Redirect to="/PageNotFound"/>
         }
         const title = <h2>{post.title}</h2>;
@@ -50,7 +47,7 @@ class PostView extends Component {
 
         return <div>
             <AppNavbar/>
-            <div style={{marginLeft:"15em"}}>
+            <div style={{marginLeft: "15em"}}>
                 {title}
                 {text}
                 <br/>

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import AppNavbar from './components/common/AppNavbar';
 
 class PageNotFound extends Component {
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <AppNavbar/>
                 <div>
