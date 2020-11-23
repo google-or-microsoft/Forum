@@ -1,4 +1,4 @@
-Initialize Project:
+# Initialize Project:
 
 Step 1. Clone from GitHub files to clone the project.
 
