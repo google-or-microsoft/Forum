@@ -14,11 +14,11 @@ Step 4. Copy a local branch from remote branch
 
 # Start A Ticket
 
-1. Pick a ticket (issue) from GitHub Board
+**Step 1. Pick a ticket (issue) from GitHub Board**
 
-Tickets will initially be on your To Do column
+  Tickets will initially be on your To Do column
 
-2. Work on a new issue
+**Step 2. Work on a new issue**
 
   Board actions:
 
@@ -40,9 +40,9 @@ Tickets will initially be on your To Do column
   ```git rebase origin/master```    
   ```git push -f ```    
 
-3. Submit pull request for code review
+**Step 3. Submit pull request for code review**
 
-  - Create pull request, link your pull request to the issue
+  Create pull request, link your pull request to the issue
 
   Board actions:
 
