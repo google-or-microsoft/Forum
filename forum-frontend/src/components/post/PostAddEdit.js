@@ -50,11 +50,11 @@ class PostAddEdit extends Component {
         this.setState({post});
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         const {post} = this.state;
 
-        axios({
+        await axios({
             method: (post.id) ? 'PUT' : 'POST',
             url: `/api/v1/posts/${post.id}`,
             headers: {
@@ -62,7 +62,8 @@ class PostAddEdit extends Component {
                 'Content-Type': 'application/json'
             },
             data: JSON.stringify(post)
-        }).then(this.props.history.push('/posts'));
+        });
+        this.props.history.push('/posts');
     }
 
     render() {
