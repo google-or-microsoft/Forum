@@ -1,8 +1,8 @@
-package com.teamgorm.projectforum.controllers;
+package com.teamgorm.projectforum.controller;
 
 
-import com.teamgorm.projectforum.models.User;
-import com.teamgorm.projectforum.repositories.UserRepository;
+import com.teamgorm.projectforum.model.User;
+import com.teamgorm.projectforum.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

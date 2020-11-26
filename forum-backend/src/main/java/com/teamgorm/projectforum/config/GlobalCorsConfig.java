@@ -1,4 +1,4 @@
-package com.teamgorm.projectforum.configs;
+package com.teamgorm.projectforum.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

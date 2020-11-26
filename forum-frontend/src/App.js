@@ -6,6 +6,7 @@ import PostList from './components/post/PostList';
 import PostAddEdit from './components/post/PostAddEdit';
 import PostView from "./components/post/PostView";
 import PageNotFound from "./PageNotFound";
+import UserProfile from "./components/user/UserProfile";
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
                     <Route path='/posts' exact={true} component={PostList}/>
                     <Route path='/posts/:id' exact={true} component={PostView}/>
                     <Route path='/posts/:id/edit' component={PostAddEdit}/>
+                    <Route path='/users/:id' component={UserProfile}/>
                     <Route path='*' component={PageNotFound}/>
                 </Switch>
             </Router>

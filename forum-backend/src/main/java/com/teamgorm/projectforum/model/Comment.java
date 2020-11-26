@@ -1,36 +1,29 @@
-package com.teamgorm.projectforum.models;
+package com.teamgorm.projectforum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
-@Entity(name = "posts")
-@EntityListeners(AuditingEntityListener.class)
+@Entity(name = "comments")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Post {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String text;
 
     @CreatedDate
     private Date date;
 
-    private String title;
-
-    private String text;
+    @JsonIgnore
+    @ManyToOne
+    private Post post;
 
     @ManyToOne
     private User user;
-
-
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
 }
-
-

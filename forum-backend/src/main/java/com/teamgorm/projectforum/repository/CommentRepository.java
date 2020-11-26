@@ -1,6 +1,6 @@
-package com.teamgorm.projectforum.repositories;
+package com.teamgorm.projectforum.repository;
 
-import com.teamgorm.projectforum.models.Comment;
+import com.teamgorm.projectforum.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {

@@ -1,8 +1,8 @@
-package com.teamgorm.projectforum.controllers;
+package com.teamgorm.projectforum.controller;
 
 
-import com.teamgorm.projectforum.models.Comment;
-import com.teamgorm.projectforum.repositories.CommentRepository;
+import com.teamgorm.projectforum.model.Comment;
+import com.teamgorm.projectforum.repository.CommentRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
