@@ -16,8 +16,8 @@ Technique | Description | Version
 Back-end
 Technique | Description | Version
 ------- | -------- | --------
-[Spring Boot](https://spring.io/projects/spring-boot) | A back-end Java framework | 2.3.4.RELEASE
-[Lombok](https://projectlombok.org/)|A Java Library to simplify code| 1.18.12
+[Spring Boot](https://spring.io/projects/spring-boot) | Back-end Java framework | 2.3.4.RELEASE
+[Lombok](https://projectlombok.org/)| Java Library to simplify code| 1.18.12
 [MySQL](https://www.mysql.com/)|Database| 5.7
 
 
