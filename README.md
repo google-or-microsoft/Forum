@@ -10,7 +10,7 @@ This is a forum project.
 Front-end
 Technique | Description | Version 
 ------- | -------- | --------
-[React](https://reactjs.org/) | A JavaScript UI library | 17.0.1
+[React](https://reactjs.org/) | JavaScript UI library | 17.0.1
 [Axios](https://github.com/axios/axios) | Promise based HTTP client | 0.21.0
 
 Back-end
