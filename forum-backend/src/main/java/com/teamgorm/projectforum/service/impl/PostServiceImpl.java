@@ -22,6 +22,19 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getByAuthor(String author) {
         User user = userRepository.findByName(author);
+        //TODO: Implement polymorphism exception throwing process
+        // ie: UserNotFoundException
+        if (user != null) {
+            return postRepository.findAllByUser(user);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Post> getAllByUserId(Long id) {
+        //TODO: Implement polymorphism exception throwing process
+        // ie: UserNotFoundException
+        User user = userRepository.getOne(id);
         if (user != null) {
             return postRepository.findAllByUser(user);
         }

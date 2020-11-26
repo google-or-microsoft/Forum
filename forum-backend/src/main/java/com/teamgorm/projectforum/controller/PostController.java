@@ -28,10 +28,7 @@ public class PostController {
     }
 
     @GetMapping("/api/v1/posts/user/{id}")
-    public List<Post> getAllByUser(@PathVariable(value = "id") Long id) {
-        User user = userRepository.getOne(id);
-        return postRepository.findAllByUser(user);
-    }
+    public List<Post> getAllByUser(@PathVariable(value = "id") Long id) { return postService.getAllByUserId(id); }
 
     @GetMapping("/api/v1/posts/{id}")
     public Post get(@PathVariable(value = "id") Long id) {
