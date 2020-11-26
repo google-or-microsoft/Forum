@@ -1,4 +1,4 @@
-package com.teamgorm.projectforum.models;
+package com.teamgorm.projectforum.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,8 +16,8 @@ public class User {
     private Long id;
     private String password;
     private Integer privilege;
-    private String user_name;
-    private String email_address;
+    private String name;
+    private String email;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -26,6 +26,4 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
-
-
 }
