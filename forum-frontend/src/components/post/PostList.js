@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ButtonGroup, Container, Table} from 'reactstrap';
+import {ButtonGroup, Container, Table} from '@material-ui/core';
 import AppNavbar from '../common/AppNavbar';
 import {Link} from 'react-router-dom';
 import {Button} from '@material-ui/core';
@@ -53,11 +53,11 @@ class PostList extends Component {
                 <td>
 
                     <ButtonGroup>
-                        <Button size="sm" variant="outlined" color="primary" tag={Link}
+                        <Button size="small" variant="outlined" color="primary" tag={Link}
                                 href={"/posts/" + post.id + "/edit"}>Edit
                         </Button>
                         &nbsp;
-                        <Button size="sm" variant="outlined" color="secondary" onClick={() => this.remove(post.id)}>
+                        <Button size="small" variant="outlined" color="secondary" onClick={() => this.remove(post.id)}>
                             Delete
                         </Button>
                     </ButtonGroup>
