@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 public class PostController {
     @Autowired
@@ -27,25 +28,25 @@ public class PostController {
         return postRepository.findAll();
     }
 
-    @GetMapping("/api/v1/posts/user/{id}")
+    @GetMapping("/user/{id}")
     public List<Post> getAllByUser(@PathVariable(value = "id") Long id) { return postService.getAllByUserId(id); }
 
-    @GetMapping("/api/v1/posts/{id}")
+    @GetMapping("/{id}")
     public Post get(@PathVariable(value = "id") Long id) {
         return postRepository.getOne(id);
     }
 
-    @PostMapping("/api/v1/posts")
+    @PostMapping
     public Post create(@RequestBody final Post post) {
         return postRepository.saveAndFlush(post);
     }
 
-    @DeleteMapping("/api/v1/posts/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         postRepository.deleteById(id);
     }
 
-    @PutMapping("/api/v1/posts/{id}")
+    @PutMapping("/{id}")
     public Post update(@PathVariable Long id, @RequestBody Post post) {
         Post existingPost = postRepository.getOne(id);
         BeanUtils.copyProperties(post, existingPost, "id");

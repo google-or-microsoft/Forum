@@ -17,8 +17,8 @@ class App extends Component {
                     <Route path='/' exact={true} component={Home}/>
                     <Route path='/posts' exact={true} component={PostList}/>
                     <Route path='/posts/:id' exact={true} component={PostView}/>
-                    <Route path='/posts/:id/edit' component={PostAddEdit}/>
-                    <Route path='/users/:id' component={UserProfile}/>
+                    <Route path='/posts/:id/edit' exact={true} component={PostAddEdit}/>
+                    <Route path='/users/:id' exact={true} component={UserProfile}/>
                     <Route path='*' component={PageNotFound}/>
                 </Switch>
             </Router>
