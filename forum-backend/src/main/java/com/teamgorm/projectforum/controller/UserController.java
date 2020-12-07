@@ -11,31 +11,33 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin
+@RequestMapping("/api/v1/users")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/api/v1/users")
+    @GetMapping
     public List<User> list() {
         return userRepository.findAll();
     }
 
-    @GetMapping("/api/v1/users/{id}")
+    @GetMapping("/{id}")
     public User get(@PathVariable(value = "id") Long id) {
         return userRepository.getOne(id);
     }
 
-    @PostMapping("/api/v1/users")
+    @PostMapping
     public User create(@RequestBody User user) {
         return userRepository.saveAndFlush(user);
     }
 
-    @DeleteMapping("/api/v1/users/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         userRepository.deleteById(id);
     }
 
-    @PutMapping("/api/v1/users/{id}")
+    @PutMapping("/{id}")
     public User update(@PathVariable Long id, @RequestBody User user) {
         User existingUser = userRepository.getOne(id);
         BeanUtils.copyProperties(user, existingUser, "id");

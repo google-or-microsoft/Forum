@@ -11,31 +11,33 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin
+@RequestMapping("/api/v1/comments")
 public class CommentController {
     @Autowired
     private CommentRepository commentRepository;
 
-    @GetMapping("/api/v1/comments")
+    @GetMapping
     public List<Comment> list() {
         return commentRepository.findAll();
     }
 
-    @GetMapping("/api/v1/comments/{id}")
+    @GetMapping("/{id}")
     public Comment get(@PathVariable(value = "id") Long id) {
         return commentRepository.getOne(id);
     }
 
-    @PostMapping("/api/v1/comments")
+    @PostMapping
     public Comment create(@RequestBody Comment comment) {
         return commentRepository.saveAndFlush(comment);
     }
 
-    @DeleteMapping("/api/v1/comments/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         commentRepository.deleteById(id);
     }
 
-    @PutMapping("/api/v1/comments/{id}")
+    @PutMapping("/{id}")
     public Comment update(@PathVariable Long id, @RequestBody Comment comment) {
         Comment existingComment = commentRepository.getOne(id);
         BeanUtils.copyProperties(comment, existingComment, "id");
