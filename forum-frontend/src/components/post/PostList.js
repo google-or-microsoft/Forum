@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import {ButtonGroup, Container, Table} from '@material-ui/core';
+import {Button, ButtonGroup, Container, Table} from '@material-ui/core';
 import AppNavbar from '../common/AppNavbar';
 import {Link} from 'react-router-dom';
-import {Button} from '@material-ui/core';
 import axios from "axios";
 
 class PostList extends Component {

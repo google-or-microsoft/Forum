@@ -19,9 +19,9 @@ class PostView extends Component {
             .then(res => {
                 curr.setState({post: res.data, isLoading: false});
             })
-            .catch(err => {
-                curr.setState({redirect: true, isLoading: false});
-            });
+            .catch(
+                curr.setState({redirect: true, isLoading: false})
+            );
 
     }
 
@@ -36,14 +36,14 @@ class PostView extends Component {
         const title = <h2>{post.title}</h2>;
         const text = <p>{parse(post.text)}</p>;
 
-        const commentsList = post.comments.map(comment =>{
+        const commentsList = post.comments.map(comment => {
             return <tr key={comment.id}>
-                        <td>
-                            {comment.text}<br/>
-                            {comment.user.user_name}
-                        </td>
-                   </tr>
-            })
+                <td>
+                    {comment.text}<br/>
+                    {comment.user.user_name}
+                </td>
+            </tr>
+        })
 
 
         return <div>
