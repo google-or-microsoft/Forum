@@ -15,7 +15,6 @@ import java.util.List;
 @Document(collection = "posts")
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date date;
