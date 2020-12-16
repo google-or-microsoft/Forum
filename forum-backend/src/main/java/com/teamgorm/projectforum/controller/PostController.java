@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -31,18 +32,18 @@ public class PostController {
 
     @GetMapping("/user/{id}")
     public List<Post> getAllByUser(@PathVariable(value = "id") Long id) {
-        User user = userRepository.getOne(id);
-        return postRepository.findAllByUser(user);
+        Optional<User> user = userRepository.findById(id);
+        return postRepository.findAllByUser(user.get());
     }
 
     @GetMapping("/{id}")
-    public Post get(@PathVariable(value = "id") Long id) {
-        return postRepository.getOne(id);
+    public Optional<Post> get(@PathVariable(value = "id") Long id) {
+        return postRepository.findById(id);
     }
 
     @PostMapping
     public Post create(@RequestBody final Post post) {
-        return postRepository.saveAndFlush(post);
+        return postRepository.save(post);
     }
 
     @DeleteMapping("/{id}")
@@ -50,11 +51,10 @@ public class PostController {
         postRepository.deleteById(id);
     }
 
-    // @PreAuthorize("isAuthorize()")
     @PutMapping("/{id}")
     public Post update(@PathVariable Long id, @RequestBody Post post) {
-        Post existingPost = postRepository.getOne(id);
+        Optional<Post> existingPost = postRepository.findById(id);
         BeanUtils.copyProperties(post, existingPost, "id");
-        return postRepository.saveAndFlush(existingPost);
+        return postRepository.save(existingPost.get());
     }
 }
