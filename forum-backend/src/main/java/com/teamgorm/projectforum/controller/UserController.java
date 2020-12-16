@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -21,13 +22,13 @@ public class UserController {
     }
 
     @GetMapping("/api/v1/users/{id}")
-    public User get(@PathVariable(value = "id") Long id) {
-        return userRepository.getOne(id);
+    public Optional<User> get(@PathVariable(value = "id") Long id) {
+        return userRepository.findById(id);
     }
 
     @PostMapping("/api/v1/users")
     public User create(@RequestBody User user) {
-        return userRepository.saveAndFlush(user);
+        return userRepository.save(user);
     }
 
     @DeleteMapping("/api/v1/users/{id}")
@@ -37,8 +38,8 @@ public class UserController {
 
     @PutMapping("/api/v1/users/{id}")
     public User update(@PathVariable Long id, @RequestBody User user) {
-        User existingUser = userRepository.getOne(id);
+        Optional<User> existingUser = userRepository.findById(id);
         BeanUtils.copyProperties(user, existingUser, "id");
-        return userRepository.saveAndFlush(existingUser);
+        return userRepository.save(existingUser.get());
     }
 }

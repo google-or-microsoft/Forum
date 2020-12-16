@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin
 @RestController
+@RequestMapping("/api/v1/posts")
 public class PostController {
     @Autowired
     private PostRepository postRepository;
@@ -22,33 +25,37 @@ public class PostController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/api/v1/posts")
+    @GetMapping
     public List<Post> getAll() {
         return postRepository.findAll();
     }
 
-    @GetMapping("/api/v1/posts/user/{id}")
-    public List<Post> getAllByUser(@PathVariable(value = "id") Long id) { return postService.getAllByUserId(id); }
-
-    @GetMapping("/api/v1/posts/{id}")
-    public Post get(@PathVariable(value = "id") Long id) {
-        return postRepository.getOne(id);
+    @GetMapping("/user/{id}")
+    public List<Post> getAllByUser(@PathVariable(value = "id") Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return postRepository.findAllByUser(user.get());
     }
 
-    @PostMapping("/api/v1/posts")
+    @GetMapping("/{id}")
+    public Optional<Post> get(@PathVariable(value = "id") Long id) {
+        return postRepository.findById(id);
+    }
+
+    @PostMapping
     public Post create(@RequestBody final Post post) {
-        return postRepository.saveAndFlush(post);
+        return postRepository.save(post);
     }
 
-    @DeleteMapping("/api/v1/posts/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         postRepository.deleteById(id);
     }
 
-    @PutMapping("/api/v1/posts/{id}")
+    // @PreAuthorize("isAuthorize()")
+    @PutMapping("/{id}")
     public Post update(@PathVariable Long id, @RequestBody Post post) {
-        Post existingPost = postRepository.getOne(id);
+        Optional<Post> existingPost = postRepository.findById(id);
         BeanUtils.copyProperties(post, existingPost, "id");
-        return postRepository.saveAndFlush(existingPost);
+        return postRepository.save(existingPost.get());
     }
 }

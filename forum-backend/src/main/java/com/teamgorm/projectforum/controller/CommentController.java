@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -21,13 +22,13 @@ public class CommentController {
     }
 
     @GetMapping("/api/v1/comments/{id}")
-    public Comment get(@PathVariable(value = "id") Long id) {
-        return commentRepository.getOne(id);
+    public Optional<Comment> get(@PathVariable(value = "id") Long id) {
+        return commentRepository.findById(id);
     }
 
     @PostMapping("/api/v1/comments")
     public Comment create(@RequestBody Comment comment) {
-        return commentRepository.saveAndFlush(comment);
+        return commentRepository.save(comment);
     }
 
     @DeleteMapping("/api/v1/comments/{id}")
@@ -37,8 +38,8 @@ public class CommentController {
 
     @PutMapping("/api/v1/comments/{id}")
     public Comment update(@PathVariable Long id, @RequestBody Comment comment) {
-        Comment existingComment = commentRepository.getOne(id);
+        Optional<Comment> existingComment = commentRepository.findById(id);
         BeanUtils.copyProperties(comment, existingComment, "id");
-        return commentRepository.saveAndFlush(existingComment);
+        return commentRepository.save(existingComment.get());
     }
 }
