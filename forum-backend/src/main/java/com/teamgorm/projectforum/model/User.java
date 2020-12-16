@@ -21,11 +21,7 @@ public class User {
     private String name;
     private String email;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 }

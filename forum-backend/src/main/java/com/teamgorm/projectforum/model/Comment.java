@@ -14,14 +14,12 @@ import java.util.Date;
 @Document(collection = "comments")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String text;
 
-    @CreatedDate
     private Date date;
 
-    @JsonIgnore
     private Post post;
 
     private User user;
