@@ -1,7 +1,6 @@
 package com.teamgorm.projectforum.service;
 
 import com.teamgorm.projectforum.model.Post;
-import com.teamgorm.projectforum.model.User;
 
 import java.util.List;
 
