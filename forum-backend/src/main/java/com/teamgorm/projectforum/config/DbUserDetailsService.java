@@ -20,7 +20,7 @@ public class DbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.getByUsername(username);
+        User user = userService.getByName(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not exist!");
         }

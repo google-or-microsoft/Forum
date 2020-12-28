@@ -4,5 +4,6 @@ import com.teamgorm.projectforum.model.User;
 
 public interface UserService {
 
-    User getByUsername(String username);
+    User getByName(String username);
+
 }

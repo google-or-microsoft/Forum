@@ -23,7 +23,7 @@ class Login extends Component {
         axios.get(`/admin/login`,
             {headers: {authorization: this.createBasicAuthToken(login.username, login.password)}});
 
-        this.props.history.push('/login');
+        this.props.history.push('/');
     }
 
     render() {
