@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @GetMapping("/api/v1/users/{id}")
-    public Optional<User> get(@PathVariable(value = "id") Long id) {
+    public Optional<User> get(@PathVariable(value = "id") String id) {
         return userRepository.findById(id);
     }
 
@@ -32,14 +32,17 @@ public class UserController {
     }
 
     @DeleteMapping("/api/v1/users/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
+    public void delete(@PathVariable(value = "id") String id) {
         userRepository.deleteById(id);
     }
 
     @PutMapping("/api/v1/users/{id}")
-    public User update(@PathVariable Long id, @RequestBody User user) {
+    public User update(@PathVariable String id, @RequestBody User user) {
         Optional<User> existingUser = userRepository.findById(id);
         BeanUtils.copyProperties(user, existingUser, "id");
+        if (!existingUser.isPresent()) {
+            throw new IllegalStateException("Post not found.");
+        }
         return userRepository.save(existingUser.get());
     }
 }

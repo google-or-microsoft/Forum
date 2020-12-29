@@ -22,7 +22,7 @@ public class CommentController {
     }
 
     @GetMapping("/api/v1/comments/{id}")
-    public Optional<Comment> get(@PathVariable(value = "id") Long id) {
+    public Optional<Comment> get(@PathVariable(value = "id") String id) {
         return commentRepository.findById(id);
     }
 
@@ -32,14 +32,17 @@ public class CommentController {
     }
 
     @DeleteMapping("/api/v1/comments/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
+    public void delete(@PathVariable(value = "id") String id) {
         commentRepository.deleteById(id);
     }
 
     @PutMapping("/api/v1/comments/{id}")
-    public Comment update(@PathVariable Long id, @RequestBody Comment comment) {
+    public Comment update(@PathVariable String id, @RequestBody Comment comment) {
         Optional<Comment> existingComment = commentRepository.findById(id);
         BeanUtils.copyProperties(comment, existingComment, "id");
+        if (!existingComment.isPresent()) {
+            throw new IllegalStateException("Post not found.");
+        }
         return commentRepository.save(existingComment.get());
     }
 }

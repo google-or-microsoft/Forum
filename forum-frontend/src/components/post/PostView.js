@@ -22,7 +22,6 @@ class PostView extends Component {
             .catch(err => {
                 curr.setState({redirect: true, isLoading: false});
             });
-
     }
 
     render() {
@@ -36,15 +35,14 @@ class PostView extends Component {
         const title = <h2>{post.title}</h2>;
         const text = <p>{parse(post.text)}</p>;
 
-        const commentsList = post.comments.map(comment =>{
-            return <tr key={comment.id}>
-                        <td>
-                            {comment.text}<br/>
-                            {comment.user.user_name}
-                        </td>
-                   </tr>
-            })
-
+        // const commentsList = post.comments.map(comment =>{
+        //     return <tr key={comment.id}>
+        //                 <td>
+        //                     {comment.text}<br/>
+        //                     {comment.user.user_name}
+        //                 </td>
+        //            </tr>
+        //     })
 
         return <div>
             <AppNavbar/>
@@ -54,7 +52,7 @@ class PostView extends Component {
                 <br/>
                 <br/>
                 <p>Comments of this post</p>
-                {commentsList}
+                {/*{commentsList}*/}
             </div>
         </div>
     }

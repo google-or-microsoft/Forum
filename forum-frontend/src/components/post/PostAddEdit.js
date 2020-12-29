@@ -13,13 +13,14 @@ class PostAddEdit extends Component {
         id: '',
         date: '',
         text: '',
-        user: {
-            "id": 1,
-            "password": "admin01",
-            "privilege": 0,
-            "user_name": "admin1",
-            "email_address": "admin1@gmail.com"
-        }
+        user:
+            {
+                "id": {"$oid": "5feab6d231521c7b4f43184a"},
+                "password": "password",
+                "privilege": "1",
+                "name": "Jue",
+                "email": "rainyforest@gmail.com"
+            }
     };
 
     constructor(props) {
