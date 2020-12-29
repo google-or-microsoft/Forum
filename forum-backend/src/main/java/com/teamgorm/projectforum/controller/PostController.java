@@ -31,13 +31,17 @@ public class PostController {
     }
 
     @GetMapping("/user/{id}")
-    public List<Post> getAllByUser(@PathVariable(value = "id") Long id) {
+    public List<Post> getAllByUser(@PathVariable(value = "id") String id) {
         Optional<User> user = userRepository.findById(id);
-        return postRepository.findAllByUser(user.get());
+        if (!user.isPresent()) {
+            throw new IllegalStateException("User not found.");
+        }
+        String userName = user.get().getName();
+        return postRepository.findAllByUserName(userName);
     }
 
     @GetMapping("/{id}")
-    public Optional<Post> get(@PathVariable(value = "id") Long id) {
+    public Optional<Post> get(@PathVariable(value = "id") String id) {
         return postRepository.findById(id);
     }
 
@@ -47,14 +51,17 @@ public class PostController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") Long id) {
+    public void delete(@PathVariable(value = "id") String id) {
         postRepository.deleteById(id);
     }
 
     @PutMapping("/{id}")
-    public Post update(@PathVariable Long id, @RequestBody Post post) {
+    public Post update(@PathVariable String id, @RequestBody Post post) {
         Optional<Post> existingPost = postRepository.findById(id);
         BeanUtils.copyProperties(post, existingPost, "id");
+        if (!existingPost.isPresent()) {
+            throw new IllegalStateException("Post not found.");
+        }
         return postRepository.save(existingPost.get());
     }
 }
