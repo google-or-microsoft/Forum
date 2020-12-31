@@ -46,7 +46,7 @@ class PostList extends Component {
                     <Link to={"/posts/" + post.id}>{post.title}</Link><br/>
                 </td>
                 <td>
-                    <Link to={"/users/" + post.username}>{post.username}</Link><br/>
+                    <Link to={"/users/" + post.userName}>{post.userName}</Link><br/>
                     {post.date}
                 </td>
                 <td>

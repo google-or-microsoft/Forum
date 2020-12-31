@@ -14,7 +14,7 @@ class UserProfile extends Component {
         let curr = this;
         curr.setState({isLoading: true});
         axios
-            .get(`/api/v1/posts/user/${curr.props.match.params.id}`)
+            .get(`/api/v1/posts/user/${curr.props.match.params.userName}`)
             .then(res => {
                 curr.setState({posts: res.data, isLoading: false});
             })
@@ -32,7 +32,7 @@ class UserProfile extends Component {
         if (redirect) {
             return <Redirect to="/PageNotFound"/>
         }
-        const userName = posts[0].user.name;
+        const userName = posts[0].userName;
         const postsList = posts.map(post => {
             return <tr key={post.id}>
                 <td>

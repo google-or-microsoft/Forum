@@ -30,14 +30,9 @@ public class PostController {
         return postRepository.findAll();
     }
 
-    @GetMapping("/user/{id}")
-    public List<Post> getAllByUser(@PathVariable(value = "id") String id) {
-        Optional<User> user = userRepository.findById(id);
-        if (!user.isPresent()) {
-            throw new IllegalStateException("User not found.");
-        }
-        String userName = user.get().getName();
-        return postRepository.findAllByUserName(userName);
+    @GetMapping("/user/{userName}")
+    public List<Post> getAllByUserName(@PathVariable(value = "userName") String userName) {
+        return postService.getByUserName(userName);
     }
 
     @GetMapping("/{id}")
