@@ -9,18 +9,19 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 class PostAddEdit extends Component {
 
+    defaultUser = {
+            "id": {"$oid": "5feab6d231521c7b4f43184a"},
+            "password": "password",
+            "privilege": "1",
+            "name": "Jue",
+            "email": "rainyforest@gmail.com"
+    }
+
     emptyPost = {
         id: '',
         date: '',
         text: '',
-        user:
-            {
-                "id": {"$oid": "5feab6d231521c7b4f43184a"},
-                "password": "password",
-                "privilege": "1",
-                "name": "Jue",
-                "email": "rainyforest@gmail.com"
-            }
+        userName: this.defaultUser.name
     };
 
     constructor(props) {
