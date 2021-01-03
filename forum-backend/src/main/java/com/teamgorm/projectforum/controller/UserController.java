@@ -3,8 +3,10 @@ package com.teamgorm.projectforum.controller;
 
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.UserRepository;
+import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,14 +18,17 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/api/v1/users")
     public List<User> list() {
         return userRepository.findAll();
     }
 
     @GetMapping("/api/v1/users/{id}")
-    public Optional<User> get(@PathVariable(value = "id") String id) {
-        return userRepository.findById(id);
+    public ResponseEntity<User> get(@PathVariable(value = "id") String id) {
+        return ResponseEntity.of(userService.getUserById(id));
     }
 
     @PostMapping("/api/v1/users")
@@ -38,11 +43,12 @@ public class UserController {
 
     @PutMapping("/api/v1/users/{id}")
     public User update(@PathVariable String id, @RequestBody User user) {
-        Optional<User> existingUser = userRepository.findById(id);
-        BeanUtils.copyProperties(user, existingUser, "id");
-        if (!existingUser.isPresent()) {
-            throw new IllegalStateException("Post not found.");
+        if(userRepository.existsById(id)) {
+            // Overwrites the user's id if doesn't match with id
+            user.setId(id);
+            return userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("User not found.");
         }
-        return userRepository.save(existingUser.get());
     }
 }
