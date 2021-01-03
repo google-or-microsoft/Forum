@@ -2,8 +2,8 @@ package com.teamgorm.projectforum.service;
 
 import com.teamgorm.projectforum.model.User;
 
+import java.util.Optional;
+
 public interface UserService {
-
-    User getByName(String username);
-
+    Optional<User> getUserById(String id);
 }
