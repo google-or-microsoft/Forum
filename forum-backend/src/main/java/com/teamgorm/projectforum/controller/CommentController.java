@@ -3,7 +3,6 @@ package com.teamgorm.projectforum.controller;
 
 import com.teamgorm.projectforum.model.Comment;
 import com.teamgorm.projectforum.repository.CommentRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,11 +39,12 @@ public class CommentController {
 
     @PutMapping("/{id}")
     public Comment update(@PathVariable String id, @RequestBody Comment comment) {
-        Optional<Comment> existingComment = commentRepository.findById(id);
-        BeanUtils.copyProperties(comment, existingComment, "id");
-        if (!existingComment.isPresent()) {
-            throw new IllegalStateException("Post not found.");
+        if(commentRepository.existsById(id)) {
+            // Overwrites the comment's id if doesn't match with id
+            comment.setId(id);
+            return commentRepository.save(comment);
+        } else {
+            throw new IllegalArgumentException("Comment not found.");
         }
-        return commentRepository.save(existingComment.get());
     }
 }

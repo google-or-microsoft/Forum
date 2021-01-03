@@ -4,6 +4,7 @@ package com.teamgorm.projectforum.controller;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.UserRepository;
 import com.teamgorm.projectforum.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

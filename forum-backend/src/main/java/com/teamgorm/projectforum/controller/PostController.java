@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/posts")
+@RequestMapping("/posts")
 public class PostController {
     @Autowired
     private PostRepository postRepository;
@@ -52,11 +52,12 @@ public class PostController {
 
     @PutMapping("/{id}")
     public Post update(@PathVariable String id, @RequestBody Post post) {
-        Optional<Post> existingPost = postRepository.findById(id);
-        BeanUtils.copyProperties(post, existingPost, "id");
-        if (!existingPost.isPresent()) {
-            throw new IllegalStateException("Post not found.");
+        if(postRepository.existsById(id)) {
+            // Overwrites the post's id if doesn't match with id
+            post.setId(id);
+            return postRepository.save(post);
+        } else {
+            throw new IllegalArgumentException("Post not found.");
         }
-        return postRepository.save(existingPost.get());
     }
 }
