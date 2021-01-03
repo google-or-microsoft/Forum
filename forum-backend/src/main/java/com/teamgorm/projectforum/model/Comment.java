@@ -1,29 +1,22 @@
 package com.teamgorm.projectforum.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Data
-@Entity(name = "comments")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Document(collection = "comments")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
+
     private String text;
 
-    @CreatedDate
     private Date date;
 
-    @JsonIgnore
-    @ManyToOne
-    private Post post;
+    private String postTitle;
 
-    @ManyToOne
-    private User user;
+    private String userName;
 }
