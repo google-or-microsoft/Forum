@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers("/api/v1/**").permitAll()
+//              .antMatchers("/api/v1/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .userDetailsService(userDetailService)
-            .passwordEncoder(new BCryptPasswordEncoder());
+                .userDetailsService(userDetailService)
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 }

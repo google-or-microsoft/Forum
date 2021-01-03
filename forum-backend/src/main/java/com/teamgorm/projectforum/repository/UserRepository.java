@@ -1,8 +1,10 @@
 package com.teamgorm.projectforum.repository;
 
 import com.teamgorm.projectforum.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findByName(String name);
+import java.util.Optional;
+
+public interface UserRepository extends MongoRepository<User, String> {
+    Optional<User> findByName(String name);
 }

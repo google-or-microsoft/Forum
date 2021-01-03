@@ -1,29 +1,20 @@
 package com.teamgorm.projectforum.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
-@Entity(name = "users")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Document(collection = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String password;
     private String role;
     private String name;
     private String email;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
 }

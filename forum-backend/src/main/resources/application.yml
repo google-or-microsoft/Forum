@@ -1,0 +1,13 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://root:root@cluster0.i5rfg.mongodb.net/forum?retryWrites=true&w=majority
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT-8
+
+
+
+server:
+  servlet:
+    context-path: /api/v1
