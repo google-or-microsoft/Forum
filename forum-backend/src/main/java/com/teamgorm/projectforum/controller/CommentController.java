@@ -16,33 +16,34 @@ public class CommentController {
     @Autowired
     private CommentRepository commentRepository;
 
-    @GetMapping("/api/v1/comments")
+    @GetMapping("/comments")
     public List<Comment> list() {
         return commentRepository.findAll();
     }
 
-    @GetMapping("/api/v1/comments/{id}")
+    @GetMapping("/comments/{id}")
     public Optional<Comment> get(@PathVariable(value = "id") String id) {
         return commentRepository.findById(id);
     }
 
-    @PostMapping("/api/v1/comments")
+    @PostMapping("/comments")
     public Comment create(@RequestBody Comment comment) {
         return commentRepository.save(comment);
     }
 
-    @DeleteMapping("/api/v1/comments/{id}")
+    @DeleteMapping("/comments/{id}")
     public void delete(@PathVariable(value = "id") String id) {
         commentRepository.deleteById(id);
     }
 
-    @PutMapping("/api/v1/comments/{id}")
+    @PutMapping("/comments/{id}")
     public Comment update(@PathVariable String id, @RequestBody Comment comment) {
-        Optional<Comment> existingComment = commentRepository.findById(id);
-        BeanUtils.copyProperties(comment, existingComment, "id");
-        if (!existingComment.isPresent()) {
-            throw new IllegalStateException("Post not found.");
+        if(commentRepository.existsById(id)) {
+            // Overwrites the comment's id if doesn't match with id
+            comment.setId(id);
+            return commentRepository.save(comment);
+        } else {
+            throw new IllegalArgumentException("Comment not found.");
         }
-        return commentRepository.save(existingComment.get());
     }
 }

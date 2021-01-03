@@ -21,27 +21,27 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/api/v1/users")
+    @GetMapping("/users")
     public List<User> list() {
         return userRepository.findAll();
     }
 
-    @GetMapping("/api/v1/users/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> get(@PathVariable(value = "id") String id) {
         return ResponseEntity.of(userService.getUserById(id));
     }
 
-    @PostMapping("/api/v1/users")
+    @PostMapping("/users")
     public User create(@RequestBody User user) {
         return userRepository.save(user);
     }
 
-    @DeleteMapping("/api/v1/users/{id}")
+    @DeleteMapping("/users/{id}")
     public void delete(@PathVariable(value = "id") String id) {
         userRepository.deleteById(id);
     }
 
-    @PutMapping("/api/v1/users/{id}")
+    @PutMapping("/users/{id}")
     public User update(@PathVariable String id, @RequestBody User user) {
         if(userRepository.existsById(id)) {
             // Overwrites the user's id if doesn't match with id
