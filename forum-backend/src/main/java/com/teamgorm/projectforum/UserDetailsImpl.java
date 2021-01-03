@@ -13,13 +13,12 @@ public class UserDetailsImpl implements UserDetails {
     @Autowired
     private User user;
 
-    public UserDetailsImpl (User user){
+    public UserDetailsImpl(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("USER");
         return Arrays.asList(authority);
     }

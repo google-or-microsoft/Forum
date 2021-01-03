@@ -4,7 +4,6 @@ package com.teamgorm.projectforum.controller;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.UserRepository;
 import com.teamgorm.projectforum.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
@@ -44,7 +43,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public User update(@PathVariable String id, @RequestBody User user) {
-        if(userRepository.existsById(id)) {
+        if (userRepository.existsById(id)) {
             // Overwrites the user's id if doesn't match with id
             user.setId(id);
             return userRepository.save(user);

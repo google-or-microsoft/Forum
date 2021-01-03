@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -20,12 +21,12 @@ public class PostServiceImpl implements PostService {
     private UserRepository userRepository;
 
     @Override
-    public List<Post> getByUserName(String userName) {
-        User user = userRepository.findByName(userName);
+    public List<Post> getByUsername(String username) {
+        Optional<User> user = userRepository.findByName(username);
         //TODO: Implement polymorphism exception throwing process
         // ie: UserNotFoundException
-        if (user != null) {
-            return postRepository.findAllByUserName(userName);
+        if (user.isPresent()) {
+            return postRepository.findAllByUsername(username);
         }
         return null;
     }

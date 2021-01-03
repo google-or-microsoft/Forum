@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1/comments")
+@RequestMapping("/comments")
 public class CommentController {
     @Autowired
     private CommentRepository commentRepository;
@@ -39,7 +39,7 @@ public class CommentController {
 
     @PutMapping("/{id}")
     public Comment update(@PathVariable String id, @RequestBody Comment comment) {
-        if(commentRepository.existsById(id)) {
+        if (commentRepository.existsById(id)) {
             // Overwrites the comment's id if doesn't match with id
             comment.setId(id);
             return commentRepository.save(comment);

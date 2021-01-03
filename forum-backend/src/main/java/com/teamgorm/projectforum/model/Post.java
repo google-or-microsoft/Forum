@@ -20,7 +20,7 @@ public class Post {
 
     private String text;
 
-    private String userName;
+    private String username;
 }
 
 

@@ -11,9 +11,9 @@ class PostAddEdit extends Component {
 
     defaultUser = {
             "id": {"$oid": "5feab6d231521c7b4f43184a"},
-            "password": "password",
+            "password": "admin01",
             "privilege": "1",
-            "name": "Jue",
+            "name": "admin1",
             "email": "rainyforest@gmail.com"
     }
 
@@ -21,7 +21,7 @@ class PostAddEdit extends Component {
         id: '',
         date: '',
         text: '',
-        userName: this.defaultUser.name
+        username: this.defaultUser.name
     };
 
     constructor(props) {
