@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.service.impl;
 
-import com.teamgorm.projectforum.exception.NoDataFoundException;
+import com.teamgorm.projectforum.exception.CustomizeException;
+import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.UserRepository;
 import com.teamgorm.projectforum.service.UserService;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
             user.setId(id);
             return userRepository.save(user);
         } else {
-            throw new NoDataFoundException(user.getName());
+            throw new CustomizeException(ErrorCode.USER_NOT_FOUND, user.getName());
         }
     }
 

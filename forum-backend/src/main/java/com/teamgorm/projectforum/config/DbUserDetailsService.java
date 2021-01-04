@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.config;
 
-import com.teamgorm.projectforum.exception.NoDataFoundException;
+import com.teamgorm.projectforum.exception.CustomizeException;
+import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +27,6 @@ public class DbUserDetailsService implements UserDetailsService {
                     simpleGrantedAuthorities.add(new SimpleGrantedAuthority("USER"));
                     return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), simpleGrantedAuthorities);
                 })
-                .orElseThrow(()-> new NoDataFoundException(username));
+                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND));
     }
 }
