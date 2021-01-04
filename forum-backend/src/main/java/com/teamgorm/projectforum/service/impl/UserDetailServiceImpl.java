@@ -1,7 +1,8 @@
 package com.teamgorm.projectforum.service.impl;
 
 import com.teamgorm.projectforum.UserDetailsImpl;
-import com.teamgorm.projectforum.exception.NoDataFoundException;
+import com.teamgorm.projectforum.exception.CustomizeException;
+import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +18,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new UserDetailsImpl(userRepository.findByName(username)
-                .orElseThrow(() -> new NoDataFoundException(username)));
+                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND, username)));
     }
 }

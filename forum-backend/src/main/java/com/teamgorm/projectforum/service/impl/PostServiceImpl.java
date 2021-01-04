@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.service.impl;
 
-import com.teamgorm.projectforum.exception.NoDataFoundException;
+import com.teamgorm.projectforum.exception.CustomizeException;
+import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.PostRepository;
@@ -38,7 +39,7 @@ public class PostServiceImpl implements PostService {
         if (user.isPresent()) {
             return postRepository.findAllByUsername(username);
         } else {
-            throw new NoDataFoundException(username);
+            throw new CustomizeException(ErrorCode.USER_NOT_FOUND, username);
         }
     }
 

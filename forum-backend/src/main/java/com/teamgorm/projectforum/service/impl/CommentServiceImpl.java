@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.service.impl;
 
-import com.teamgorm.projectforum.exception.NoDataFoundException;
+import com.teamgorm.projectforum.exception.CustomizeException;
+import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.Comment;
 import com.teamgorm.projectforum.repository.CommentRepository;
 import com.teamgorm.projectforum.service.CommentService;
@@ -32,7 +33,7 @@ public class CommentServiceImpl implements CommentService {
             comment.setId(id);
             return commentRepository.save(comment);
         } else {
-            throw new NoDataFoundException("Comment");
+            throw new CustomizeException(ErrorCode.COMMENT_NOT_FOUND);
         }
     }
 

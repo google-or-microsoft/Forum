@@ -1,8 +1,5 @@
 package com.teamgorm.projectforum.exception;
 
-import com.teamgorm.projectforum.model.Comment;
-import com.teamgorm.projectforum.model.Post;
-import com.teamgorm.projectforum.model.User;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,46 +15,21 @@ import java.util.Map;
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
+    @ExceptionHandler(value = {IllegalArgumentException.class, IllegalStateException.class})
     public ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
         String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
-    @ExceptionHandler(NoDataFoundException.class)
-    public ResponseEntity<User> handleUserNotFound(
-            NoDataFoundException ex, WebRequest request) {
+    @ExceptionHandler(CustomizeException.class)
+    public ResponseEntity<Object> handleCustomException(
+            CustomizeException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", "No such user found.");
+        body.put("message", ex.getMessage());
 
-        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(body, ex.getCode().getStatus());
     }
-
-    @ExceptionHandler(NoDataFoundException.class)
-    public ResponseEntity<Post> handlePostNotFound(
-            NoDataFoundException ex, WebRequest request) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "No such post found.");
-
-        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(NoDataFoundException.class)
-    public ResponseEntity<Comment> handleCommentNotFound(
-            NoDataFoundException ex, WebRequest request) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "No such comment found.");
-
-        return new ResponseEntity(body, HttpStatus.NOT_FOUND);
-    }
-
-
-
 
 }
