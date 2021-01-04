@@ -1,5 +1,6 @@
 package com.teamgorm.projectforum.service.impl;
 
+import com.teamgorm.projectforum.exception.NoDataFoundException;
 import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.PostRepository;
@@ -21,13 +22,44 @@ public class PostServiceImpl implements PostService {
     private UserRepository userRepository;
 
     @Override
+    public Post create(Post post) {
+        return postRepository.save(post);
+    }
+
+    @Override
+    public Optional<Post> getById(String id) {
+        return postRepository.findById(id);
+    }
+
+    @Override
     public List<Post> getByUsername(String username) {
         Optional<User> user = userRepository.findByName(username);
-        //TODO: Implement polymorphism exception throwing process
-        // ie: UserNotFoundException
+
         if (user.isPresent()) {
             return postRepository.findAllByUsername(username);
+        } else {
+            throw new NoDataFoundException(username);
         }
-        return null;
+    }
+
+    @Override
+    public List<Post> getAll() {
+        return postRepository.findAll();
+    }
+
+    @Override
+    public Post update(String id, Post post) {
+        if (postRepository.existsById(id)) {
+            // Overwrites the post's id if doesn't match with id
+            post.setId(id);
+            return postRepository.save(post);
+        } else {
+            throw new IllegalArgumentException("Post not found.");
+        }
+    }
+
+    @Override
+    public void deleteById(String id) {
+        postRepository.deleteById(id);
     }
 }
