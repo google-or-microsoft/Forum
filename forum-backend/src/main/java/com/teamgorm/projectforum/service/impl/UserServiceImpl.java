@@ -18,13 +18,15 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public Optional<User> getById(String id) {
-        return userRepository.findById(id);
+    public User getById(String id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND, id));
     }
 
     @Override
-    public Optional<User> getByName(String username) {
-        return userRepository.findByName(username);
+    public User getByName(String username) {
+        return userRepository.findByName(username)
+                .orElseThrow(()->new CustomizeException(ErrorCode.USER_NOT_FOUND,username));
     }
 
     @Override

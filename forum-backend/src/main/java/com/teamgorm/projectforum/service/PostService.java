@@ -9,7 +9,7 @@ public interface PostService {
 
     Post create(Post post);
 
-    Optional<Post> getById(String id);
+    Post getById(String id);
 
     List<Post> getByUsername(String userName);
 

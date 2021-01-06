@@ -1,7 +1,6 @@
 package com.teamgorm.projectforum.config;
 
-import com.teamgorm.projectforum.exception.CustomizeException;
-import com.teamgorm.projectforum.exception.ErrorCode;
+import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,12 +20,9 @@ public class DbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userService.getByName(username)
-                .map((user) -> {
-                    List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-                    simpleGrantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-                    return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), simpleGrantedAuthorities);
-                })
-                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND));
+        User user = userService.getByName(username);
+        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+        simpleGrantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), simpleGrantedAuthorities);
     }
 }

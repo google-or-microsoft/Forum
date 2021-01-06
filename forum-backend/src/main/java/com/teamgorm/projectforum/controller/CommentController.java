@@ -6,8 +6,6 @@ import com.teamgorm.projectforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 
 @RestController
 @CrossOrigin
@@ -23,7 +21,7 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Comment> get(@PathVariable(value = "id") String id) {
+    public Comment get(@PathVariable(value = "id") String id) {
         return commentService.getById(id);
     }
 

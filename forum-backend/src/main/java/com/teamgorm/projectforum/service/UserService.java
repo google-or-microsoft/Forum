@@ -9,9 +9,9 @@ public interface UserService {
 
     User create(User user);
 
-    Optional<User> getById(String id);
+    User getById(String id);
 
-    Optional<User> getByName(String username);
+    User getByName(String username);
 
     List<User> getAll();
 

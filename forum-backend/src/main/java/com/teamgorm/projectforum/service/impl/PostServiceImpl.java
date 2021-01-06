@@ -28,19 +28,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Optional<Post> getById(String id) {
-        return postRepository.findById(id);
+    public Post getById(String id) {
+        return postRepository.findById(id)
+                .orElseThrow(()-> new CustomizeException(ErrorCode.POST_NOT_FOUND,id));
     }
 
     @Override
     public List<Post> getByUsername(String username) {
-        Optional<User> user = userRepository.findByName(username);
-
-        if (user.isPresent()) {
-            return postRepository.findAllByUsername(username);
-        } else {
-            throw new CustomizeException(ErrorCode.USER_NOT_FOUND, username);
-        }
+        return userRepository.findByName(username)
+                .map((user) ->  postRepository.findAllByUsername(username))
+                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND, username));
     }
 
     @Override

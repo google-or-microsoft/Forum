@@ -8,8 +8,6 @@ import com.teamgorm.projectforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -22,8 +20,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Optional<Comment> getById(String id) {
-        return commentRepository.findById(id);
+    public Comment getById(String id) {
+        return commentRepository.findById(id)
+                .orElseThrow(()-> new CustomizeException(ErrorCode.COMMENT_NOT_FOUND,id));
     }
 
     @Override
