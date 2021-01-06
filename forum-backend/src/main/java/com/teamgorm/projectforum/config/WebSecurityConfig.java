@@ -26,12 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .csrf().disable();
-//                .and()
-//                .logout()
-//                .permitAll();
-//                .cors()
-//                .and()
-//                .antMatchers("/api/v1/posts");
     }
 
     @Override

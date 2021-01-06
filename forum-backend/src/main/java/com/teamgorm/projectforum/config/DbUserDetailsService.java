@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DbUserDetailsService implements UserDetailsService {
@@ -21,14 +20,9 @@ public class DbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        Optional<User> user = userService.getUserByName(username);
-        if (user.isPresent()) {
-            List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-            simpleGrantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-            return new org.springframework.security.core.userdetails.User(user.get().getName(),user.get().getPassword(), simpleGrantedAuthorities);
-        } else {
-            throw new UsernameNotFoundException("User not exist!");
-        }
+        User user = userService.getByName(username);
+        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+        simpleGrantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), simpleGrantedAuthorities);
     }
 }

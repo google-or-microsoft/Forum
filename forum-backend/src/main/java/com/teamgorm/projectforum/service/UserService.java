@@ -2,10 +2,21 @@ package com.teamgorm.projectforum.service;
 
 import com.teamgorm.projectforum.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    Optional<User> getUserById(String id);
 
-    Optional<User> getUserByName(String username);
+    User create(User user);
+
+    User getById(String id);
+
+    User getByName(String username);
+
+    List<User> getAll();
+
+    User update(String id, User user);
+
+    void deleteById(String id);
+
 }
