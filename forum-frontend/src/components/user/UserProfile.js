@@ -32,7 +32,7 @@ class UserProfile extends Component {
         if (redirect) {
             return <Redirect to="/PageNotFound"/>
         }
-        const userName = posts[0].userName;
+        const userName = posts[0].username;
         const postsList = posts.map(post => {
             return <tr key={post.id}>
                 <td>

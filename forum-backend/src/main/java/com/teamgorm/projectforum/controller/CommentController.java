@@ -6,7 +6,7 @@ import com.teamgorm.projectforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
 
 
 @RestController
@@ -23,8 +23,14 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Comment> get(@PathVariable(value = "id") String id) {
+    public Comment get(@PathVariable(value = "id") String id) {
         return commentService.getById(id);
+    }
+
+    @GetMapping("/post/{id}")
+
+    public List<Comment> getByPostId(@PathVariable(value = "postId") String postId) {
+        return commentService.getByPostId(postId);
     }
 
     @PutMapping("/{id}")

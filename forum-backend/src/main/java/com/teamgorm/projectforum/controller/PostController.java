@@ -22,7 +22,7 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Post> get(@PathVariable String id) {
+    public Post get(@PathVariable String id) {
         return postService.getById(id);
     }
 
