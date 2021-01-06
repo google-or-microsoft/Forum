@@ -1,0 +1,7 @@
+{
+  "allInOne": true,
+  "isStrict": false,
+  "outPath": "src/main/resources/static/apidoc",
+  "allInOneDocFileName":"api_documentation.html",
+  "language": "ENGLISH"
+}

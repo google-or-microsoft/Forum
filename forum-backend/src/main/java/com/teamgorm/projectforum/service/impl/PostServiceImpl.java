@@ -3,7 +3,6 @@ package com.teamgorm.projectforum.service.impl;
 import com.teamgorm.projectforum.exception.CustomizeException;
 import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.Post;
-import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.PostRepository;
 import com.teamgorm.projectforum.repository.UserRepository;
 import com.teamgorm.projectforum.service.PostService;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -30,13 +28,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post getById(String id) {
         return postRepository.findById(id)
-                .orElseThrow(()-> new CustomizeException(ErrorCode.POST_NOT_FOUND,id));
+                .orElseThrow(() -> new CustomizeException(ErrorCode.POST_NOT_FOUND, id));
     }
 
     @Override
     public List<Post> getByUsername(String username) {
         return userRepository.findByName(username)
-                .map((user) ->  postRepository.findAllByUsername(username))
+                .map((user) -> postRepository.findAllByUsername(username))
                 .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND, username));
     }
 

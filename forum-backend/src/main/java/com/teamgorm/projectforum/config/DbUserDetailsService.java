@@ -1,8 +1,6 @@
 package com.teamgorm.projectforum.config;
 
 import com.teamgorm.projectforum.model.User;
-import com.teamgorm.projectforum.exception.CustomizeException;
-import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
