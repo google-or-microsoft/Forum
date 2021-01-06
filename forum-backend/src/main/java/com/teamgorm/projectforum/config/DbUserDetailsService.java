@@ -1,6 +1,8 @@
 package com.teamgorm.projectforum.config;
 
 import com.teamgorm.projectforum.model.User;
+import com.teamgorm.projectforum.exception.CustomizeException;
+import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,5 +26,6 @@ public class DbUserDetailsService implements UserDetailsService {
         List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
         simpleGrantedAuthorities.add(new SimpleGrantedAuthority("USER"));
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), simpleGrantedAuthorities);
+
     }
 }
