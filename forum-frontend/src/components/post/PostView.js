@@ -19,8 +19,8 @@ class PostView extends Component {
         let curr = this;
         curr.setState({isLoading: true});
         getPost(this.props.match.params.id)
-            .then(data => {
-                curr.setState({post: data, isLoading: false});
+            .then(post => {
+                curr.setState({post: post, isLoading: false});
             })
             .catch(err => {
                 curr.setState({redirect: true, isLoading: false});
