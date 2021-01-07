@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
-import {Redirect, withRouter} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import AppNavbar from '../common/AppNavbar';
-import axios from 'axios';
 import parse from 'html-react-parser';
+import {getPost} from "../../api/postService";
 
 class PostView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {post: {}, isLoading: true, redirect: false};
+        this.state = {
+            post: {},
+            isLoading: true,
+            redirect: false
+        };
     }
 
     componentDidMount() {
         let curr = this;
         curr.setState({isLoading: true});
-        axios
-            .get(`/api/v1/posts/${curr.props.match.params.id}`)
-            .then(res => {
-                curr.setState({post: res.data, isLoading: false});
+        getPost(this.props.match.params.id)
+            .then(data => {
+                curr.setState({post: data, isLoading: false});
             })
             .catch(err => {
                 curr.setState({redirect: true, isLoading: false});
@@ -58,4 +61,4 @@ class PostView extends Component {
     }
 }
 
-export default withRouter(PostView);
+export default PostView;

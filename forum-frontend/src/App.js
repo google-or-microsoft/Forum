@@ -1,26 +1,27 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {Route, Router, Switch} from 'react-router-dom';
 import React, {Component} from 'react';
-import Home from './components/home/Home';
+import Home from './components/Home';
 import PostList from './components/post/PostList';
 import PostAddEdit from './components/post/PostAddEdit';
 import PostView from "./components/post/PostView";
 import PageNotFound from "./PageNotFound";
 import UserProfile from "./components/user/UserProfile";
-import Login from "./components/Login";
+import Login from "./components/auth/Login";
+import history from './history';
 
 class App extends Component {
 
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <Switch>
-                    <Route path='/' exact={true} component={Home}/>
-                    <Route path='/login' exact={true} component={Login}/>
-                    <Route path='/posts' exact={true} component={PostList}/>
-                    <Route path='/posts/:id' exact={true} component={PostView}/>
-                    <Route path='/posts/:id/edit' exact={true} component={PostAddEdit}/>
-                    <Route path='/users/:userName' exact={true} component={UserProfile}/>
+                    <Route path='/' exact component={Home}/>
+                    <Route path='/login' exact component={Login}/>
+                    <Route path='/posts' exact component={PostList}/>
+                    <Route path='/posts/:id' exact component={PostView}/>
+                    <Route path='/posts/:id/edit' exact component={PostAddEdit}/>
+                    <Route path='/users/:username' exact component={UserProfile}/>
                     <Route path='*' component={PageNotFound}/>
                 </Switch>
             </Router>
