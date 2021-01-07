@@ -11,7 +11,7 @@ public interface PostService {
 
     Post getById(String id);
 
-    List<Post> getByUsername(String userName);
+    List<Post> getByUsername(String username);
 
     List<Post> getAll();
 

@@ -2,29 +2,23 @@ import React, {Component} from 'react';
 import {Button, ButtonGroup, Container, Table} from '@material-ui/core';
 import AppNavbar from '../common/AppNavbar';
 import {Link} from 'react-router-dom';
-import axios from "axios";
+import {deletePost, getPosts} from "../../api/postService";
 
 class PostList extends Component {
+    state = {posts: [], isLoading: true};
 
-    constructor(props) {
-        super(props);
-        this.state = {posts: [], isLoading: true};
-        this.remove = this.remove.bind(this);
-    }
 
     componentDidMount() {
         this.setState({isLoading: true});
 
-        axios
-            .get(`/api/v1/posts`)
-            .then(res => {
-                this.setState({posts: res.data, isLoading: false});
+        getPosts()
+            .then(posts => {
+                this.setState({posts: posts, isLoading: false});
             })
     }
 
     remove(id) {
-        axios
-            .delete(`/api/v1/posts/${id}`)
+        deletePost(id)
             .then(() => {
                 let updatedPosts = [...this.state.posts].filter(i => i.id !== id);
                 this.setState({posts: updatedPosts});
@@ -37,7 +31,7 @@ class PostList extends Component {
         if (isLoading) {
             return <p>Loading Content...</p>;
         }
-        //To be done: convert each title of the posts
+        //ToDo: convert each title of the posts
         //            as a ref link, need to add
         //            "title" attributes first
         const postList = posts.map(post => {

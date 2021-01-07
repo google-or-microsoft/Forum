@@ -1,28 +1,22 @@
 import React, {Component} from 'react';
-import AppNavbar from './common/AppNavbar';
-import axios from "axios";
+import AppNavbar from '../common/AppNavbar';
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {login: {}};
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {loginInfo: {}};
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         const target = event.target;
         this.setState({username: target.username});
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
-        const {login} = this.state;
+        const {loginInfo} = this.state;
 
-        axios.get(`/admin/login`,
-            {headers: {authorization: this.createBasicAuthToken(login.username, login.password)}});
-
+        login(loginInfo.username, loginInfo.password)
         this.props.history.push('/');
     }
 
@@ -36,12 +30,12 @@ class Login extends Component {
                         username:
                         <input type="text" value={this.state.username} onChange={this.handleChange}/>
                     </label>
-                    <br />
+                    <br/>
                     <label>
                         password:
                         <input type="text" value={this.state.password} onChange={this.handleChange}/>
                     </label>
-                    <br />
+                    <br/>
                     <input type="submit" value="Submit"/>
                 </form>
             </div>
