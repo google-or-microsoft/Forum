@@ -4,8 +4,8 @@ import com.teamgorm.projectforum.exception.CustomizeException;
 import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.Comment;
 import com.teamgorm.projectforum.model.Post;
-import com.teamgorm.projectforum.repository.PostRepository;
 import com.teamgorm.projectforum.repository.CommentRepository;
+import com.teamgorm.projectforum.repository.PostRepository;
 import com.teamgorm.projectforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Comment Service
+ */
 @Service
 public class CommentServiceImpl implements CommentService {
     @Autowired
@@ -38,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment getById(String id) {
         return commentRepository.findById(id)
-                .orElseThrow(()-> new CustomizeException(ErrorCode.COMMENT_NOT_FOUND,id));
+                .orElseThrow(() -> new CustomizeException(ErrorCode.COMMENT_NOT_FOUND, id));
     }
 
     @Override
