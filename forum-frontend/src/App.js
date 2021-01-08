@@ -16,7 +16,7 @@ function App() {
             <Switch>
                 <Route path='/' exact component={Home}/>
                 <Route path='/login' exact component={Login}/>
-                <Route path='/posts' exact><PostList /></Route>
+                <Route path='/posts' exact><PostList/></Route>
                 <Route path='/posts/:id' exact component={PostView}/>
                 <Route path='/posts/:id/edit' exact component={PostAddEdit}/>
                 <Route path='/users/:username' exact component={UserProfile}/>

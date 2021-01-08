@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from '@material-ui/core/Button';
 import AppNavbar from '../common/AppNavbar';
@@ -7,9 +7,9 @@ import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {addPost, getPost, updatePost} from "../../services/postService";
 
-class PostAddEdit extends Component {
+const PostAddEdit = (props) => {
 
-    defaultUser = {
+    const defaultUser = {
         "id": {"$oid": "5feab6d231521c7b4f43184a"},
         "password": "admin01",
         "privilege": "1",
@@ -17,84 +17,76 @@ class PostAddEdit extends Component {
         "email": "rainyforest@gmail.com"
     }
 
-    emptyPost = {
+    const emptyPost = {
         id: '',
         date: '',
         text: '',
-        username: this.defaultUser.name
+        username: defaultUser.name
     }
 
-    state = {
-        post: this.emptyPost
-    };
+    const [post, setPost] = useState(emptyPost);
 
-
-    componentDidMount() {
-        if (this.props.match.params.id !== 'new') {
-            getPost(this.props.match.params.id)
-                .then(post => {
-                    this.setState({post: post});
-                })
+    useEffect(() => {
+        let id = props.match.params.id;
+        if (id !== 'new') {
+            getPost(id)
+                .then(post => setPost(post))
         }
-    }
 
-    handleChange = (event) => {
+    }, []);
+
+    const handleChange = (event) => {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let post = {...this.state.post};
-        post[name] = value;
-        this.setState({post});
+        let newPost = {...post};
+        newPost[name] = value;
+        setPost(newPost);
     }
 
-    handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const {post} = this.state;
         if (post.id) {
             await updatePost(post.id, post);
         } else {
             await addPost(post);
         }
-        this.props.history.push('/posts');
+        props.history.push('/posts');
     }
 
-    render() {
-        const {post} = this.state;
-        const title = <h2>{post.id ? 'Edit Post' : 'Add Post'}</h2>;
+    return (<div>
+        <AppNavbar/>
+        <Container>
+            <h2>{post.id ? 'Edit Post' : 'Add Post'}</h2>
+            <Form onSubmit={handleSubmit}>
+                <FormGroup>
+                    <Label for="text">Title</Label>
+                    <Input type="text" name="title" id="title" value={post.title || ''}
+                           onChange={handleChange} autoComplete="text"/><br/>
+                    <CKEditor
+                        editor={ClassicEditor}
+                        data={post.text}
+                        onChange={(event, editor) => {
+                            post.text = editor.getData();
+                        }}
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit">Save</Button>{' '}
 
-        return <div>
-            <AppNavbar/>
-            <Container>
-                {title}
-                <Form onSubmit={this.handleSubmit}>
-                    <FormGroup>
-                        <Label for="text">Title</Label>
-                        <Input type="text" name="title" id="title" value={post.title || ''}
-                               onChange={this.handleChange} autoComplete="text"/><br/>
-                        <CKEditor
-                            editor={ClassicEditor}
-                            data={post.text}
-                            onChange={(event, editor) => {
-                                post.text = editor.getData();
-                            }}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit">Save</Button>{' '}
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        component={Link} to={'/posts'}>Cancel</Button>
 
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            component={Link} to={'/posts'}>Cancel</Button>
+                </FormGroup>
+            </Form>
+        </Container>
+    </div>);
 
-                    </FormGroup>
-                </Form>
-            </Container>
-        </div>
-    }
 }
 
-export default withRouter(PostAddEdit);
+export default PostAddEdit;
