@@ -13,7 +13,7 @@ const PostList = () => {
         getPosts()
             .then(posts => setPosts(posts))
             . finally(() => setLoading(false));
-    });
+    },[]);
 
     const renderPostList = posts.map(post => {
         return (

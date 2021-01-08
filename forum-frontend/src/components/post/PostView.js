@@ -14,7 +14,7 @@ const PostView = (props) => {
             .then(post => setPost(post))
             .catch(() => setRedirect(true))
             .finally(() => setLoading(false));
-    });
+    },[]);
 
 
     const renderPostView = () => {
