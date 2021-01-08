@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {deletePost, getPosts} from "../../services/postService";
 
 const PostList = () => {
-    const [posts, setPosts] = useState(null);
+    const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const PostList = () => {
             .finally(() => setLoading(false));
     }, []);
 
-    function remove(id) {
+    const remove = (id) => {
         deletePost(id)
             .then(() => {
                 let posts = [...posts].filter(i => i.id !== id);
@@ -53,7 +53,7 @@ const PostList = () => {
     return (
         <div>
             <AppNavbar/>
-            { loading ? <p>Loading Content...</p>: <Container fluid>
+            {loading ? <p>Loading Content...</p> : <Container fluid>
                 <div className="float-right">
                     <Button variant="outlined" color="primary" component={Link} to="/posts/new/edit">Add
                         Post</Button>
@@ -72,9 +72,6 @@ const PostList = () => {
                     </tbody>
                 </Table>
             </Container>}
-
-
-
         </div>
     );
 }
