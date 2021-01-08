@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Button, ButtonGroup, Container, Table} from '@material-ui/core';
-import AppNavbar from '../common/AppNavbar';
 import {Link} from 'react-router-dom';
 import {deletePost, getPosts} from "../../services/postService";
 
@@ -53,7 +52,6 @@ const PostList = () => {
     //            "title" attributes first
     return (
         <div>
-            <AppNavbar/>
             {loading ? <p>Loading Content...</p> : <Container fluid>
                 <div className="float-right">
                     <Button variant="outlined" color="primary" component={Link} to="/posts/new/edit">Add

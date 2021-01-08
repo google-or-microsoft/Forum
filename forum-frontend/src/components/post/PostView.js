@@ -37,7 +37,7 @@ const PostView = (props) => {
         //     })
 
         return <div>
-            <AppNavbar/>
+            {/* <AppNavbar/> */}
             <div style={{marginLeft: "15em"}}>
                 {title}
                 {text}
