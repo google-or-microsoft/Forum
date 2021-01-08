@@ -1,35 +1,24 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import AppNavbar from '../common/AppNavbar';
 import parse from 'html-react-parser';
-import {getPost} from "../../api/postService";
+import {getPost} from "../../services/postService";
 
-class PostView extends Component {
+const PostView = (props) => {
+    const [post, setPost] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [redirect, setRedirect] = useState(false);
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            post: {},
-            isLoading: true,
-            redirect: false
-        };
-    }
+    useEffect(() => {
+        getPost(props.match.params.id)
+            .then(post => setPost(post))
+            .catch(() => setRedirect(true))
+            .finally(() => setLoading(false));
+    }, []);
 
-    componentDidMount() {
-        let curr = this;
-        curr.setState({isLoading: true});
-        getPost(this.props.match.params.id)
-            .then(post => {
-                curr.setState({post: post, isLoading: false});
-            })
-            .catch(err => {
-                curr.setState({redirect: true, isLoading: false});
-            });
-    }
 
-    render() {
-        const {post, isLoading, redirect} = this.state;
-        if (isLoading) {
+    const renderPostView = () => {
+        if (loading) {
             return <p>Loading detailed page....</p>;
         }
         if (redirect) {
@@ -59,6 +48,8 @@ class PostView extends Component {
             </div>
         </div>
     }
+
+    return renderPostView();
 }
 
 export default PostView;
