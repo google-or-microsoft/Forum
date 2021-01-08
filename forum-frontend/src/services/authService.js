@@ -9,3 +9,11 @@ export const login = (username, password) => {
         }
     });
 }
+
+export const register = (user) => {
+    return axiosRequest({
+        url: `/auth/register`,
+        method: 'post',
+        data: JSON.stringify(user)
+    });
+}
