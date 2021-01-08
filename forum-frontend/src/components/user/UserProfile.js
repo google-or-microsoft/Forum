@@ -1,34 +1,22 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import AppNavbar from '../common/AppNavbar';
 import {getUserPosts} from "../../services/userService";
 
-class UserProfile extends Component {
+const UserProfile = (props) => {
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [redirect, setRedirect] = useState(false);
 
-    state = {
-        username: "",
-        posts: [],
-        isLoading: true,
-        redirect: false
-    };
+    useEffect(() => {
+        getUserPosts(props.match.params.username)
+            .then(posts => setPosts(posts))
+            .catch(() => setRedirect(true))
+            .finally(() => setLoading(false));
+    }, []);
 
-    componentDidMount() {
-        let curr = this;
-        curr.setState({isLoading: true});
-
-        getUserPosts(curr.props.match.params.username)
-            .then(posts => {
-                curr.setState({posts: posts, isLoading: false});
-            })
-            .catch(err => {
-                curr.setState({redirect: true, isLoading: false});
-            });
-
-    }
-
-    render() {
-        const {posts, isLoading, redirect} = this.state;
-        if (isLoading) {
+    const renderUserProfile = () => {
+        if (loading) {
             return <p>Loading detailed page....</p>;
         }
         if (redirect) {
@@ -43,7 +31,6 @@ class UserProfile extends Component {
             </tr>
         })
 
-
         return <div>
             <AppNavbar/>
             <div style={{marginLeft: "15em"}}>
@@ -55,6 +42,7 @@ class UserProfile extends Component {
             </div>
         </div>
     }
+    return renderUserProfile();
 }
 
 export default UserProfile;

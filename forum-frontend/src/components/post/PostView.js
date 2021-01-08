@@ -49,7 +49,7 @@ const PostView = (props) => {
         </div>
     }
 
-    return <div>{renderPostView()}</div>;
+    return renderPostView();
 }
 
 export default PostView;
