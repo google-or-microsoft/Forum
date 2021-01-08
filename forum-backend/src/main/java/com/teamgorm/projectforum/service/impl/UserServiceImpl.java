@@ -6,6 +6,7 @@ import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.UserRepository;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,12 +30,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void checkEmailDuplicate(String email){
+        userRepository.findByEmail(email)
+                .ifPresent((user) -> {throw new CustomizeException(ErrorCode.EMAIL_EXISTS,email);});
+    }
+
+    @Override
+    public void checkUsernameDuplicate(String username){
+        userRepository.findByName(username)
+                .ifPresent((user)-> {throw new CustomizeException(ErrorCode.USERNAME_EXISTS,username);});
+    }
+
+    @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public User create(User user) {
+    public User register(User user) {
+        String username = user.getName();
+        String email = user.getEmail();
+        String password = user.getPassword();
+        checkUsernameDuplicate(username);
+        checkEmailDuplicate(email);
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
         return userRepository.save(user);
     }
 

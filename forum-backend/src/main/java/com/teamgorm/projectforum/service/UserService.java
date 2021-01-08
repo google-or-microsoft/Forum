@@ -6,11 +6,15 @@ import java.util.List;
 
 public interface UserService {
 
-    User create(User user);
+    User register(User user);
 
     User getById(String id);
 
     User getByName(String username);
+
+    void checkEmailDuplicate(String email);
+
+    void checkUsernameDuplicate(String username);
 
     List<User> getAll();
 

@@ -19,16 +19,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /**
-     * Create a new user
-     *
-     * @param user The user created
-     * @return
-     */
-    @PostMapping
-    public User create(@RequestBody User user) {
-        return userService.create(user);
-    }
+
 
     /**
      * Get a single user by id
@@ -63,14 +54,6 @@ public class UserController {
         return userService.update(id, user);
     }
 
-    /**
-     * Delete a user by id
-     *
-     * @param id
-     */
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
-        userService.deleteById(id);
-    }
+
 
 }
