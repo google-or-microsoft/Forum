@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import AppNavbar from '../common/AppNavbar';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {addPost, getPost, updatePost} from "../../api/postService";
+import {addPost, getPost, updatePost} from "../../services/postService";
 
 class PostAddEdit extends Component {
 

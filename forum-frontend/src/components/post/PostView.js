@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import AppNavbar from '../common/AppNavbar';
 import parse from 'html-react-parser';
-import {getPost} from "../../api/postService";
+import {getPost} from "../../services/postService";
 
 class PostView extends Component {
 

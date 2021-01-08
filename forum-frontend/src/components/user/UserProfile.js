@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import AppNavbar from '../common/AppNavbar';
-import {getUserPosts} from "../../api/userService";
+import {getUserPosts} from "../../services/userService";
 
 class UserProfile extends Component {
 
