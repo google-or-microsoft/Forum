@@ -13,7 +13,7 @@ const UserProfile = (props) => {
             .then(posts => setPosts(posts))
             .catch(() => setRedirect(true))
             .finally(() => setLoading(false));
-    }, []);
+    });
 
     const renderUserProfile = () => {
         if (loading) {

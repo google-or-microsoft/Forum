@@ -32,8 +32,7 @@ const PostAddEdit = (props) => {
             getPost(id)
                 .then(post => setPost(post))
         }
-
-    }, []);
+    });
 
     const handleChange = (event) => {
         const target = event.target;

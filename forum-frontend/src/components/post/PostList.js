@@ -12,15 +12,9 @@ const PostList = () => {
         getPosts()
             .then(posts => setPosts(posts))
             .finally(() => setLoading(false));
-    }, []);
+    });
 
-    const remove = (id) => {
-        deletePost(id)
-            .then(() => {
-                let posts = [...posts].filter(i => i.id !== id);
-                setPosts(posts);
-            });
-    }
+
 
     const renderPostList = posts.map(post => {
         return <tr key={post.id}>
@@ -46,6 +40,13 @@ const PostList = () => {
         </tr>
     });
 
+    const remove = (id) => {
+        deletePost(id)
+            .then(() => {
+                let filteredPosts = [...posts].filter(i => i.id !== id);
+                setPosts(filteredPosts);
+            });
+    }
 
     //ToDo: convert each title of the posts
     //            as a ref link, need to add
