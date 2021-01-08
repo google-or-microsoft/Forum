@@ -8,7 +8,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <AppNavbar/>
+                {/* <AppNavbar/> */}
                 <Container fluid>
                     <Button color="link"><Link to="/posts">Manage Forum Posts</Link></Button>
                 </Container>

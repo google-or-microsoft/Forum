@@ -8,15 +8,18 @@ import PostView from "./components/post/PostView";
 import PageNotFound from "./PageNotFound";
 import UserProfile from "./components/user/UserProfile";
 import Login from "./components/auth/Login";
+import AppNavbar from './components/common/AppNavbar';
 import history from './history';
 
 function App() {
     return (
+        
         <Router history={history}>
+            <AppNavbar/>
             <Switch>
                 <Route path='/' exact component={Home}/>
                 <Route path='/login' exact component={Login}/>
-                <Route path='/posts' exact><PostList/></Route>
+                <Route path='/posts' exact component={PostList} />
                 <Route path='/posts/:id' exact component={PostView}/>
                 <Route path='/posts/:id/edit' exact component={PostAddEdit}/>
                 <Route path='/users/:username' exact component={UserProfile}/>

@@ -54,7 +54,6 @@ const PostAddEdit = (props) => {
     }
 
     return (<div>
-        <AppNavbar/>
         <Container>
             <h2>{post.id ? 'Edit Post' : 'Add Post'}</h2>
             <Form onSubmit={handleSubmit}>

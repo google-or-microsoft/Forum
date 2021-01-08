@@ -32,7 +32,7 @@ const UserProfile = (props) => {
         })
 
         return <div>
-            <AppNavbar/>
+            {/* <AppNavbar/> */}
             <div style={{marginLeft: "15em"}}>
                 <h2>{username}</h2>
                 <br/>
