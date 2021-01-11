@@ -33,7 +33,7 @@ public class AuthController {
      * This action must be taken by ADMIN role
      * @param id
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/admin/{id}")
     public void delete(@PathVariable String id) {
         userService.deleteById(id);

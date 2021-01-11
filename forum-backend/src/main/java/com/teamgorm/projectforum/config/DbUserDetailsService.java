@@ -22,8 +22,14 @@ public class DbUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.getByName(username);
         List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-        simpleGrantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-        return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(), simpleGrantedAuthorities);
+        simpleGrantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
+        return new org.springframework.security.core.userdetails.User(user.getName(),
+                                                                      user.getPassword(),
+                                                                      user.getDeleted(),
+                                                                      true,
+                                                                      true,
+                                                                      true,
+                                                                      simpleGrantedAuthorities);
 
     }
 }
