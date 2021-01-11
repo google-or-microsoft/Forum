@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import AppNavbar from '../common/AppNavbar';
 import {getUserPosts} from "../../services/userService";
 
 const UserProfile = (props) => {
@@ -8,12 +7,13 @@ const UserProfile = (props) => {
     const [loading, setLoading] = useState(true);
     const [redirect, setRedirect] = useState(false);
 
+    const username = props.match.params.username;
     useEffect(() => {
-        getUserPosts(props.match.params.username)
+        getUserPosts(username)
             .then(posts => setPosts(posts))
             .catch(() => setRedirect(true))
             .finally(() => setLoading(false));
-    },[]);
+    }, [username]);
 
     const renderUserProfile = () => {
         if (loading) {

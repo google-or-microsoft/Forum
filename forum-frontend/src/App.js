@@ -19,7 +19,7 @@ function App() {
             <Switch>
                 <Route path='/' exact component={Home}/>
                 <Route path='/login' exact component={Login}/>
-                <Route path='/posts' exact component={PostList} />
+                <Route path='/posts' exact component={PostList}/>
                 <Route path='/register' exact component={Register}/>
                 <Route path='/posts/:id' exact component={PostView}/>
                 <Route path='/posts/:id/edit' exact component={PostAddEdit}/>

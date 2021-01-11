@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
-import AppNavbar from '../common/AppNavbar';
 import parse from 'html-react-parser';
 import {getPost} from "../../services/postService";
 
@@ -9,12 +8,13 @@ const PostView = (props) => {
     const [loading, setLoading] = useState(true);
     const [redirect, setRedirect] = useState(false);
 
+    const postId = props.match.params.id;
     useEffect(() => {
-        getPost(props.match.params.id)
+        getPost(postId)
             .then(post => setPost(post))
             .catch(() => setRedirect(true))
             .finally(() => setLoading(false));
-    },[]);
+    }, [postId]);
 
 
     const renderPostView = () => {

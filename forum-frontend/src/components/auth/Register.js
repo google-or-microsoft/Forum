@@ -5,12 +5,12 @@ import {register} from "../../services/authService";
 
 class Register extends Component {
 
-        state = {
-            name: "",
-            password: "",
-            role: "USER",
-            email: ""
-        };
+    state = {
+        name: "",
+        password: "",
+        role: "USER",
+        email: ""
+    };
 
     handleChange = (event) => {
         const target = event.target;
