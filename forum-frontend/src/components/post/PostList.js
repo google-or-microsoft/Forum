@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, ButtonGroup, Container, Table} from '@material-ui/core';
+import {Button, Container} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {deletePost, getPosts} from "../../services/postService";
 
@@ -12,8 +12,8 @@ const PostList = () => {
     useEffect(() => {
         getPosts()
             .then(posts => setPosts(posts))
-            . finally(() => setLoading(false));
-    },[]);
+            .finally(() => setLoading(false));
+    }, []);
 
     const renderPostList = posts.map(post => {
         return (

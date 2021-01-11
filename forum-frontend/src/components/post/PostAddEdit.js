@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from '@material-ui/core/Button';
-import AppNavbar from '../common/AppNavbar';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {addPost, getPost, updatePost} from "../../services/postService";
