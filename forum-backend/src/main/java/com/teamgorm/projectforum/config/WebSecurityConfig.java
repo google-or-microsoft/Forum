@@ -18,12 +18,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailServiceImpl userDetailService;
 
+    private static final String[] SWAGGER_WHITELIST = {
+            // -- swagger ui
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui/**",
+            "/webjars/**"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/auth/**")
-                .permitAll()
+                .antMatchers("/auth/**").permitAll()
+                .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
