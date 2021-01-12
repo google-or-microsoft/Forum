@@ -1,4 +1,4 @@
-import {LOAD_POSTS} from "../actionTypes";
+import {LOAD_POSTS} from "./constants";
 
 export const loadPosts = data => ({
     type: LOAD_POSTS,

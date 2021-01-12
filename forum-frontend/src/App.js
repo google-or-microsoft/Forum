@@ -2,15 +2,15 @@ import './App.css';
 import {Route, Router, Switch} from 'react-router-dom';
 import React from 'react';
 import Home from './Home';
-import PostList from './post/PostList';
-import PostAddEdit from './post/PostAddEdit';
-import PostView from "./post/PostView";
+import PostList from './Views/PostList';
+import PostAddEdit from './Views/NewPost/PostAddEdit';
+import PostView from "./Views/PostView/PostView";
 import PageNotFound from "./PageNotFound";
-import UserProfile from "./user/UserProfile";
-import Login from "./auth/Login";
-import AppNavbar from './common/AppNavbar';
+import UserProfile from "./Views/UserProfile/UserProfile";
+import Login from "./Views/Auth/Login";
+import AppNavbar from './Components/AppNavbar';
 import history from './history';
-import Register from "./auth/Register";
+import Register from "./Views/Auth/Register";
 
 function App() {
     return (

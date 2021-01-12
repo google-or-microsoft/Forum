@@ -1,4 +1,4 @@
-import axiosRequest from '../axios/axiosRequest';
+import axiosRequest from '../../Utils/axiosRequest';
 
 export const addPost = (post) => {
     return axiosRequest({

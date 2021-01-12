@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AppNavbar from '../common/AppNavbar';
+import AppNavbar from '../../Components/AppNavbar';
  import {register} from "./api";
 
 
