@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AppNavbar from './components/common/AppNavbar';
+import AppNavbar from './common/AppNavbar';
 
 class PageNotFound extends Component {
     render() {

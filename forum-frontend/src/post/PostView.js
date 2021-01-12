@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import parse from 'html-react-parser';
-import {getPost} from "../../services/postService";
+import {getPost} from "./api";
 
 const PostView = (props) => {
     const [post, setPost] = useState({});

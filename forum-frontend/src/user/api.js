@@ -1,4 +1,4 @@
-import axiosRequest from "./axiosRequest";
+import axiosRequest from "../axios/axiosRequest";
 
 export const getUserPosts = (username) => {
     return axiosRequest({

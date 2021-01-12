@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import {getUserPosts} from "../../services/userService";
+import {getUserPosts} from "./api";
 
 const UserProfile = (props) => {
     const [posts, setPosts] = useState([]);

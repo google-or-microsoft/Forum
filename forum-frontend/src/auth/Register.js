@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AppNavbar from '../common/AppNavbar';
-import {register} from "../../services/authService";
+ import {register} from "./api";
 
 
 class Register extends Component {

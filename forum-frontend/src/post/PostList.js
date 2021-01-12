@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Container} from '@material-ui/core';
 import {Link} from 'react-router-dom';
-import {deletePost, getPosts} from "../../services/postService";
+import {deletePost, getPosts} from "./api";
 
 const PostList = () => {
-    const [posts,
-        setPosts] = useState([]);
-    const [loading,
-        setLoading] = useState(true);
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getPosts()

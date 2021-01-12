@@ -4,7 +4,7 @@ import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from '@material-ui/core/Button';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {addPost, getPost, updatePost} from "../../services/postService";
+import {addPost, getPost, updatePost} from "./api";
 
 const PostAddEdit = (props) => {
 
@@ -25,13 +25,13 @@ const PostAddEdit = (props) => {
 
     const [post, setPost] = useState(emptyPost);
 
+    const postId = props.match.params.id;
     useEffect(() => {
-        let id = props.match.params.id;
-        if (id !== 'new') {
-            getPost(id)
+        if (postId !== 'new') {
+            getPost(postId)
                 .then(post => setPost(post))
         }
-    });
+    }, [postId]);
 
     const handleChange = (event) => {
         const target = event.target;

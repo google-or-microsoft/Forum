@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AppNavbar from '../common/AppNavbar';
-import {login} from '../../services/authService';
+import {login} from './api';
 
 class Login extends Component {
     constructor(props) {
