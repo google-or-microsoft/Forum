@@ -20,6 +20,8 @@ Technique | Description | Version
 [Lombok](https://projectlombok.org/)| Java Library to simplify code| 1.18.12
 [MySQL](https://www.mysql.com/)|Database| 5.7
 
+## API Documentation   
+Access [API Documentation](http://localhost:8080/api/v1/swagger-ui/index.html) after starting the back-end server.
 
 ## Contributers
 - [Rainyforest](https://github.com/Rainyforest)
