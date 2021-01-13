@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import {Button, Container} from '@material-ui/core';
 import {Link} from 'react-router-dom';
-import {deletePost} from "./api";
 import {useDispatch, useSelector} from "react-redux";
-import {loadPostsAction} from "./actions";
+import {deletePostAction, loadPostsAction} from "./actions";
 
 
 const PostList = () => {
@@ -38,7 +37,7 @@ const PostList = () => {
                         size="small"
                         variant="outlined"
                         color="secondary"
-                        onClick={() => remove(post.id)}
+                        onClick={() => dispatch(deletePostAction(post.id))}
                         className="mx-1">
                         Delete
                     </Button>
@@ -46,13 +45,6 @@ const PostList = () => {
             </div>
         )
     })
-
-    const remove = (id) => {
-        deletePost(id).then(() => {
-            let filteredPosts = [...posts].filter(i => i.id !== id);
-            // setPosts(filteredPosts);
-        });
-    }
 
     // ToDo: convert each title of the posts as a ref link, need to add
     //       "title" attributes first

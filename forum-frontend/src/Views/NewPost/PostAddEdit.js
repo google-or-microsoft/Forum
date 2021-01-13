@@ -4,7 +4,7 @@ import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from '@material-ui/core/Button';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {addPost, getPost, updatePost} from "../PostList/api";
+import {addPost, getPost, updatePost} from "../PostView/api";
 
 const PostAddEdit = (props) => {
 

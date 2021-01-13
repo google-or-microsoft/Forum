@@ -1,19 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import parse from 'html-react-parser';
-import {getPost} from "../PostList/api";
+import {loadSinglePostAction} from "./actons";
+import {useDispatch, useSelector} from "react-redux";
 
 const PostView = (props) => {
-    const [post, setPost] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [redirect, setRedirect] = useState(false);
+    const {post, loading, redirect, error} = useSelector(state => ({
+        post: state.singlePost.post,
+        loading: state.singlePost.loading,
+        redirect: state.singlePost.redirect,
+        error: state.singlePost.error
+    }));
+
+    const dispatch = useDispatch();
 
     const postId = props.match.params.id;
     useEffect(() => {
-        getPost(postId)
-            .then(post => setPost(post))
-            .catch(() => setRedirect(true))
-            .finally(() => setLoading(false));
+        dispatch(loadSinglePostAction(postId));
     }, [postId]);
 
 

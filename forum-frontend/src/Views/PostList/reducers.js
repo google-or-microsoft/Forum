@@ -1,9 +1,4 @@
-import {
-    FETCHING_POSTS_FAILURE,
-    FETCHING_POSTS_SUCCESS,
-    START_FETCHING_POSTS,
-    STOP_FETCHING_POSTS
-} from "./constants";
+import {LOADING_POSTS_FAILURE, LOADING_POSTS_SUCCESS, START_LOADING_POSTS, STOP_LOADING_POSTS} from "./constants";
 
 const initialState = {
     posts: [],
@@ -11,24 +6,24 @@ const initialState = {
     error: null
 };
 
-export const postReducer = (state = initialState, action) => {
+export const postsReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case START_FETCHING_POSTS:
+        case START_LOADING_POSTS:
             return {
                 ...state,
-                loading:true,
+                loading: true,
                 error: null
             };
 
-        case STOP_FETCHING_POSTS:
+        case STOP_LOADING_POSTS:
             return {
                 ...state,
                 loading: false,
                 error: null
             };
 
-        case FETCHING_POSTS_SUCCESS:
+        case LOADING_POSTS_SUCCESS:
             return {
                 ...state,
                 posts: action.payload,
@@ -36,7 +31,7 @@ export const postReducer = (state = initialState, action) => {
                 error: null
             };
 
-        case FETCHING_POSTS_FAILURE:
+        case LOADING_POSTS_FAILURE:
             return {
                 ...state,
                 loading: false,

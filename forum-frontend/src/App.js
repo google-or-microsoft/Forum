@@ -1,17 +1,17 @@
 import './App.css';
 import {Route, Router, Switch} from 'react-router-dom';
 import React from 'react';
-import Home from './Home';
+import Home from './Views/Home/Home';
 import PostList from './Views/PostList';
 import PostAddEdit from './Views/NewPost/PostAddEdit';
 import PostView from "./Views/PostView/PostView";
-import PageNotFound from "./PageNotFound";
+import PageNotFound from "./Views/NotFound/PageNotFound";
 import UserProfile from "./Views/UserProfile/UserProfile";
 import Login from "./Views/Auth/Login";
 import AppNavbar from './Components/AppNavbar';
 import history from './history';
 import Register from "./Views/Auth/Register";
-import store from "./store";
+import store from "./App/store";
 import {Provider} from "react-redux";
 
 function App() {
