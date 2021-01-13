@@ -1,16 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Button, Container} from '@material-ui/core';
 import {Link} from 'react-router-dom';
-import {deletePost, getPosts} from "./api";
+import {deletePost} from "./api";
+import {useDispatch, useSelector} from "react-redux";
+import {loadPostsAction} from "./actions";
+
 
 const PostList = () => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
+
+    const {posts, loading, error} = useSelector(state => ({
+        posts: state.posts.posts,
+        loading: state.posts.loading,
+        error: state.posts.error
+    }));
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getPosts()
-            .then(posts => setPosts(posts))
-            .finally(() => setLoading(false));
+        dispatch(loadPostsAction());
     }, []);
 
     const renderPostList = posts.map(post => {
@@ -43,11 +50,11 @@ const PostList = () => {
     const remove = (id) => {
         deletePost(id).then(() => {
             let filteredPosts = [...posts].filter(i => i.id !== id);
-            setPosts(filteredPosts);
+            // setPosts(filteredPosts);
         });
     }
 
-    // ToDo: convert each title of the posts            as a ref link, need to add
+    // ToDo: convert each title of the posts as a ref link, need to add
     //       "title" attributes first
     return (
         <div className="mt-2">

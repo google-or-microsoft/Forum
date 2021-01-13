@@ -9,7 +9,8 @@ class Register extends Component {
         name: "",
         password: "",
         role: "USER",
-        email: ""
+        email: "",
+        deleted: false
     };
 
     handleChange = (event) => {

@@ -1,9 +1,14 @@
-import {FETCHING_POSTS_SUCCESS, START_FETCHING_POSTS, STOP_FETCHING_POSTS} from "./constants";
+import {
+    FETCHING_POSTS_FAILURE,
+    FETCHING_POSTS_SUCCESS,
+    START_FETCHING_POSTS,
+    STOP_FETCHING_POSTS
+} from "./constants";
 
 const initialState = {
-    fetchingDiscussions: true,
-    discussions: null,
-    error: null,
+    posts: [],
+    loading: true,
+    error: null
 };
 
 export const postReducer = (state = initialState, action) => {
@@ -12,23 +17,31 @@ export const postReducer = (state = initialState, action) => {
         case START_FETCHING_POSTS:
             return {
                 ...state,
-                fetchingDiscussions: true,
-                error: null,
+                loading:true,
+                error: null
             };
 
         case STOP_FETCHING_POSTS:
             return {
                 ...state,
-                fetchingDiscussions: false,
+                loading: false,
+                error: null
             };
 
         case FETCHING_POSTS_SUCCESS:
             return {
                 ...state,
-                discussions: action.payload,
-                fetchingDiscussions: false,
-                error: null,
+                posts: action.payload,
+                loading: false,
+                error: null
             };
+
+        case FETCHING_POSTS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: 'Unable to fetch posts at the moment.'
+            }
 
         default:
             return state;
