@@ -19,13 +19,13 @@ const defaultUser = {
 }
 
 const initialState = {
-
+    post:{
         id: '',
         date: '',
-        title: '',
         text: '',
-        username: defaultUser.name,
-        error: null
+        username: defaultUser.name
+    },
+    error: null
 };
 
 export const modifyPostReducer = (state = initialState, action) => {
@@ -33,18 +33,14 @@ export const modifyPostReducer = (state = initialState, action) => {
         case LOADING_ORIGINAL_POST_SUCCESS:
             return {
                 ...state,
-                // post:action.payload,
-                id:action.payload.id,
-                date:action.payload.date,
-                title:action.payload.title,
-                text:action.payload.text,
-                username:action.payload.username,
+                post: action.payload,
                 error:null
             };
+
         case LOADING_ORIGINAL_POST_FAILURE:
             return {
                 ...state,
-                error:"Fail to load original Post"
+                error: "Fail to load original Post"
             };
         case STOP_LOADING_ORIGINAL_POST:
             return {
@@ -59,20 +55,12 @@ export const modifyPostReducer = (state = initialState, action) => {
             };
 
         case STOP_MODIFYING_POST:
-            return {
-                ...state,
-                error: null
-            };
+            return initialState;
 
         case MODIFYING_POST_SUCCESS:
             return {
                 ...state,
-                // post: action.payload,
-                id:action.payload.id,
-                date:action.payload.date,
-                title:action.payload.title,
-                text:action.payload.text,
-                username:action.payload.username,
+                post: action.payload,
                 error: null
             };
 
@@ -84,14 +72,20 @@ export const modifyPostReducer = (state = initialState, action) => {
         case UPDATE_POST_TITLE:
             return{
                 ...state,
-                title: action.payload.title,
+                post: {
+                    ...state.post,
+                    title: action.payload
+                },
                 error:null
             };
 
         case UPDATE_POST_CONTENT:
             return {
                 ...state,
-                text: action.payload.text,
+                post: {
+                    ...state.post,
+                    text: action.payload
+                },
                 error:null
             };
 

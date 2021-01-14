@@ -16,35 +16,40 @@ const PostList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log("render");
         dispatch(loadPostsAction());
     }, []);
 
-    const renderPostList = posts.map(post => {
-        return (
-            <div className="flex flex-row justify-between my-4">
-                <Link to={"/posts/" + post.id} className="w-1/3">{post.title}</Link>
-                <Link to={"/users/" + post.username} className="w-1/3">{post.username}</Link>
-                <div className="flex flex-row w-1/3">
-                    <Button
-                        size="small"
-                        variant="outlined"
-                        color="primary"
-                        tag={Link}
-                        href={"/posts/" + post.id + "/edit"}
-                        className="mx-1">Edit
-                    </Button>
-                    <Button
-                        size="small"
-                        variant="outlined"
-                        color="secondary"
-                        onClick={() => dispatch(deletePostAction(post.id))}
-                        className="mx-1">
-                        Delete
-                    </Button>
+    const renderPostList = () => {
+        if(!posts) return null;
+        return posts.map(post => {
+            console.log(post.title);
+            return (
+                <div className="flex flex-row justify-between my-4" key={post.id}>
+                    <Link to={"/posts/" + post.id} className="w-1/3">{post.title}</Link>
+                    <Link to={"/users/" + post.username} className="w-1/3">{post.username}</Link>
+                    <div className="flex flex-row w-1/3">
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            color="primary"
+                            tag={Link}
+                            href={"/posts/" + post.id + "/edit"}
+                            className="mx-1">Edit
+                        </Button>
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            color="secondary"
+                            onClick={() => dispatch(deletePostAction(post.id))}
+                            className="mx-1">
+                            Delete
+                        </Button>
+                    </div>
                 </div>
-            </div>
-        )
-    })
+            )
+        })
+    }
 
     // ToDo: convert each title of the posts as a ref link, need to add
     //       "title" attributes first
@@ -67,7 +72,7 @@ const PostList = () => {
                             <div className="w-1/3 justify-self-center">Author</div>
                             <div className="w-1/3 justify-self-center">Actions</div>
                         </div>
-                        {renderPostList}
+                        {renderPostList()}
                     </div>
                 </Container>}
         </div>
