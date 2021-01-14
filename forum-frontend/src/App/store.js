@@ -2,10 +2,12 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import {postsReducer} from '../Views/PostList/reducers';
 import thunk from 'redux-thunk';
 import {singlePostReducer} from "../Views/PostView/reducers";
+import {modifyPostReducer} from "../Views/NewPost/reducers";
 // root reducer for app
 const rootReducer = combineReducers({
     posts: postsReducer,
-    singlePost: singlePostReducer
+    singlePost: singlePostReducer,
+    modifyPost: modifyPostReducer
 });
 
 // dev tool extension

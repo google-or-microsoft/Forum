@@ -3,7 +3,7 @@ import {Route, Router, Switch} from 'react-router-dom';
 import React from 'react';
 import Home from './Views/Home/Home';
 import PostList from './Views/PostList';
-import PostAddEdit from './Views/NewPost/PostAddEdit';
+import PostAddEdit from './Views/NewPost';
 import PostView from "./Views/PostView";
 import PageNotFound from "./Views/NotFound/PageNotFound";
 import UserProfile from "./Views/UserProfile/UserProfile";

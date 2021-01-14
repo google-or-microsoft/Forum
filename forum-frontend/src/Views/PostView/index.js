@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 import parse from 'html-react-parser';
-import {loadSinglePostAction} from "./actons";
+import {loadSinglePostAction} from "./actions";
 import {useDispatch, useSelector} from "react-redux";
 
 const PostView = (props) => {

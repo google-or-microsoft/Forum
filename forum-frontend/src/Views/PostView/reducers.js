@@ -6,7 +6,7 @@ import {
 } from "./constants";
 
 const initialState = {
-    post: [],
+    post: {},
     loading: true,
     redirect: false,
     error: null

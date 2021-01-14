@@ -1,57 +1,52 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from '@material-ui/core/Button';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {addPost, getPost, updatePost} from "../PostView/api";
+import {useDispatch, useSelector} from "react-redux";
+import {loadOriginalPostAction, modifyPostAction, updatePostContent, updatePostTitle} from "./actions";
 
 const PostAddEdit = (props) => {
 
-    const defaultUser = {
-        "id": {"$oid": "5feab6d231521c7b4f43184a"},
-        "password": "admin01",
-        "privilege": "1",
-        "name": "admin1",
-        "email": "rainyforest@gmail.com"
-    }
+    const {post, error} = useSelector(state => ({
+        post: state.modifyPost.post,
+        error: state.modifyPost.error
+    }));
 
-    const emptyPost = {
-        id: '',
-        date: '',
-        text: '',
-        username: defaultUser.name
-    }
-
-    const [post, setPost] = useState(emptyPost);
-
+    const dispatch = useDispatch();
     const postId = props.match.params.id;
     useEffect(() => {
+        // if (postId !== 'new') {
+        //     getPost(postId)
+        //         .then(post => setPost(post))
+        // }
         if (postId !== 'new') {
-            getPost(postId)
-                .then(post => setPost(post))
+            dispatch(loadOriginalPostAction(postId));
         }
     }, [postId]);
 
-    const handleChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        let newPost = {...post};
-        newPost[name] = value;
-        setPost(newPost);
-    }
+    // const handleChange = (event) => {
+    //     const target = event.target;
+    //     const value = target.value;
+    //     const name = target.name;
+    //     let newPost = {...post};
+    //     newPost[name] = value;
+    //     this.setState({newPost});
+    // }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (post.id) {
-            await updatePost(post.id, post);
-        } else {
-            await addPost(post);
-        }
+        // if (post.id) {
+        //     await updatePost(post.id, post);
+        // } else {
+        //     await addPost(post);
+        // }
+
+        dispatch(modifyPostAction(post.id,post))
+
         props.history.push('/posts');
     }
-
     return (<div>
         <Container>
             <h2>{post.id ? 'Edit Post' : 'Add Post'}</h2>
@@ -59,13 +54,13 @@ const PostAddEdit = (props) => {
                 <FormGroup>
                     <Label for="text">Title</Label>
                     <Input type="text" name="title" id="title" value={post.title || ''}
-                           onChange={handleChange} autoComplete="text"/><br/>
+                           onChange={(event) => dispatch(updatePostTitle(event.target.value))} autoComplete="text"/><br/>
                     <CKEditor
                         editor={ClassicEditor}
                         data={post.text}
-                        onChange={(event, editor) => {
-                            post.text = editor.getData();
-                        }}
+                        onChange={(event, editor) =>
+                            dispatch(updatePostContent(editor.getData()))
+                        }
                     />
                 </FormGroup>
                 <FormGroup>
