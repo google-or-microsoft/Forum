@@ -1,4 +1,4 @@
-import axiosRequest from "./axiosRequest";
+import axiosRequest from "../../Utils/axiosRequest";
 
 export const login = (username, password) => {
     return axiosRequest({

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import AppNavbar from '../common/AppNavbar';
-import {register} from "../../services/authService";
+import AppNavbar from '../../Components/AppNavbar';
+import {register} from "./api";
 
 
 class Register extends Component {
@@ -9,7 +9,8 @@ class Register extends Component {
         name: "",
         password: "",
         role: "USER",
-        email: ""
+        email: "",
+        deleted: false
     };
 
     handleChange = (event) => {
