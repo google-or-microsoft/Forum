@@ -20,7 +20,6 @@ public class UserController {
     private UserService userService;
 
 
-
     /**
      * Get a single user by id
      *
@@ -53,7 +52,6 @@ public class UserController {
     public User update(@PathVariable String id, @RequestBody User user) {
         return userService.update(id, user);
     }
-
 
 
 }

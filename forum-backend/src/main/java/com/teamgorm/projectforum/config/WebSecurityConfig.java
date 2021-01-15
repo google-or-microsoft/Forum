@@ -2,7 +2,9 @@ package com.teamgorm.projectforum.config;
 
 import com.teamgorm.projectforum.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,9 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserDetailServiceImpl userDetailService;
-
     private static final String[] SWAGGER_WHITELIST = {
             // -- swagger ui
             "/v2/api-docs",
@@ -28,6 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
             "/webjars/**"
     };
+    @Autowired
+    UserDetailServiceImpl userDetailService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -48,4 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailService)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
+
+    /**
+     * Inject AuthenticationManager
+     **/
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
 }

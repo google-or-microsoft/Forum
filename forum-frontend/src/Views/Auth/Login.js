@@ -1,51 +1,42 @@
-import React, {Component} from 'react';
-import AppNavbar from '../../Components/AppNavbar';
+import React, {useState} from 'react';
 import {login} from './api';
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {loginInfo: {}};
+const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+    }
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
     }
 
-    handleChange = (event) => {
-        const target = event.target;
-        this.setState({username: target.username});
-    }
-
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const {loginInfo} = this.state;
-
-        login(loginInfo.username, loginInfo.password)
-        this.props.history.push('/');
+        login(username, password)
+        // history.push('/');
     }
 
-    render() {
-        return (
-            <div>
-                <AppNavbar/>
-                <h2>Login</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        username:
-                        <input type="text" value={this.state.username} onChange={this.handleChange}/>
-                    </label>
-                    <br/>
-                    <label>
-                        password:
-                        <input type="text" value={this.state.password} onChange={this.handleChange}/>
-                    </label>
-                    <br/>
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
-        );
-    }
 
-    createBasicAuthToken(username, password) {
-        return 'Basic ' + window.btoa(username + ":" + password);
-    }
+    return (
+        <div>
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    username:
+                    <input type="text" value={username} onChange={handleUsernameChange}/>
+                </label>
+                <br/>
+                <label>
+                    password:
+                    <input type="text" value={password} onChange={handlePasswordChange}/>
+                </label>
+                <br/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    );
 }
 
 export default Login;

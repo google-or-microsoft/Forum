@@ -1,6 +1,5 @@
 package com.teamgorm.projectforum.exception;
 
-import com.sun.net.httpserver.HttpsConfigurator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

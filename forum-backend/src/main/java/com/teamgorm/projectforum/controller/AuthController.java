@@ -1,9 +1,12 @@
 package com.teamgorm.projectforum.controller;
 
 import com.teamgorm.projectforum.model.User;
+import com.teamgorm.projectforum.service.AuthService;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,7 +18,17 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
     private UserService userService;
+    @Autowired
+    private AuthService authService;
+
+    @PostMapping("/login")
+    public String login(@AuthenticationPrincipal @RequestBody String loginToken) {
+        authService.login(loginToken, authenticationManager);
+        return "ok";
+    }
 
     /**
      * Create a new user
@@ -31,6 +44,7 @@ public class AuthController {
     /**
      * Delete a user by id
      * This action must be taken by ADMIN role
+     *
      * @param id
      */
     @PreAuthorize("hasRole('ROLE_ADMIN')")
