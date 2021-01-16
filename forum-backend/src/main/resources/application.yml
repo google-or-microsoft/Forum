@@ -9,3 +9,8 @@ spring:
 server:
   servlet:
     context-path: /api/v1
+
+logging:
+  level:
+    root: info
+    org.springframework.security: debug

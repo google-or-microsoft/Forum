@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {login} from './api';
+import history from "../../history";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -15,7 +16,7 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         login(username, password)
-        // history.push('/');
+        history.push('/');
     }
 
 

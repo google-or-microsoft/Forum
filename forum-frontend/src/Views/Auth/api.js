@@ -4,8 +4,10 @@ export const login = (username, password) => {
     let token = 'Basic ' + window.btoa(username + ":" + password);
     return axiosRequest({
         url: `/auth/login`,
-        method: 'post',
-        data: token
+        method: 'get',
+        headers: {
+            authorization: token
+        }
     });
 }
 
