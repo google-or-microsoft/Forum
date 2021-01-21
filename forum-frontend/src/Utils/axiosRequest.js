@@ -5,11 +5,15 @@ import history from '../history';
 /**
  * Create an axios instance
  */
+let tokenContext = localStorage.getItem("token");
+console.log(tokenContext);
 const service = axios.create({
+
     baseURL: "/api/v1",
     headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${tokenContext}`
     }
 })
 
@@ -22,6 +26,11 @@ service.interceptors.response.use(
             }
             return Promise.reject('error');
         } else {
+            if (res.data === "Success login"){
+                localStorage.clear();
+                localStorage.setItem("token",res.headers["authorization"]);
+                localStorage.setItem("username",res.headers["username"]);
+            }
             return res.data;
         }
     },

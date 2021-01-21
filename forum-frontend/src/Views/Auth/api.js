@@ -6,7 +6,7 @@ export const login = (username, password) => {
         url: `/auth/login`,
         method: 'get',
         headers: {
-            authorization: token
+            "Authorization": token
         }
     });
 }

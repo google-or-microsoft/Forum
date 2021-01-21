@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
@@ -34,7 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(mySecurityFilter(), BasicAuthenticationFilter.class)
+        http
+                .addFilterBefore(basicAuthenticationFilter(), AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(SWAGGER_WHITELIST).permitAll()
@@ -53,8 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @SneakyThrows
-    private MySecurityFilter mySecurityFilter(){
-        return new MySecurityFilter(super.authenticationManager());
+    private BasicAuthenticationFilter basicAuthenticationFilter(){
+        return new BasicAuthenticationFilter(super.authenticationManager());
     }
 
 

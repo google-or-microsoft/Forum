@@ -4,7 +4,12 @@ import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.Base64;
 
 /**
  * Auth Controller
@@ -19,8 +24,14 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public Boolean login() {
-        return true;
+    public String login(HttpServletResponse res) {
+        UserDetails principle = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = principle.getUsername();
+        String password = principle.getPassword();
+        String token = Base64.getEncoder().encodeToString((username+":"+password).getBytes());
+        res.setHeader("Authorization",token);
+        res.setHeader("username",username);
+        return "Success login";
     }
 
     /**
