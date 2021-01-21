@@ -1,6 +1,6 @@
-# Forum
+# Discussion Web Forum
 
-This is a forum project.
+This is a discussion web forum project that allows users to post their topics and comment to other posts.
 
 ## Basic Functions
 - user management
