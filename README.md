@@ -4,7 +4,7 @@ This is a discussion web forum project that allows users to post their topics an
 
 ## Basic Functions
 - user management
-- post management
+- posts management
 
 ## Tech Requirements
 Front-end
