@@ -35,8 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .addFilterBefore(basicAuthenticationFilter(), AnonymousAuthenticationFilter.class)
+        http.addFilterBefore(mySecurityFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(SWAGGER_WHITELIST).permitAll()
@@ -55,9 +54,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @SneakyThrows
-    private BasicAuthenticationFilter basicAuthenticationFilter(){
-        return new BasicAuthenticationFilter(super.authenticationManager());
+    private MySecurityFilter mySecurityFilter(){
+        return new MySecurityFilter(this.authenticationManager());
     }
+
+
 
 
 }

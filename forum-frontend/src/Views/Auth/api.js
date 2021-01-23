@@ -1,14 +1,15 @@
 import axiosRequest from "../../Utils/axiosRequest";
 
 export const login = (username, password) => {
-    let token = 'Basic ' + window.btoa(username + ":" + password);
+    let token = window.btoa(username + ":" + password);
+    localStorage.setItem("token",token);
     return axiosRequest({
         url: `/auth/login`,
         method: 'get',
         headers: {
-            "Authorization": token
+            "Authorization": `Basic ${token}`
         }
-    });
+    })
 }
 
 export const register = (user) => {

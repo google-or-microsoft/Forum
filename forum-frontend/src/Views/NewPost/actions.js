@@ -8,7 +8,8 @@ import {
     LOADING_ORIGINAL_POST_FAILURE,
     STOP_LOADING_ORIGINAL_POST,
     UPDATE_POST_CONTENT,
-    UPDATE_POST_TITLE, START_MODIFYING_POST
+    UPDATE_POST_TITLE,
+    UPDATE_POST_AUTHOR
 } from "./constants";
 import {getPost} from "../PostView/api";
 
@@ -46,6 +47,13 @@ export const modifyPostAction = (id,post) => {
 export const updatePostTitle = (value) => {
     return {
         type: UPDATE_POST_TITLE,
+        payload: value
+    };
+};
+
+export const updateAuthor = (value) => {
+    return {
+        type: UPDATE_POST_AUTHOR,
         payload: value
     };
 };

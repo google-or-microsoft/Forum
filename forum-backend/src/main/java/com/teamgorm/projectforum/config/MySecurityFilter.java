@@ -48,6 +48,6 @@ public class MySecurityFilter extends OncePerRequestFilter {
         String encodedString = loginToken.substring(6);
         byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
         String[] decodedStrings = new String(decodedBytes).split(":");
-        return new LoginDTO(decodedStrings[0], decodedStrings[1]);
+        return new LoginDTO(decodedStrings[0], decodedStrings[1]," ");
     }
 }

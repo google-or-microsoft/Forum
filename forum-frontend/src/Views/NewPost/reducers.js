@@ -7,8 +7,9 @@ import {
     LOADING_ORIGINAL_POST_SUCCESS,
     STOP_LOADING_ORIGINAL_POST,
     UPDATE_POST_TITLE,
-    UPDATE_POST_CONTENT
+    UPDATE_POST_CONTENT, UPDATE_POST_AUTHOR
 } from "./constants";
+import {userReducer} from "../User/reducers";
 
 const defaultUser = {
     "id": {"$oid": "5feab6d231521c7b4f43184a"},
@@ -23,7 +24,7 @@ const initialState = {
         id: '',
         date: '',
         text: '',
-        username: defaultUser.name
+        username: ''
     },
     error: null
 };
@@ -58,9 +59,13 @@ export const modifyPostReducer = (state = initialState, action) => {
             return initialState;
 
         case MODIFYING_POST_SUCCESS:
+
             return {
                 ...state,
-                post: action.payload,
+                // post: action.payload,
+                post: {
+                    ...state.post,
+                },
                 error: null
             };
 
@@ -85,6 +90,15 @@ export const modifyPostReducer = (state = initialState, action) => {
                 post: {
                     ...state.post,
                     text: action.payload
+                },
+                error:null
+            };
+        case UPDATE_POST_AUTHOR:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    username: action.payload
                 },
                 error:null
             };

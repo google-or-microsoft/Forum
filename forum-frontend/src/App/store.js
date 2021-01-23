@@ -3,11 +3,14 @@ import {postsReducer} from '../Views/PostList/reducers';
 import thunk from 'redux-thunk';
 import {singlePostReducer} from "../Views/PostView/reducers";
 import {modifyPostReducer} from "../Views/NewPost/reducers";
+import {userReducer} from "../Views/User/reducers";
 // root reducer for app
 const rootReducer = combineReducers({
     posts: postsReducer,
     singlePost: singlePostReducer,
-    modifyPost: modifyPostReducer
+    modifyPost: modifyPostReducer,
+    storeUser: userReducer
+
 });
 
 // dev tool extension

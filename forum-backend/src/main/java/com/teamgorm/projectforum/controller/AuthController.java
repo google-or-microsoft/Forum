@@ -1,5 +1,6 @@
 package com.teamgorm.projectforum.controller;
 
+import com.teamgorm.projectforum.dto.LoginDTO;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,13 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public String login(HttpServletResponse res) {
+    public LoginDTO login(HttpServletResponse res) {
         UserDetails principle = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = principle.getUsername();
         String password = principle.getPassword();
-        String token = Base64.getEncoder().encodeToString((username+":"+password).getBytes());
-        res.setHeader("Authorization",token);
-        res.setHeader("username",username);
-        return "Success login";
+//        String token = Base64.getEncoder().encodeToString((username+":"+password).getBytes());
+//        res.setHeader("Authorization",token);
+        return new LoginDTO(username,password,"Success login");
     }
 
     /**

@@ -5,13 +5,14 @@ import Button from '@material-ui/core/Button';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {useDispatch, useSelector} from "react-redux";
-import {loadOriginalPostAction, modifyPostAction, updatePostContent, updatePostTitle} from "./actions";
+import {loadOriginalPostAction, modifyPostAction, updateAuthor, updatePostContent, updatePostTitle} from "./actions";
+import store from "../../App/store"
 
 const PostAddEdit = (props) => {
 
     const {post, error} = useSelector(state => ({
         post: state.modifyPost.post,
-        error: state.modifyPost.error
+        error: state.modifyPost.error,
     }));
 
     const dispatch = useDispatch();
@@ -22,7 +23,6 @@ const PostAddEdit = (props) => {
             dispatch(loadOriginalPostAction(postId));
         }
     }, [postId]);
-
     const renderNewPost = () => {
 
         return (
@@ -31,7 +31,9 @@ const PostAddEdit = (props) => {
                     <h2>{post.id ? 'Edit Post' : 'Add Post'}</h2>
                     <Form onSubmit={(e) => {
                         e.preventDefault();
-                        dispatch(modifyPostAction(post.id, post))
+                        dispatch(updateAuthor(username));
+                        dispatch(modifyPostAction(post.id, post));
+
                     }}>
                         <FormGroup>
                             <Label for="text">Title</Label>
