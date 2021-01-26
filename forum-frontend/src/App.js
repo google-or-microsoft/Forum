@@ -8,7 +8,7 @@ import PostView from "./Views/PostView";
 import PageNotFound from "./Views/NotFound/PageNotFound";
 import UserProfile from "./Views/UserProfile/UserProfile";
 import Login from "./Views/Auth/Login";
-import AppNavbar from './Components/AppNavbar';
+import AppNavbar from './Components/Navbar';
 import history from './history';
 import Register from "./Views/Auth/Register";
 import store from "./App/store";
