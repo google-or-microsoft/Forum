@@ -1,5 +1,5 @@
 import React from 'react';
-import AppNavbar from '../../Components/AppNavbar';
+import AppNavbar from '../../Components/Navbar';
 
 const PageNotFound = () => {
 
