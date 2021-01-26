@@ -1,11 +1,12 @@
-import axiosRequest from "../../Utils/axiosRequest";
+import axiosRequest from '../../Utils/axiosRequest';
+import Cookies from 'js-cookie';
 
 export const getPost = (id) => {
     return axiosRequest({
         url: `/posts/${id}`,
         method: 'get',
-        headers:{
-            "Authorization": `Basic ${localStorage.getItem("token")}`
+        headers: {
+            "Authorization": `Basic ${Cookies.get("token")}`
         }
     });
 }

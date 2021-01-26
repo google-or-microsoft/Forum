@@ -1,8 +1,9 @@
 import axiosRequest from "../../Utils/axiosRequest";
+import Cookies from "js-cookie";
 
 export const login = (username, password) => {
     let token = window.btoa(username + ":" + password);
-    localStorage.setItem("token",token);
+    Cookies.set("token", token);
     return axiosRequest({
         url: `/auth/login`,
         method: 'get',

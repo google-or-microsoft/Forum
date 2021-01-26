@@ -1,6 +1,5 @@
 package com.teamgorm.projectforum.controller;
 
-import com.teamgorm.projectforum.dto.LoginDTO;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Base64;
 
 /**
  * Auth Controller
@@ -25,13 +24,15 @@ public class AuthController {
 
 
     @GetMapping("/login")
-    public LoginDTO login(HttpServletResponse res) {
+    public String login(HttpServletResponse res) {
         UserDetails principle = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = principle.getUsername();
-        String password = principle.getPassword();
+        Cookie cookie = new Cookie("username", username);
+        cookie.setPath("/");
+        res.addCookie(cookie);
 //        String token = Base64.getEncoder().encodeToString((username+":"+password).getBytes());
 //        res.setHeader("Authorization",token);
-        return new LoginDTO(username,password,"Success login");
+        return "Success login";
     }
 
     /**

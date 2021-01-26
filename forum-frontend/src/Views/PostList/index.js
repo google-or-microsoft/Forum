@@ -20,7 +20,7 @@ const PostList = () => {
     }, []);
 
     const renderPostList = () => {
-        if(!posts) return null;
+        if (!posts) return null;
         return posts.map(post => {
             return (
                 <div className="flex flex-row justify-between my-4" key={post.id}>

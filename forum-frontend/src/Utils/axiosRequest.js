@@ -1,18 +1,18 @@
 import axios from 'axios';
 import history from '../history';
+import Cookies from 'js-cookie';
 
 // const baseUrl = process.env.REACT_APP_API_BASE_URL;
 /**
  * Create an axios instance
  */
-// let tokenContext = localStorage.getItem("token");
+
 const service = axios.create({
 
     baseURL: "/api/v1",
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        // 'Authorization': `Basic ${tokenContext}`
     }
 })
 
@@ -25,10 +25,9 @@ service.interceptors.response.use(
             }
             return Promise.reject('error');
         } else {
-            if (res.data.loggedIn === "Success logout"){
-                localStorage.clear();
-                // localStorage.setItem("token",res.headers["authorization"]);
-                // localStorage.setItem("username",res.headers["username"]);
+            if (res.data === "Success logout") {
+                Cookies.remove('username');
+                Cookies.remove('token');
             }
             return res.data;
         }

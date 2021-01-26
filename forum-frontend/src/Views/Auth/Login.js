@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {setUser, updatePassword, updateUsername} from "../User/actions";
 
 const Login = () => {
-    const {username, loginStatus,password} = useSelector(state => ({
+    const {username, loginStatus, password} = useSelector(state => ({
         username: state.storeUser.username,
         loginStatus: state.storeUser.loginStatus,
-        password:state.storeUser.password
+        password: state.storeUser.password
     }));
 
     const dispatch = useDispatch();
@@ -22,12 +22,14 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     username:
-                    <input type="text" value={username} onChange={(event) => dispatch(updateUsername(event.target.value))}/>
+                    <input type="text" value={username}
+                           onChange={(event) => dispatch(updateUsername(event.target.value))}/>
                 </label>
                 <br/>
                 <label>
                     password:
-                    <input type="text" value={password} onChange={(event) => dispatch(updatePassword(event.target.value))}/>
+                    <input type="text" value={password}
+                           onChange={(event) => dispatch(updatePassword(event.target.value))}/>
                 </label>
                 <br/>
                 <input type="submit" value="Submit"/>

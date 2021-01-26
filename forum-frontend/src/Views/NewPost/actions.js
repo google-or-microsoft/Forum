@@ -12,6 +12,7 @@ import {
     UPDATE_POST_TITLE
 } from "./constants";
 import {getPost} from "../PostView/api";
+import Cookies from "js-cookie";
 
 export const loadOriginalPostAction = (id) => {
     return (dispatch) => {
@@ -31,10 +32,9 @@ export const addOrEdit = (id, post) => {
 };
 
 export const modifyPostAction = (id, post) => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         // assign username from userReducer to the post
-        post.username = getState().storeUser.username;
-
+        post.username = Cookies.get('username');
         addOrEdit(id, post)
             .then(data => {
                 dispatch({type: MODIFYING_POST_SUCCESS, payload: data})
