@@ -30,15 +30,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void checkEmailDuplicate(String email){
+    public void checkEmailDuplicate(String email) {
         userRepository.findByEmail(email)
-                .ifPresent((user) -> {throw new CustomizeException(ErrorCode.EMAIL_EXISTS,email);});
+                .ifPresent((user) -> {
+                    throw new CustomizeException(ErrorCode.EMAIL_EXISTS, email);
+                });
     }
 
     @Override
-    public void checkUsernameDuplicate(String username){
+    public void checkUsernameDuplicate(String username) {
         userRepository.findByName(username)
-                .ifPresent((user)-> {throw new CustomizeException(ErrorCode.USERNAME_EXISTS,username);});
+                .ifPresent((user) -> {
+                    throw new CustomizeException(ErrorCode.USERNAME_EXISTS, username);
+                });
     }
 
     @Override

@@ -1,9 +1,5 @@
 import {getPost} from "./api";
-import {
-    LOADING_SINGLE_POST_FAILURE,
-    LOADING_SINGLE_POST_SUCCESS,
-    STOP_LOADING_SINGLE_POST
-} from "./constants";
+import {LOADING_SINGLE_POST_FAILURE, LOADING_SINGLE_POST_SUCCESS, STOP_LOADING_SINGLE_POST} from "./constants";
 
 export const loadSinglePostAction = (id) => {
 

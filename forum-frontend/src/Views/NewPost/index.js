@@ -11,7 +11,7 @@ const PostAddEdit = (props) => {
 
     const {post, error} = useSelector(state => ({
         post: state.modifyPost.post,
-        error: state.modifyPost.error
+        error: state.modifyPost.error,
     }));
 
     const dispatch = useDispatch();
@@ -22,7 +22,6 @@ const PostAddEdit = (props) => {
             dispatch(loadOriginalPostAction(postId));
         }
     }, [postId]);
-
     const renderNewPost = () => {
 
         return (
@@ -31,7 +30,8 @@ const PostAddEdit = (props) => {
                     <h2>{post.id ? 'Edit Post' : 'Add Post'}</h2>
                     <Form onSubmit={(e) => {
                         e.preventDefault();
-                        dispatch(modifyPostAction(post.id, post))
+                        dispatch(modifyPostAction(post.id, post));
+
                     }}>
                         <FormGroup>
                             <Label for="text">Title</Label>

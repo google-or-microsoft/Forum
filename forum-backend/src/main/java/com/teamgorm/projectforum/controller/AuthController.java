@@ -8,7 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * Auth Controller
@@ -20,8 +22,16 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
-    private Principal principal;
+  
+    @GetMapping("/login")
+    public String login(HttpServletResponse res) {
+        UserDetails principle = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = principle.getUsername();
+        Cookie cookie = new Cookie("username", username);
+        cookie.setPath("/");
+        res.addCookie(cookie);
+        return "Success login";
+    }
 
     /**
      * Create a new user
@@ -37,6 +47,7 @@ public class AuthController {
     /**
      * Delete a user by id
      * This action must be taken by ADMIN role
+     *
      * @param id
      */
 

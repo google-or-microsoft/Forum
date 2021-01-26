@@ -16,14 +16,12 @@ const PostList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("render");
         dispatch(loadPostsAction());
     }, []);
 
     const renderPostList = () => {
-        if(!posts) return null;
+        if (!posts) return null;
         return posts.map(post => {
-            console.log(post.title);
             return (
                 <div className="flex flex-row justify-between my-4" key={post.id}>
                     <Link to={"/posts/" + post.id} className="w-1/3">{post.title}</Link>

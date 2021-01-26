@@ -3,6 +3,7 @@ package com.teamgorm.projectforum.controller;
 import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class PostController {
      * @return
      */
     @PostMapping
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN')")
     public Post create(@RequestBody Post post) {
         return postService.create(post);
     }

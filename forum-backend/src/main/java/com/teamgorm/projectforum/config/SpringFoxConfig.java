@@ -9,8 +9,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- *  Swagger 2 for a Spring REST web service, using the Springfox implementation of the Swagger 2 specification.
- *  https://swagger.io/
+ * Swagger 2 for a Spring REST web service, using the Springfox implementation of the Swagger 2 specification.
+ * https://swagger.io/
  */
 
 @EnableSwagger2

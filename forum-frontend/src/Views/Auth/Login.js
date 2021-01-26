@@ -1,51 +1,41 @@
-import React, {Component} from 'react';
-import AppNavbar from '../../Components/AppNavbar';
-import {login} from './api';
+import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {setUser, updatePassword, updateUsername} from "../User/actions";
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {loginInfo: {}};
-    }
+const Login = () => {
+    const {username, loginStatus, password} = useSelector(state => ({
+        username: state.storeUser.username,
+        loginStatus: state.storeUser.loginStatus,
+        password: state.storeUser.password
+    }));
 
-    handleChange = (event) => {
-        const target = event.target;
-        this.setState({username: target.username});
-    }
-
-    handleSubmit = (event) => {
+    const dispatch = useDispatch();
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const {loginInfo} = this.state;
-
-        login(loginInfo.username, loginInfo.password)
-        this.props.history.push('/');
+        dispatch(setUser(username, password));
     }
 
-    render() {
-        return (
-            <div>
-                <AppNavbar/>
-                <h2>Login</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        username:
-                        <input type="text" value={this.state.username} onChange={this.handleChange}/>
-                    </label>
-                    <br/>
-                    <label>
-                        password:
-                        <input type="text" value={this.state.password} onChange={this.handleChange}/>
-                    </label>
-                    <br/>
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
-        );
-    }
 
-    createBasicAuthToken(username, password) {
-        return 'Basic ' + window.btoa(username + ":" + password);
-    }
+    return (
+        <div>
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    username:
+                    <input type="text" value={username}
+                           onChange={(event) => dispatch(updateUsername(event.target.value))}/>
+                </label>
+                <br/>
+                <label>
+                    password:
+                    <input type="text" value={password}
+                           onChange={(event) => dispatch(updatePassword(event.target.value))}/>
+                </label>
+                <br/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    );
 }
 
 export default Login;

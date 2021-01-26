@@ -1,13 +1,14 @@
 import {
-    START_MODIFYING_POST,
-    STOP_MODIFYING_POST,
-    MODIFYING_POST_SUCCESS,
-    MODIFYING_POST_FAILURE,
     LOADING_ORIGINAL_POST_FAILURE,
     LOADING_ORIGINAL_POST_SUCCESS,
+    MODIFYING_POST_FAILURE,
+    MODIFYING_POST_SUCCESS,
+    START_MODIFYING_POST,
     STOP_LOADING_ORIGINAL_POST,
-    UPDATE_POST_TITLE,
-    UPDATE_POST_CONTENT
+    STOP_MODIFYING_POST,
+    UPDATE_POST_AUTHOR,
+    UPDATE_POST_CONTENT,
+    UPDATE_POST_TITLE
 } from "./constants";
 
 const defaultUser = {
@@ -19,11 +20,11 @@ const defaultUser = {
 }
 
 const initialState = {
-    post:{
+    post: {
         id: '',
         date: '',
         text: '',
-        username: defaultUser.name
+        username: ''
     },
     error: null
 };
@@ -34,7 +35,7 @@ export const modifyPostReducer = (state = initialState, action) => {
             return {
                 ...state,
                 post: action.payload,
-                error:null
+                error: null
             };
 
         case LOADING_ORIGINAL_POST_FAILURE:
@@ -45,7 +46,7 @@ export const modifyPostReducer = (state = initialState, action) => {
         case STOP_LOADING_ORIGINAL_POST:
             return {
                 ...state,
-                error:null
+                error: null
             };
 
         case START_MODIFYING_POST:
@@ -58,9 +59,9 @@ export const modifyPostReducer = (state = initialState, action) => {
             return initialState;
 
         case MODIFYING_POST_SUCCESS:
+
             return {
                 ...state,
-                post: action.payload,
                 error: null
             };
 
@@ -70,13 +71,13 @@ export const modifyPostReducer = (state = initialState, action) => {
                 error: 'Unable to add a new post at the moment.'
             }
         case UPDATE_POST_TITLE:
-            return{
+            return {
                 ...state,
                 post: {
                     ...state.post,
                     title: action.payload
                 },
-                error:null
+                error: null
             };
 
         case UPDATE_POST_CONTENT:
@@ -86,7 +87,16 @@ export const modifyPostReducer = (state = initialState, action) => {
                     ...state.post,
                     text: action.payload
                 },
-                error:null
+                error: null
+            };
+        case UPDATE_POST_AUTHOR:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    username: action.payload
+                },
+                error: null
             };
 
         default:

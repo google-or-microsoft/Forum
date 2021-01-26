@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.config;
 
 import com.teamgorm.projectforum.service.impl.UserDetailServiceImpl;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,14 +10,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    UserDetailServiceImpl userDetailService;
 
     private static final String[] SWAGGER_WHITELIST = {
             // -- swagger ui
@@ -28,17 +27,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
             "/webjars/**"
     };
+    @Autowired
+    UserDetailServiceImpl userDetailService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.addFilterBefore(mySecurityFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(SWAGGER_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic()
-                .and()
+//                .httpBasic()
+//                .and()
                 .csrf().disable();
     }
 
@@ -48,4 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailService)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
+
+    @SneakyThrows
+    private MySecurityFilter mySecurityFilter() {
+        return new MySecurityFilter(this.authenticationManager());
+    }
+
+
 }

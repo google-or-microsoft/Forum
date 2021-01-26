@@ -1,13 +1,16 @@
 import axiosRequest from "../../Utils/axiosRequest";
+import Cookies from "js-cookie";
 
 export const login = (username, password) => {
+    let token = window.btoa(username + ":" + password);
+    Cookies.set("token", token);
     return axiosRequest({
-        url: `/admin/login`,
+        url: `/auth/login`,
         method: 'get',
         headers: {
-            authorization: this.createBasicAuthToken(username, password)
+            "Authorization": `Basic ${token}`
         }
-    });
+    })
 }
 
 export const register = (user) => {
