@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Auth Controller
  */
@@ -21,8 +22,7 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
-
+  
     @GetMapping("/login")
     public String login(HttpServletResponse res) {
         UserDetails principle = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -30,8 +30,6 @@ public class AuthController {
         Cookie cookie = new Cookie("username", username);
         cookie.setPath("/");
         res.addCookie(cookie);
-//        String token = Base64.getEncoder().encodeToString((username+":"+password).getBytes());
-//        res.setHeader("Authorization",token);
         return "Success login";
     }
 
@@ -52,9 +50,16 @@ public class AuthController {
      *
      * @param id
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') or @authController.getId() == #id")
     @DeleteMapping("/admin/{id}")
     public void delete(@PathVariable String id) {
         userService.deleteById(id);
+    }
+
+    public String getId(){
+        Object currentPrinciple = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails) currentPrinciple).getUsername();
+        return userService.getByName(username).getId();
     }
 }
