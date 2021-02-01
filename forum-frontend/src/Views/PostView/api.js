@@ -10,13 +10,3 @@ export const getPost = (id) => {
         }
     });
 }
-
-export const getComments = (id) => {
-    return axiosRequest({
-        url: `/comments/post/${id}`,
-        method: 'get',
-        headers: {
-            "Authorization": `Basic ${Cookies.get("token")}`
-        }
-    });
-}

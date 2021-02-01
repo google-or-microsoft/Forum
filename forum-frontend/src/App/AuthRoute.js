@@ -10,7 +10,6 @@ const AuthRoute = (props) => {
         ...otherProps
     } = props;
     const userRole = Cookies.get("role");
-    console.log("authRoute " + userRole);
     if (userRole && (routeRole.indexOf(userRole)) !== -1) {
         return <Route {...otherProps} />
     } else {

@@ -2,7 +2,7 @@ import './App.css';
 import {Route, Router, Switch} from 'react-router-dom';
 import React from 'react';
 import PageNotFound from "./Views/NotFound/PageNotFound";
-import AppNavbar from './Components/Navbar';
+import AppNavbar from './Base/Navbar';
 import history from './history';
 import store from "./App/store";
 import {Provider} from "react-redux";

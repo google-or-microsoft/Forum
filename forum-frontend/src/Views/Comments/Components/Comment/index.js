@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -9,15 +9,14 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
+import {red} from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: '80%',
-        marginTop:5
+        maxWidth: '100%',
+        marginTop: 5
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -33,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: red[500],
     },
     cardComponent: {
-         paddingLeft: 10,
-         paddingTop:5,
-         paddingBottom:1,
-         marginTop:2
+        paddingLeft: 10,
+        paddingTop: 5,
+        paddingBottom: 1,
+        marginTop: 2
     }
 }));
 
@@ -49,7 +48,7 @@ const Comment = (props) => {
     };
 
     return (
-        <Card className={classes.root} elevation={3} >
+        <Card className={classes.root} variant="outlined">
             <CardHeader
                 className={classes.cardComponent}
                 avatar={
@@ -57,7 +56,7 @@ const Comment = (props) => {
                         {props.username}
                     </Avatar>
                 }
-                title= {props.username}
+                title={props.username}
                 subheader={props.date}
             />
             <CardContent className={classes.cardComponent}>
@@ -67,7 +66,7 @@ const Comment = (props) => {
             </CardContent>
             <CardActions disableSpacing className={classes.cardComponent}>
                 <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
+                    <FavoriteIcon/>
                 </IconButton>
                 <IconButton
                     className={clsx(classes.expand, {
@@ -77,7 +76,7 @@ const Comment = (props) => {
                     aria-expanded={expanded}
                     aria-label="show more"
                 >
-                    <ExpandMoreIcon />
+                    <ExpandMoreIcon/>
                 </IconButton>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
