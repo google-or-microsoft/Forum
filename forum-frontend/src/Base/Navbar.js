@@ -3,6 +3,7 @@ import {AppBar, Button, makeStyles, Toolbar, Typography} from '@material-ui/core
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from "@material-ui/core/IconButton";
 import history from "../history";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,7 +20,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+
 const Navbar = () => {
+
+    const {loginStatus} = useSelector(state => ({
+        loginStatus : state.storeUser.loginStatus
+    }));
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -31,9 +38,13 @@ const Navbar = () => {
                     <Typography variant="h6" className={classes.title}>
                         Forum
                     </Typography>
+                    {loginStatus ?
                     <Button
                         color="inherit"
-                        onClick={() => history.push("/login")}>Login</Button>
+                        onClick={() => history.push("/")}>Log Out</Button> :
+                    <Button
+                        color="inherit"
+                        onClick={() => history.push("/login")}>Log In</Button>}
                 </Toolbar>
             </AppBar>
         </div>
