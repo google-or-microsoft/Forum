@@ -10,3 +10,13 @@ export const getUserPosts = (username) => {
         }
     });
 }
+
+export const getUser = (id) => {
+    return axiosRequest({
+        url: `/users/${id}`,
+        method: 'get',
+        headers: {
+            "Authorization": `Basic ${Cookies.get("token")}`
+        }
+    });
+}

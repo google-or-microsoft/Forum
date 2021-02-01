@@ -3,11 +3,12 @@ import {postsReducer} from '../Views/PostList/reducers';
 import thunk from 'redux-thunk';
 import {singlePostReducer} from "../Views/PostView/reducers";
 import {modifyPostReducer} from "../Views/NewPost/reducers";
-import {userReducer} from "../Views/User/reducers";
+import {loginReducer} from "../Views/Login/reducers";
 import {modifyCommentReducer} from "../Views/Comments/reducers";
 import {persistCombineReducers, persistStore} from 'redux-persist'
 import {CookieStorage} from 'redux-persist-cookie-storage'
 import Cookies from "js-cookie";
+import {userReducer} from "../Views/User/reducers";
 
 const persistConfig = {
     key: "root",
@@ -20,7 +21,8 @@ const rootReducer = persistCombineReducers(persistConfig, {
     singlePost: singlePostReducer,
     modifyPost: modifyPostReducer,
     modifyComment: modifyCommentReducer,
-    storeUser: userReducer
+    login: loginReducer,
+    user: userReducer
 });
 
 // dev tool extension
@@ -34,6 +36,6 @@ const store = createStore(
     )
 );
 
-const persistor = persistStore(store, {});
+persistStore(store, {});
 
 export default store;
