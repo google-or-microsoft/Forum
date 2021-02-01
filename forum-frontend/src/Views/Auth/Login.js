@@ -1,17 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {loginAction, updatePassword, updateUsername} from "../User/actions";
 import {Container, TextField} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const Login = () => {
-    const {username, loginStatus, password} = useSelector(state => ({
-        username: state.storeUser.username,
-        loginStatus: state.storeUser.loginStatus,
-        password: state.storeUser.password
-    }));
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(loginAction(username, password));
@@ -34,11 +33,15 @@ const Login = () => {
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit} className={classes.root}>
                     <br/>
-                    <TextField label="Username" value={username} variant="outlined"
-                               onChange={(event) => dispatch(updateUsername(event.target.value))}/>
+                    <TextField label="Username" value={username} variant="outlined" onChange={(e)=>{
+                        e.preventDefault();
+                        setUsername(e.target.value)
+                    }}/>
                     <br/>
-                    <TextField label="Password" value={password} variant="outlined"
-                               onChange={(event) => dispatch(updatePassword(event.target.value))}/>
+                    <TextField label="Password" value={password} variant="outlined" onChange={(e)=>{
+                        e.preventDefault();
+                        setPassword(e.target.value)
+                    }}/>
                     <br/>
                     <input type="submit" value="Submit"/>
                 </form>
