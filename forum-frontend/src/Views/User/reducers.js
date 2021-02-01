@@ -1,56 +1,44 @@
-import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS, SET_PASSWORD, SET_USERNAME} from "./constants";
+import {LOAD_USER_FAILURE, LOAD_USER_SUCCESS, START_LOAD_USER, STOP_LOAD_USER} from "./constants";
 
 const initialState = {
-    loginStatus: false,
-    username: null,
-    password: null,
+    user: {},
+    loading: true,
     error: null
-}
+};
 
 export const userReducer = (state = initialState, action) => {
+
     switch (action.type) {
-        case LOGIN_SUCCESS:
+        case START_LOAD_USER:
             return {
                 ...state,
-                loginStatus: true,
-                username: action.payload,
-                error: null
-            };
-        case LOGIN_FAILURE:
-            return {
-                ...state,
-                loginStatus: false,
-                username: null,
-                password: null,
-                error: "Login procedure failed"
-            };
-        case LOGOUT_SUCCESS:
-            return {
-                ...state,
-                loginStatus: false,
-                username: null,
-                password: null,
-                error: null
-            };
-        case LOGOUT_FAILURE:
-            return {
-                ...state
-            };
-        case SET_USERNAME:
-            return {
-                ...state,
-                username: action.payload,
+                loading: true,
                 error: null
             };
 
-        case SET_PASSWORD:
+        case STOP_LOAD_USER:
             return {
                 ...state,
-                password: action.payload,
+                loading: false,
                 error: null
             };
+
+        case LOAD_USER_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                loading: false,
+                error: null
+            };
+
+        case LOAD_USER_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: 'Unable to fetch user at the moment.'
+            }
 
         default:
-            return state
+            return state;
     }
 }

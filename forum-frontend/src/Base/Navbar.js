@@ -4,7 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from "@material-ui/core/IconButton";
 import history from "../history";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutAction} from "../Views/User/actions";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,13 +24,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = () => {
 
-    const {loginStatus} = useSelector(state => ({
-        loginStatus: state.storeUser.loginStatus
+    const {loginStatus, username} = useSelector(state => ({
+        loginStatus: state.login.loginStatus,
+        username: state.login.username,
     }));
 
     const classes = useStyles();
 
     const dispatch = useDispatch();
+
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.bar}>
@@ -42,9 +44,12 @@ const Navbar = () => {
                         Forum
                     </Typography>
                     {loginStatus ?
-                        <Button
-                            color="inherit"
-                            onClick={() => dispatch(logoutAction())}>Log Out</Button> :
+                        <Avatar aria-label="recipe" className={classes.avatar}>
+                            {username}
+                        </Avatar> :
+                        // <Button
+                        //     color="inherit"
+                        //     onClick={() => dispatch(logoutAction())}>Log Out</Button> :
                         <Button
                             color="inherit"
                             onClick={() => history.push("/login")}>Log In</Button>}

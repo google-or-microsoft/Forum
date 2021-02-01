@@ -1,44 +1,17 @@
-import {login, logout} from "../Auth/api";
-import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS, SET_PASSWORD, SET_USERNAME} from "./constants";
-import history from "../../history";
+import {getUser} from "./api";
+import {LOAD_USER_FAILURE, LOAD_USER_SUCCESS, START_LOAD_USER, STOP_LOAD_USER} from "./constants";
 import Cookies from "js-cookie";
 
-export const loginAction = (username, password) => {
+export const loadUserAction = () => {
+
     return (dispatch) => {
-        login(username, password)
+        const uid = Cookies.get('uid');
+        dispatch({type: START_LOAD_USER});
+        getUser(uid)
             .then(data => {
-                dispatch({type: LOGIN_SUCCESS, payload: Cookies.get("username")})
+                dispatch({type: LOAD_USER_SUCCESS, payload: data})
             })
-            .catch(() => dispatch({type: LOGIN_FAILURE}))
-            .finally(() => {
-                history.push('/');
-            });
-    }
-}
-
-export const logoutAction = () => {
-    return (dispatch) => {
-        const userId = Cookies.get('uid');
-        logout(userId)
-            .then(data => {
-                dispatch({type: LOGOUT_SUCCESS, payload: Cookies.get("uid")});
-                history.push('/');
-            })
-            .catch(() => dispatch({type: LOGOUT_FAILURE}))
-    }
-}
-
-
-export const updateUsername = (value) => {
-    return {
-        type: SET_USERNAME,
-        payload: value
+            .catch(() => dispatch({type: LOAD_USER_FAILURE}))
+            .finally(() => dispatch({type: STOP_LOAD_USER}));
     };
-};
-
-export const updatePassword = (value) => {
-    return {
-        type: SET_PASSWORD,
-        payload: value
-    };
-};
+}

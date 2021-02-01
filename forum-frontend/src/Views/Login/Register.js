@@ -8,7 +8,7 @@ class Register extends Component {
     state = {
         name: "",
         password: "",
-        role: "USER",
+        role: "ROLE_USER",
         email: "",
         deleted: false
     };

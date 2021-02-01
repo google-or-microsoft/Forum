@@ -1,6 +1,6 @@
-import Login from "../Views/Auth/Login";
+import Login from "../Views/Login/Login";
 import Home from "../Views/Home/Home";
-import Register from "../Views/Auth/Register";
+import Register from "../Views/Login/Register";
 
 const PublicRoutes = [
     {
