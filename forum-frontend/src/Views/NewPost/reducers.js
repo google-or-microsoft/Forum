@@ -59,7 +59,6 @@ export const modifyPostReducer = (state = initialState, action) => {
             return initialState;
 
         case MODIFYING_POST_SUCCESS:
-
             return {
                 ...state,
                 error: null
@@ -70,6 +69,7 @@ export const modifyPostReducer = (state = initialState, action) => {
                 ...state,
                 error: 'Unable to add a new post at the moment.'
             }
+
         case UPDATE_POST_TITLE:
             return {
                 ...state,

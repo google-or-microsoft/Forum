@@ -4,11 +4,14 @@ import thunk from 'redux-thunk';
 import {singlePostReducer} from "../Views/PostView/reducers";
 import {modifyPostReducer} from "../Views/NewPost/reducers";
 import {userReducer} from "../Views/User/reducers";
+import {modifyCommentReducer} from "../Views/Comments/reducers";
+
 // root reducer for app
 const rootReducer = combineReducers({
     posts: postsReducer,
     singlePost: singlePostReducer,
     modifyPost: modifyPostReducer,
+    modifyComment: modifyCommentReducer,
     storeUser: userReducer
 
 });
