@@ -1,12 +1,13 @@
 import {login} from "../Auth/api";
 import {SET_PASSWORD, SET_USER, SET_USER_FAILURE, SET_USERNAME} from "./constants";
 import history from "../../history";
+import Cookies from "js-cookie";
 
 export const setUser = (username, password) => {
     return (dispatch) => {
         login(username, password)
             .then(data => {
-                dispatch({type: SET_USER, payload: data.username})
+                dispatch({type: SET_USER, payload: Cookies.get("username")})
             })
             .catch(() => dispatch({type: SET_USER_FAILURE}))
             .finally(() => {
