@@ -4,14 +4,15 @@ import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 
 /**
@@ -24,23 +25,41 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-  
+
     @GetMapping("/login")
     public String login(HttpServletResponse res) {
         UserDetails principle = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         // Add username cookie
         String username = principle.getUsername();
-        Cookie usernameCookie = new Cookie("username",username);
+        Cookie usernameCookie = new Cookie("username", username);
         usernameCookie.setPath("/");
         res.addCookie(usernameCookie);
 
         // Add role cookie
         String role = userService.getByName(username).getRole();
-        Cookie roleCookie = new Cookie("role",role);
+        Cookie roleCookie = new Cookie("role", role);
         roleCookie.setPath("/");
         res.addCookie(roleCookie);
-        return "Success login";
+
+        //TODO: To be refactored
+        //Temporarily set for testing logout procedure
+        String id = getId();
+        Cookie idCookie = new Cookie("uid", id);
+        idCookie.setPath("/");
+        res.addCookie(idCookie);
+        return "LOGIN SUCCESS";
+    }
+
+    @PreAuthorize("@authController.getId() == #id")
+    @GetMapping("/logout/{id}")
+    public String logout(@PathVariable String id, HttpServletRequest req, HttpServletResponse res) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(req, res, auth);
+            return "LOGOUT SUCCESS";
+        }
+        return "LOGOUT FAILURE";
     }
 
     /**
@@ -67,7 +86,7 @@ public class AuthController {
         userService.deleteById(id);
     }
 
-    public String getId(){
+    public String getId() {
         Object currentPrinciple = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails) currentPrinciple).getUsername();
         return userService.getByName(username).getId();

@@ -16,7 +16,7 @@ const initialState = {
     loadingComments: true,
     redirect: false,
     error: null,
-    comments:[]
+    comments: []
 };
 
 export const singlePostReducer = (state = initialState, action) => {

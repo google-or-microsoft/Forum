@@ -20,3 +20,13 @@ export const register = (user) => {
         data: JSON.stringify(user)
     });
 }
+
+export const logout = (id) => {
+    return axiosRequest({
+        url: `/auth/logout/${id}`,
+        method: 'get',
+        headers: {
+            "Authorization": `Basic ${Cookies.get("token")}`
+        }
+    });
+}

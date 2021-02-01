@@ -3,7 +3,8 @@ import {AppBar, Button, makeStyles, Toolbar, Typography} from '@material-ui/core
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from "@material-ui/core/IconButton";
 import history from "../history";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutAction} from "../Views/User/actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,10 +25,12 @@ const useStyles = makeStyles((theme) => ({
 const Navbar = () => {
 
     const {loginStatus} = useSelector(state => ({
-        loginStatus : state.storeUser.loginStatus
+        loginStatus: state.storeUser.loginStatus
     }));
 
     const classes = useStyles();
+
+    const dispatch = useDispatch();
     return (
         <div className={classes.root}>
             <AppBar position="static" className={classes.bar}>
@@ -39,12 +42,12 @@ const Navbar = () => {
                         Forum
                     </Typography>
                     {loginStatus ?
-                    <Button
-                        color="inherit"
-                        onClick={() => history.push("/")}>Log Out</Button> :
-                    <Button
-                        color="inherit"
-                        onClick={() => history.push("/login")}>Log In</Button>}
+                        <Button
+                            color="inherit"
+                            onClick={() => dispatch(logoutAction())}>Log Out</Button> :
+                        <Button
+                            color="inherit"
+                            onClick={() => history.push("/login")}>Log In</Button>}
                 </Toolbar>
             </AppBar>
         </div>

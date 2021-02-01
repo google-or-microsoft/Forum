@@ -1,5 +1,7 @@
-export const SET_USER = "SET_USER";
-export const SET_USER_FAILURE = "SET_USER_FAILURE";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
 export const STOP_SET_USER = "STOP_SET_USER";
 export const SET_USERNAME = "SET_USERNAME";
 export const SET_PASSWORD = "SET_PASSWORD";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT_FAILURE = "LOGOUT_FAILURE";

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setUser, updatePassword, updateUsername} from "../User/actions";
+import {loginAction, updatePassword, updateUsername} from "../User/actions";
 import {Container, TextField} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
@@ -14,7 +14,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(setUser(username, password));
+        dispatch(loginAction(username, password));
     }
 
     const useStyles = makeStyles((theme) => ({
