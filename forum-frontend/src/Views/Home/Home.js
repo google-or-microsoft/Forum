@@ -7,8 +7,8 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Container fluid>
-                    <Button color="link"><Link to="/posts">Manage Forum Posts</Link></Button>
+                <Container>
+                    <Button><Link to="/posts">Manage Forum Posts</Link></Button>
                 </Container>
             </div>
         );
