@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {loginAction, updatePassword, updateUsername} from "../User/actions";
+import {useDispatch} from "react-redux";
+import {loginAction} from "./actions";
 import {Container, TextField} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
@@ -33,12 +33,12 @@ const Login = () => {
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit} className={classes.root}>
                     <br/>
-                    <TextField label="Username" value={username} variant="outlined" onChange={(e)=>{
+                    <TextField label="Username" value={username} variant="outlined" onChange={(e) => {
                         e.preventDefault();
                         setUsername(e.target.value)
                     }}/>
                     <br/>
-                    <TextField label="Password" value={password} variant="outlined" onChange={(e)=>{
+                    <TextField label="Password" value={password} variant="outlined" onChange={(e) => {
                         e.preventDefault();
                         setPassword(e.target.value)
                     }}/>

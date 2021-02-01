@@ -23,6 +23,7 @@ const PostAddEdit = (props) => {
             dispatch(loadOriginalPostAction(postId));
         }
     }, [postId]);
+
     const renderNewPost = () => {
 
         return (
