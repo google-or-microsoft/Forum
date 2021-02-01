@@ -99,7 +99,7 @@ const PostList = () => {
         <div className="mt-2">
             {loading
                 ? <p>Loading Content...</p>
-                : <Container fluid>
+                : <Container>
                     <div className="float-right">
                         <Button
                             variant="outlined"
