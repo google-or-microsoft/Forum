@@ -1,12 +1,12 @@
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import {postsReducer} from '../Views/PostList/reducers';
 import thunk from 'redux-thunk';
 import {singlePostReducer} from "../Views/PostView/reducers";
 import {modifyPostReducer} from "../Views/NewPost/reducers";
 import {userReducer} from "../Views/User/reducers";
 import {modifyCommentReducer} from "../Views/Comments/reducers";
-import { persistStore, persistCombineReducers } from 'redux-persist'
-import { CookieStorage } from 'redux-persist-cookie-storage'
+import {persistCombineReducers, persistStore} from 'redux-persist'
+import {CookieStorage} from 'redux-persist-cookie-storage'
 import Cookies from "js-cookie";
 
 const persistConfig = {

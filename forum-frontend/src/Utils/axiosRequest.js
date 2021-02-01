@@ -25,9 +25,11 @@ service.interceptors.response.use(
             }
             return Promise.reject('error');
         } else {
-            if (res.data === "Success logout") {
+            if (res.data === "LOGOUT SUCCESS") {
                 Cookies.remove('username');
                 Cookies.remove('token');
+                Cookies.remove('uid');
+                Cookies.remove('role');
             }
             return res.data;
         }

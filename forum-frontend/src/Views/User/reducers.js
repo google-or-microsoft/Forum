@@ -1,4 +1,4 @@
-import {SET_PASSWORD, SET_USER, SET_USER_FAILURE, SET_USERNAME} from "./constants";
+import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS, SET_PASSWORD, SET_USERNAME} from "./constants";
 
 const initialState = {
     loginStatus: false,
@@ -9,14 +9,14 @@ const initialState = {
 
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_USER:
+        case LOGIN_SUCCESS:
             return {
                 ...state,
                 loginStatus: true,
                 username: action.payload,
                 error: null
             };
-        case SET_USER_FAILURE:
+        case LOGIN_FAILURE:
             return {
                 ...state,
                 loginStatus: false,
@@ -24,14 +24,17 @@ export const userReducer = (state = initialState, action) => {
                 password: null,
                 error: "Login procedure failed"
             };
-        case "LOG_OUT":
-            localStorage.clear()
+        case LOGOUT_SUCCESS:
             return {
                 ...state,
                 loginStatus: false,
                 username: null,
                 password: null,
                 error: null
+            };
+        case LOGOUT_FAILURE:
+            return {
+                ...state
             };
         case SET_USERNAME:
             return {
