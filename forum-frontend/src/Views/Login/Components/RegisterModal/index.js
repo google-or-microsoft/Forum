@@ -39,21 +39,24 @@ const RegisterModal = () => {
 
     return (
         <div>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <Dialog open={open} onClose={handleClose} >
                 <DialogTitle id="form-dialog-title">Register</DialogTitle>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        username:
+                        Username:
+                        <br/>
                         <input type="text" value={username} name="name" onChange={(e) => setUsername(e.target.value)}/>
                     </label>
                     <br/>
                     <label>
                         Email Address:
+                        <br/>
                         <input type="text" value={email} name="email" onChange={(e) => setEmail(e.target.value)}/>
                     </label>
                     <br/>
                     <label>
-                        password:
+                        Password:
+                        <br/>
                         <input type="text" value={password} name="password"
                                onChange={e => setPassword(e.target.value)}/>
                     </label>
