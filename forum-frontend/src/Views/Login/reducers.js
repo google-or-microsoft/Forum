@@ -1,6 +1,14 @@
-import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS} from "./constants";
+import {
+    CLOSE_REGISTER_MODAL,
+    LOGIN_FAILURE,
+    LOGIN_SUCCESS,
+    LOGOUT_FAILURE,
+    LOGOUT_SUCCESS,
+    OPEN_REGISTER_MODAL
+} from "./constants";
 
 const initialState = {
+    showRegisterModal: false,
     loginStatus: false,
     username: null,
     password: null,
@@ -14,6 +22,7 @@ export const loginReducer = (state = initialState, action) => {
                 ...state,
                 loginStatus: true,
                 username: action.payload,
+                showRegisterModal: false,
                 error: null
             };
         case LOGIN_FAILURE:
@@ -35,6 +44,16 @@ export const loginReducer = (state = initialState, action) => {
         case LOGOUT_FAILURE:
             return {
                 ...state
+            };
+        case OPEN_REGISTER_MODAL:
+            return {
+                ...state,
+                showRegisterModal: true,
+            };
+        case CLOSE_REGISTER_MODAL:
+            return {
+                ...state,
+                showRegisterModal: false,
             };
         default:
             return state

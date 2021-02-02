@@ -1,5 +1,12 @@
 import {login, logout} from "./api";
-import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_FAILURE, LOGOUT_SUCCESS} from "./constants";
+import {
+    CLOSE_REGISTER_MODAL,
+    LOGIN_FAILURE,
+    LOGIN_SUCCESS,
+    LOGOUT_FAILURE,
+    LOGOUT_SUCCESS,
+    OPEN_REGISTER_MODAL
+} from "./constants";
 import history from "../../history";
 import Cookies from "js-cookie";
 
@@ -28,3 +35,15 @@ export const logoutAction = () => {
     }
 }
 
+export const openRegisterModalAction = () => {
+    return (dispatch)=>{
+        dispatch({type: OPEN_REGISTER_MODAL});
+    }
+}
+
+export const closeRegisterModalAction = () => {
+    return (dispatch)=>{
+        dispatch({type: CLOSE_REGISTER_MODAL});
+        history.push('/')
+    }
+}

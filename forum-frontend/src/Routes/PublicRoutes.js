@@ -1,6 +1,6 @@
 import Login from "../Views/Login/Login";
 import Home from "../Views/Home/Home";
-import Register from "../Views/Login/Register";
+import RegisterModal from "../Views/Login/Components/RegisterModal";
 
 const PublicRoutes = [
     {
@@ -15,7 +15,7 @@ const PublicRoutes = [
     },
     {
         path: '/register',
-        component: Register,
+        component: RegisterModal,
         exact: true,
     }
 ];

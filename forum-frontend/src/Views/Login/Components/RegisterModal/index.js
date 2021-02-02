@@ -1,11 +1,29 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import {useDispatch, useSelector} from "react-redux";
+import {closeRegisterModalAction, openRegisterModalAction} from "../../actions";
 import {register} from "../../api";
-import history from "../../../../history";
 
 const RegisterModal = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const {open} = useSelector(state => ({
+        open: state.login.showRegisterModal
+    }));
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(openRegisterModalAction());
+    }, []);
+
+    const handleClose = () => {
+        dispatch(closeRegisterModalAction());
+    };
 
     const handleSubmit = (e) => {
         const userInfo = {
@@ -16,31 +34,42 @@ const RegisterModal = () => {
             deleted: false
         }
         e.preventDefault();
-        register(userInfo).then(history.push('/'));
+        register(userInfo).then(handleClose());
     }
 
     return (
         <div>
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    username:
-                    <input type="text" value={username} name="name" onChange={(e) => setUsername(e.target.value)}/>
-                </label>
-                <br/>
-                <label>
-                    Email Address:
-                    <input type="text" value={email} name="email" onChange={(e) => setEmail(e.target.value)}/>
-                </label>
-                <br/>
-                <label>
-                    password:
-                    <input type="text" value={password} name="password" onChange={e => setPassword(e.target.value)}/>
-                </label>
-                <br/>
-                <input type="submit" value="Submit"/>
-            </form>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Register</DialogTitle>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        username:
+                        <input type="text" value={username} name="name" onChange={(e) => setUsername(e.target.value)}/>
+                    </label>
+                    <br/>
+                    <label>
+                        Email Address:
+                        <input type="text" value={email} name="email" onChange={(e) => setEmail(e.target.value)}/>
+                    </label>
+                    <br/>
+                    <label>
+                        password:
+                        <input type="text" value={password} name="password"
+                               onChange={e => setPassword(e.target.value)}/>
+                    </label>
+                    <br/>
+                    <Button type="submit">
+                        Submit
+                    </Button>
+                    <Button onClick={handleClose} color="primary">
+                        Cancel
+                    </Button>
+                </form>
+
+            </Dialog>
         </div>)
 }
 
 export default RegisterModal;
+
+
