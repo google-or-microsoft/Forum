@@ -5,6 +5,7 @@ import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.repository.UserRepository;
 import com.teamgorm.projectforum.service.UserService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User getById(String id) {
+    public User getById(ObjectId id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND, id));
+                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND, id.toString()));
     }
 
     @Override
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(String id, User user) {
+    public User update(ObjectId id, User user) {
         if (userRepository.existsById(id)) {
             // Overwrites the user's id if doesn't match with id
             user.setId(id);
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(ObjectId id) {
         User user = getById(id);
         user.setDeleted(true);
         userRepository.save(user);

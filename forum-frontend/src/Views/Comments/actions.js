@@ -25,15 +25,15 @@ export const loadCommentsAction = (id) => {
     };
 }
 
-export const addOrEdit = (id, comment) => {
-    return id ? updateComment(id, comment) : addComment(comment);
+export const addOrEdit = (id, comment, postId, userId) => {
+    return id ? updateComment(id, comment, postId, userId) : addComment(comment, postId, userId);
 };
 
 export const modifyCommentAction = (id, comment, postId) => {
     return (dispatch) => {
         comment.postId = postId;
-        comment.username = Cookies.get('username');
-        addOrEdit(id, comment)
+        comment.userId = Cookies.get('uid');
+        addOrEdit(id, comment, postId, comment.userId)
             .then(data => {
                 dispatch({type: MODIFYING_COMMENT_SUCCESS, payload: data})
                 dispatch(loadCommentsAction(postId));

@@ -1,6 +1,8 @@
 package com.teamgorm.projectforum.service;
 
+import com.teamgorm.projectforum.dto.PostDTO;
 import com.teamgorm.projectforum.model.Post;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -8,13 +10,13 @@ public interface PostService {
 
     Post create(Post post);
 
-    Post getById(String id);
+    Post getById(ObjectId id);
 
-    List<Post> getByUsername(String username);
+    List<Post> getByUserId(ObjectId id);
 
-    List<Post> getAll();
+    List<PostDTO> getAll();
 
-    Post update(String id, Post post);
+    Post update(ObjectId id, Post post);
 
-    void deleteById(String id);
+    void deleteById(ObjectId id);
 }

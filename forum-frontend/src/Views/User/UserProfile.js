@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadUserAction} from "./actions";
 import Cookies from "js-cookie";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
     const [posts, setPosts] = useState([]);
 
     const {user, loading, error} = useSelector(state => ({
@@ -17,9 +17,8 @@ const UserProfile = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadUserAction())
-        //TODO：figure out how to replace the param with user.name
-        getUserPosts(Cookies.get('username')) //Cookies.get('username')
+        dispatch(loadUserAction(props.match.params.username))
+        getUserPosts(user.id) //Cookies.get('username')
             .then(posts => setPosts(posts))
     }, []);
 

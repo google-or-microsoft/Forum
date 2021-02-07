@@ -1,9 +1,9 @@
 import axiosRequest from "../../Utils/axiosRequest";
 import Cookies from 'js-cookie';
 
-export const getUserPosts = (username) => {
+export const getUserPosts = (id) => {
     return axiosRequest({
-        url: `/posts/user/${username}`,
+        url: `/posts/user/${id}`,
         method: 'get',
         headers: {
             "Authorization": `Basic ${Cookies.get("token")}`

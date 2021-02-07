@@ -1,14 +1,21 @@
 package com.teamgorm.projectforum.service.impl;
 
+import com.teamgorm.projectforum.dto.PostDTO;
 import com.teamgorm.projectforum.exception.CustomizeException;
 import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.repository.PostRepository;
 import com.teamgorm.projectforum.repository.UserRepository;
 import com.teamgorm.projectforum.service.PostService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.LookupOperation;
+import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -17,8 +24,8 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    @Resource
+    private MongoTemplate mongoTemplate;
 
     @Override
     public Post create(Post post) {
@@ -26,25 +33,32 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post getById(String id) {
+    public Post getById(ObjectId id) {
         return postRepository.findById(id)
-                .orElseThrow(() -> new CustomizeException(ErrorCode.POST_NOT_FOUND, id));
+                .orElseThrow(() -> new CustomizeException(ErrorCode.POST_NOT_FOUND, id.toString()));
     }
 
     @Override
-    public List<Post> getByUsername(String username) {
-        return userRepository.findByName(username)
-                .map((user) -> postRepository.findAllByUsername(username))
-                .orElseThrow(() -> new CustomizeException(ErrorCode.USER_NOT_FOUND, username));
+    public List<Post> getByUserId(ObjectId id) {
+        return postRepository.findByUserId(id);
     }
 
     @Override
-    public List<Post> getAll() {
-        return postRepository.findAll();
+    public List<PostDTO> getAll() {
+        LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("users")
+                .localField("userId")
+                .foreignField("_id")
+                .as("user");
+        UnwindOperation unwind = Aggregation.unwind("user");
+        Aggregation aggregation = Aggregation.newAggregation(lookupOperation,unwind);
+        return mongoTemplate.aggregate(aggregation,"posts",PostDTO.class)
+                .getMappedResults();
+
     }
 
     @Override
-    public Post update(String id, Post post) {
+    public Post update(ObjectId id, Post post) {
         if (postRepository.existsById(id)) {
             // Overwrites the post's id if doesn't match with id
             post.setId(id);
@@ -55,7 +69,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(ObjectId id) {
         postRepository.deleteById(id);
     }
 }

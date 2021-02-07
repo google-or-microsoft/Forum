@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.service;
 
 import com.teamgorm.projectforum.model.User;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface UserService {
 
     User register(User user);
 
-    User getById(String id);
+    User getById(ObjectId id);
 
     User getByName(String username);
 
@@ -18,8 +19,8 @@ public interface UserService {
 
     List<User> getAll();
 
-    User update(String id, User user);
+    User update(ObjectId id, User user);
 
-    void deleteById(String id);
+    void deleteById(ObjectId id);
 
 }

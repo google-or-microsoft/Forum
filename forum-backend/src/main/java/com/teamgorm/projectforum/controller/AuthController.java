@@ -2,6 +2,7 @@ package com.teamgorm.projectforum.controller;
 
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.service.UserService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -44,8 +45,8 @@ public class AuthController {
 
         //TODO: To be refactored
         //Temporarily set for testing logout procedure
-        String id = getId();
-        Cookie idCookie = new Cookie("uid", id);
+        ObjectId id = getId();
+        Cookie idCookie = new Cookie("uid", id.toString());
         idCookie.setPath("/");
         res.addCookie(idCookie);
         return "LOGIN SUCCESS";
@@ -53,7 +54,7 @@ public class AuthController {
 
     @PreAuthorize("@authController.getId() == #id")
     @GetMapping("/logout/{id}")
-    public String logout(@PathVariable String id, HttpServletRequest req, HttpServletResponse res) {
+    public String logout(@PathVariable ObjectId id, HttpServletRequest req, HttpServletResponse res) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(req, res, auth);
@@ -82,11 +83,11 @@ public class AuthController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or @authController.getId() == #id")
     @DeleteMapping("/admin/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable ObjectId id) {
         userService.deleteById(id);
     }
 
-    public String getId() {
+    public ObjectId getId() {
         Object currentPrinciple = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails) currentPrinciple).getUsername();
         return userService.getByName(username).getId();

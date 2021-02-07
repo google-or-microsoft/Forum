@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.model;
 
 import lombok.Data;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class Comment {
 
     private Date date;
 
-    private String postId;
+    private ObjectId postId;
 
-    private String username;
+    private ObjectId userId;
 }
