@@ -27,7 +27,7 @@ public class MySecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         boolean hasError = false;
         String token = httpServletRequest.getHeader("Authorization");
-        if (!token.isBlank()) {
+        if (token != null && !token.isBlank()) {
             LoginDTO loginDTO = decodeToken(token);
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
             try {

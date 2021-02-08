@@ -32,14 +32,25 @@ public class UserController {
     }
 
     /**
+     * Get a single user by username
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping
+    public User getByName(@RequestParam String name) {
+        return userService.getByName(name);
+    }
+
+    /**
      * Get all users
      *
      * @return
      */
-    @GetMapping
-    public List<User> getAll() {
-        return userService.getAll();
-    }
+//    @GetMapping
+//    public List<User> getAll() {
+//        return userService.getAll();
+//    }
 
     /**
      * Update a user by id

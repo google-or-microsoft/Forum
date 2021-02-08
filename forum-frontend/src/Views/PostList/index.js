@@ -65,7 +65,7 @@ const PostList = () => {
                                     <Link to={"/posts/" + post.id} className="w-1/3">{post.title}</Link>
                                 </TableCell>
                                 <TableCell>
-                                    <Link to={"/users/" + post.username} className="w-1/3">{post.username}</Link>
+                                    <Link to={"/users/" + post.user.name} className="w-1/3">{post.user.name}</Link>
                                 </TableCell>
                                 <TableCell className="flex flex-row w-1/3" align="right">
                                     <Button

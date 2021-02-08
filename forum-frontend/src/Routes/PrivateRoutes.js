@@ -1,7 +1,7 @@
 import PostList from "../Views/PostList";
 import PostView from "../Views/PostView";
 import PostAddEdit from "../Views/NewPost";
-import UserProfile from "../Views/User/UserProfile";
+import UserProfile from "../Views/User/Compoents/UserProfile";
 
 const PrivateRoutes = [
     {

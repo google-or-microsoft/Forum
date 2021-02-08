@@ -18,5 +18,5 @@ public class Comment {
 
     private String postId;
 
-    private String username;
+    private String userId;
 }

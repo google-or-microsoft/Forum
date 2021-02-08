@@ -15,7 +15,7 @@ export const initialState = {
         text: '',
         date: '',
         postId: '',
-        username: ''
+        userId: ''
     },
     error: null
 };

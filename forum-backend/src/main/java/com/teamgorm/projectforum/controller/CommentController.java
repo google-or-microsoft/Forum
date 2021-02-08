@@ -1,6 +1,7 @@
 package com.teamgorm.projectforum.controller;
 
 
+import com.teamgorm.projectforum.dto.CommentDTO;
 import com.teamgorm.projectforum.model.Comment;
 import com.teamgorm.projectforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class CommentController {
      * @return
      */
     @GetMapping("/post/{postId}")
-    public List<Comment> getByPostId(@PathVariable(value = "postId") String postId) {
+    public List<CommentDTO> getByPostId(@PathVariable(value = "postId") String postId) {
         return commentService.getByPostId(postId);
     }
 

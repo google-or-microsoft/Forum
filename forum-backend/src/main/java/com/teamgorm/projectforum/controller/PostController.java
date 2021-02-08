@@ -1,5 +1,6 @@
 package com.teamgorm.projectforum.controller;
 
+import com.teamgorm.projectforum.dto.PostDTO;
 import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +46,12 @@ public class PostController {
     /**
      * Get posts by username
      *
-     * @param username
+     * @param id
      * @return
      */
-    @GetMapping("/user/{username}")
-    public List<Post> getByUserName(@PathVariable(value = "username") String username) {
-        return postService.getByUsername(username);
+    @GetMapping("/user/{id}")
+    public List<Post> getByUserId(@PathVariable(value = "id") String id) {
+        return postService.getByUserId(id);
     }
 
     /**
@@ -59,7 +60,7 @@ public class PostController {
      * @return
      */
     @GetMapping
-    public List<Post> getAll() {
+    public List<PostDTO> getAll() {
         return postService.getAll();
     }
 

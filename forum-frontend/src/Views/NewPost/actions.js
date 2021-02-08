@@ -34,7 +34,7 @@ export const addOrEdit = (id, post) => {
 export const modifyPostAction = (id, post) => {
     return (dispatch) => {
         // assign username from userReducer to the post
-        post.username = Cookies.get('username');
+        post.userId = Cookies.get('uid');
         addOrEdit(id, post)
             .then(data => {
                 dispatch({type: MODIFYING_POST_SUCCESS, payload: data})

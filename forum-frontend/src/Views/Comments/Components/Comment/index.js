@@ -53,10 +53,10 @@ const Comment = (props) => {
                 className={classes.cardComponent}
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
-                        {props.username}
+                        {props.user.name}
                     </Avatar>
                 }
-                title={props.username}
+                title={props.user.name}
                 subheader={props.date}
             />
             <CardContent className={classes.cardComponent}>
