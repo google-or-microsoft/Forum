@@ -1,7 +1,6 @@
 package com.teamgorm.projectforum.model;
 
 import lombok.Data;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,7 +11,7 @@ import java.util.Date;
 @Document(collection = "posts")
 public class Post {
     @Id
-    private ObjectId id;
+    private String id;
 
     private Date date;
 
@@ -21,7 +20,7 @@ public class Post {
 
     private String text;
 
-    private ObjectId userId;
+    private String userId;
 
 }
 

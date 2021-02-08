@@ -2,7 +2,6 @@ package com.teamgorm.projectforum.service;
 
 import com.teamgorm.projectforum.dto.CommentDTO;
 import com.teamgorm.projectforum.model.Comment;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 

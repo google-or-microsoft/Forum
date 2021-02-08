@@ -4,7 +4,6 @@ package com.teamgorm.projectforum.controller;
 import com.teamgorm.projectforum.dto.CommentDTO;
 import com.teamgorm.projectforum.model.Comment;
 import com.teamgorm.projectforum.service.CommentService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +39,7 @@ public class CommentController {
      * @return
      */
     @GetMapping("/{id}")
-    public Comment get(@PathVariable(value = "id") ObjectId id) {
+    public Comment get(@PathVariable(value = "id") String id) {
         return commentService.getById(id);
     }
 
@@ -51,7 +50,7 @@ public class CommentController {
      * @return
      */
     @GetMapping("/post/{postId}")
-    public List<CommentDTO> getByPostId(@PathVariable(value = "postId") ObjectId postId) {
+    public List<CommentDTO> getByPostId(@PathVariable(value = "postId") String postId) {
         return commentService.getByPostId(postId);
     }
 
@@ -63,7 +62,7 @@ public class CommentController {
      * @return
      */
     @PutMapping("/{id}")
-    public Comment update(@PathVariable ObjectId id, @RequestBody Comment comment) {
+    public Comment update(@PathVariable String id, @RequestBody Comment comment) {
         return commentService.update(id, comment);
     }
 
@@ -73,7 +72,7 @@ public class CommentController {
      * @param id
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(value = "id") ObjectId id) {
+    public void delete(@PathVariable(value = "id") String id) {
         commentService.deleteById(id);
     }
 

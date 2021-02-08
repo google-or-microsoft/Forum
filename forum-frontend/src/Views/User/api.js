@@ -20,3 +20,16 @@ export const getUser = (id) => {
         }
     });
 }
+
+export const getUserByName = (username) => {
+    return axiosRequest({
+        url: `/users`,
+        params: {
+            name: username
+        },
+        method: 'get',
+        headers: {
+            "Authorization": `Basic ${Cookies.get("token")}`
+        }
+    });
+}

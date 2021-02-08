@@ -3,7 +3,6 @@ package com.teamgorm.projectforum.controller;
 import com.teamgorm.projectforum.dto.PostDTO;
 import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.service.PostService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +39,7 @@ public class PostController {
      * @return
      */
     @GetMapping("/{id}")
-    public Post get(@PathVariable ObjectId id) {
+    public Post get(@PathVariable String id) {
         return postService.getById(id);
     }
 
@@ -51,7 +50,7 @@ public class PostController {
      * @return
      */
     @GetMapping("/user/{id}")
-    public List<Post> getByUserId(@PathVariable(value = "id") ObjectId id) {
+    public List<Post> getByUserId(@PathVariable(value = "id") String id) {
         return postService.getByUserId(id);
     }
 
@@ -73,7 +72,7 @@ public class PostController {
      * @return
      */
     @PutMapping("/{id}")
-    public Post update(@PathVariable ObjectId id, @RequestBody Post post) {
+    public Post update(@PathVariable String id, @RequestBody Post post) {
         return postService.update(id, post);
     }
 
@@ -83,7 +82,7 @@ public class PostController {
      * @param id
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable ObjectId id) {
+    public void delete(@PathVariable String id) {
         postService.deleteById(id);
     }
 }

@@ -1,25 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {getUserPosts} from "./api";
-import {useDispatch, useSelector} from "react-redux";
-import {loadUserAction} from "./actions";
-import Cookies from "js-cookie";
+import {getUserByName, getUserPosts} from "../api";
+
 
 const UserProfile = (props) => {
     const [posts, setPosts] = useState([]);
-
-    const {user, loading, error} = useSelector(state => ({
-        user: state.user.user,
-        loading: state.user.loading,
-        error: state.user.error
-    }));
-
-    const dispatch = useDispatch();
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
-        dispatch(loadUserAction(props.match.params.username))
-        getUserPosts(user.id) //Cookies.get('username')
-            .then(posts => setPosts(posts))
+        getUserByName(props.match.params.username)
+            .then(user => {
+                setUser(user);
+                getUserPosts(user.id) //Cookies.get('username')
+                    .then(posts => setPosts(posts))
+                }
+            )
     }, []);
 
     const postsList = posts.map(post => {
@@ -34,7 +29,6 @@ const UserProfile = (props) => {
 
     const renderUserProfile = () => {
         return <div>
-            {/* <AppNavbar/> */}
             <div style={{marginLeft: "15em"}}>
                 <h2>{user.name}</h2>
                 <h6>{user.email}</h6>

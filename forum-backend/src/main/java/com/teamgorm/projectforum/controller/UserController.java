@@ -3,7 +3,6 @@ package com.teamgorm.projectforum.controller;
 
 import com.teamgorm.projectforum.model.User;
 import com.teamgorm.projectforum.service.UserService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +23,23 @@ public class UserController {
     /**
      * Get a single user by id
      *
-     * @param username
+     * @param id
      * @return
      */
-    @GetMapping("/{username}")
-    public User get(@PathVariable String username) {
-        return userService.getByName(username);
+    @GetMapping("/{id}")
+    public User get(@PathVariable String id) {
+        return userService.getById(id);
+    }
+
+    /**
+     * Get a single user by username
+     *
+     * @param name
+     * @return
+     */
+    @GetMapping
+    public User getByName(@RequestParam String name) {
+        return userService.getByName(name);
     }
 
     /**
@@ -37,10 +47,10 @@ public class UserController {
      *
      * @return
      */
-    @GetMapping
-    public List<User> getAll() {
-        return userService.getAll();
-    }
+//    @GetMapping
+//    public List<User> getAll() {
+//        return userService.getAll();
+//    }
 
     /**
      * Update a user by id
@@ -50,7 +60,7 @@ public class UserController {
      * @return
      */
     @PutMapping("/{id}")
-    public User update(@PathVariable ObjectId id, @RequestBody User user) {
+    public User update(@PathVariable String id, @RequestBody User user) {
         return userService.update(id, user);
     }
 
