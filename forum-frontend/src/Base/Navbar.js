@@ -4,7 +4,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from "@material-ui/core/IconButton";
 import history from "../history";
 import {useDispatch, useSelector} from "react-redux";
-import Avatar from "@material-ui/core/Avatar";
+import DropList from "./DropList";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,9 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar = () => {
 
-    const {loginStatus, username} = useSelector(state => ({
+    const {loginStatus} = useSelector(state => ({
         loginStatus: state.login.loginStatus,
-        username: state.login.username,
     }));
 
     const classes = useStyles();
@@ -44,15 +43,14 @@ const Navbar = () => {
                         Forum
                     </Typography>
                     {loginStatus ?
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                            {username}
-                        </Avatar> :
-                        // <Button
-                        //     color="inherit"
-                        //     onClick={() => dispatch(logoutAction())}>Log Out</Button> :
+                        <div>
+                            <DropList/>
+                        </div>
+                        :
                         <Button
                             color="inherit"
-                            onClick={() => history.push("/login")}>Log In</Button>}
+                            onClick={() => history.push("/login")}>Log In</Button>
+                    }
                 </Toolbar>
             </AppBar>
         </div>
