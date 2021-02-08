@@ -71,6 +71,7 @@ public class PostController {
      * @param post
      * @return
      */
+    @PreAuthorize("@authController.getId() == #post.userId")
     @PutMapping("/{id}")
     public Post update(@PathVariable String id, @RequestBody Post post) {
         return postService.update(id, post);
@@ -81,6 +82,7 @@ public class PostController {
      *
      * @param id
      */
+    @PreAuthorize("@authController.getId() == @postServiceImpl.getById(#id).getUserId()")//@postServiceImpl.getById(#id).getUserId()
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
         postService.deleteById(id);

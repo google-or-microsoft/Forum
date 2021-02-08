@@ -7,7 +7,10 @@ import CommentList from "../Comments/Components/CommentList";
 import {loadCommentsAction} from "../Comments/actions";
 import AddComment from "../Comments/Components/AddComment";
 import Container from "@material-ui/core/Container";
-
+import Button from "@material-ui/core/Button";
+import {deletePostAction} from "../PostList/actions";
+import Link from "@material-ui/core/Link";
+import Cookies from 'js-cookie';
 
 const PostView = (props) => {
     const {post, loadingPost, loadingComments, redirect, error, comments} = useSelector(state => ({
@@ -28,7 +31,6 @@ const PostView = (props) => {
         dispatch(loadCommentsAction(postId));
     }, [postId]);
 
-
     const renderPostView = () => {
         if (loadingPost) {
             return <p>Loading Post Content...</p>;
@@ -45,6 +47,26 @@ const PostView = (props) => {
                     {title}
                     {text}
                 </div>
+                {post.userId === Cookies.get('uid') ?
+                    <div>
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            color="primary"
+                            tag={Link}
+                            href={"/posts/" + post.id + "/edit"}
+                            className="mx-1">
+                            Edit
+                        </Button>
+                        <Button
+                            size="small"
+                            variant="outlined"
+                            color="secondary"
+                            onClick={() => dispatch(deletePostAction(post.id))}
+                            className="mx-1">
+                            Delete
+                        </Button>
+                    </div> : <br/>}
             </div>
         );
     }

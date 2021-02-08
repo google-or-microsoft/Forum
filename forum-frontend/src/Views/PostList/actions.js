@@ -1,5 +1,6 @@
 import {deletePost, getPosts} from "./api";
 import {LOADING_POSTS_FAILURE, LOADING_POSTS_SUCCESS, STOP_LOADING_POSTS} from "./constants";
+import history from "../../history";
 
 export const loadPostsAction = () => {
 
@@ -18,6 +19,7 @@ export const deletePostAction = (id) => {
         deletePost(id)
             .then(() => {
                 dispatch(loadPostsAction());
+                history.push('/posts')
             })
             .catch();
     }
