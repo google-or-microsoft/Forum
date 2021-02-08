@@ -52,7 +52,6 @@ public class PostServiceImpl implements PostService {
         Aggregation aggregation = Aggregation.newAggregation(addFieldsOperation, lookupOperation, unwind);
         return mongoTemplate.aggregate(aggregation, "posts", PostDTO.class)
                 .getMappedResults();
-
     }
 
     @Override

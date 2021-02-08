@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
-import {deletePostAction, loadPostsAction} from "./actions";
+import {loadPostsAction} from "./actions";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -55,7 +55,6 @@ const PostList = () => {
                         <TableRow>
                             <TableCell>Title</TableCell>
                             <TableCell>Username</TableCell>
-                            <TableCell align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -67,25 +66,6 @@ const PostList = () => {
                                 <TableCell>
                                     <Link to={"/users/" + post.user.name} className="w-1/3">{post.user.name}</Link>
                                 </TableCell>
-                                <TableCell className="flex flex-row w-1/3" align="right">
-                                    <Button
-                                        size="small"
-                                        variant="outlined"
-                                        color="primary"
-                                        tag={Link}
-                                        href={"/posts/" + post.id + "/edit"}
-                                        className="mx-1">
-                                        Edit
-                                    </Button>
-                                    <Button
-                                        size="small"
-                                        variant="outlined"
-                                        color="secondary"
-                                        onClick={() => dispatch(deletePostAction(post.id))}
-                                        className="mx-1">
-                                        Delete
-                                    </Button>
-                                </TableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
@@ -93,8 +73,6 @@ const PostList = () => {
             </TableContainer>)
     }
 
-    // ToDo: convert each title of the posts as a ref link, need to add
-    //       "title" attributes first
     return (
         <div className="mt-2">
             {loading
