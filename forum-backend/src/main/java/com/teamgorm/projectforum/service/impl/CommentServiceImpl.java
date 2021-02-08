@@ -9,10 +9,7 @@ import com.teamgorm.projectforum.repository.PostRepository;
 import com.teamgorm.projectforum.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.aggregation.LookupOperation;
-import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
+import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentDTO> getByPostId(String id) {
+        AddFieldsOperation addFieldsOperation = new AddFieldsOperation("userId",ConvertOperators.ToObjectId.toObjectId("$userId"));
         LookupOperation lookupOperation = LookupOperation.newLookup()
                 .from("users")
                 .localField("userId")
@@ -42,10 +40,7 @@ public class CommentServiceImpl implements CommentService {
                 .as("user");
         AggregationOperation filterByPostIdOperation = Aggregation.match(Criteria.where("postId").is(id));
         UnwindOperation unwind = Aggregation.unwind("user");
-        Aggregation aggregation = Aggregation.newAggregation(lookupOperation, filterByPostIdOperation, unwind);
-        System.out.println(id);
-        System.out.println(mongoTemplate.aggregate(aggregation, "comments", CommentDTO.class)
-                .getMappedResults());
+        Aggregation aggregation = Aggregation.newAggregation(addFieldsOperation, lookupOperation, filterByPostIdOperation, unwind);
         return mongoTemplate.aggregate(aggregation, "comments", CommentDTO.class)
                 .getMappedResults();
     }
