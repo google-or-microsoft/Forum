@@ -12,7 +12,8 @@ import {userReducer} from "../Views/User/reducers";
 
 const persistConfig = {
     key: "root",
-    storage: new CookieStorage(Cookies/*, options */)
+    storage: new CookieStorage(Cookies/*, options */),
+    whitelist: ['login']
 }
 
 // root reducer for app
