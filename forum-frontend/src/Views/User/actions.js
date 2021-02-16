@@ -1,6 +1,5 @@
 import {getUser} from "./api";
 import {LOAD_USER_FAILURE, LOAD_USER_SUCCESS, START_LOAD_USER, STOP_LOAD_USER} from "./constants";
-import Cookies from "js-cookie";
 
 export const loadUserAction = (username) => {
 
