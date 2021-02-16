@@ -14,7 +14,7 @@ const PublicRoutes = [
         exact: true,
     },
     {
-        path: '/',
+        path: '/register',
         component: Register,
         exact: true,
     }

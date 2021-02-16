@@ -39,17 +39,27 @@ const Navbar = () => {
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" className={classes.title}>
+                    <Typography variant="h5" className={classes.title}>
+                        <Button
+                            color="inherit"
+                            onClick={()=> history.push("/")}>
                         Forum
+                        </Button>
                     </Typography>
                     {loginStatus ?
                         <div>
                             <DropList/>
                         </div>
                         :
-                        <Button
-                            color="inherit"
-                            onClick={() => history.push("/login")}>Log In</Button>
+                        <div>
+                            <Button
+                                color="inherit"
+                                onClick={() => history.push("/login")}>Sign In</Button>
+
+                            <Button
+                                color="inherit"
+                                onClick={() => history.push("/register")}>Sign Up</Button>
+                        </div>
                     }
                 </Toolbar>
             </AppBar>

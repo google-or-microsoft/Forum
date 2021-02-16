@@ -10,9 +10,9 @@ const UserProfile = (props) => {
     useEffect(() => {
         getUserByName(props.match.params.username)
             .then(user => {
-                setUser(user);
-                getUserPosts(user.id) //Cookies.get('username')
-                    .then(posts => setPosts(posts))
+                    setUser(user);
+                    getUserPosts(user.id) //Cookies.get('username')
+                        .then(posts => setPosts(posts))
                 }
             )
     }, []);

@@ -1,61 +1,50 @@
-import React, {Component} from 'react';
-import AppNavbar from '../../Base/Navbar';
+import React, {useState} from 'react';
 import {register} from "./api";
+import history from "../../history";
 
 
-class Register extends Component {
+const Register = () => {
 
-    state = {
-        name: "",
-        password: "",
-        role: "ROLE_USER",
-        email: "",
+    const [allValues, setAllValues] = useState({
+        email: '',
+        username: '',
+        role: 'ROLE_USER',
+        password: '',
         deleted: false
-    };
+    });
 
-    handleChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        let userInfo = {...this.state};
-        userInfo[name] = value;
-        this.setState(userInfo);
+    const handleChange = e => {
+        setAllValues({...allValues, [e.target.name]: e.target.value})
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        const userInfo = this.state;
-
-        register(userInfo);
-        this.props.history.push('/');
+        register(allValues).then(() => history.push('/'));
     }
 
-    render() {
-        return (
-            <div>
-                <AppNavbar/>
-                <h2>Register</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        username:
-                        <input type="text" name="name" onChange={(e) => this.handleChange(e)}/>
-                    </label>
-                    <br/>
-                    <label>
-                        Email Address:
-                        <input type="text" name="email" onChange={(e) => this.handleChange(e)}/>
-                    </label>
-                    <br/>
-                    <label>
-                        password:
-                        <input type="text" name="password" onChange={e => this.handleChange(e)}/>
-                    </label>
-                    <br/>
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <h2>Register</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    username:
+                    <input type="text" name="name" onChange={(e) => handleChange(e)}/>
+                </label>
+                <br/>
+                <label>
+                    Email Address:
+                    <input type="text" name="email" onChange={(e) => handleChange(e)}/>
+                </label>
+                <br/>
+                <label>
+                    password:
+                    <input type="text" name="password" onChange={e => handleChange(e)}/>
+                </label>
+                <br/>
+                <input type="submit" value="Submit"/>
+            </form>
+        </div>
+    );
 }
 
 export default Register;
