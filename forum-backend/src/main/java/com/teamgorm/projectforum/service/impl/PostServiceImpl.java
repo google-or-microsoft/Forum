@@ -7,6 +7,8 @@ import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.repository.PostRepository;
 import com.teamgorm.projectforum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getByUserId(String id) {
         return postRepository.findByUserId(id);
+    }
+
+    @Override
+    public Page<Post> getByUserId(String id, Pageable pageable) {
+        return postRepository.findByUserId(id, pageable);
     }
 
 

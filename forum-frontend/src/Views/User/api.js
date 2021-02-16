@@ -1,12 +1,16 @@
 import axiosRequest from "../../Utils/axiosRequest";
 import Cookies from 'js-cookie';
 
-export const getUserPosts = (id) => {
+export const getUserPagedPosts = (id) => {
     return axiosRequest({
         url: `/posts/user/${id}`,
         method: 'get',
         headers: {
             "Authorization": `Basic ${Cookies.get("token")}`
+        },
+        params: {
+            page: 0,
+            size: 3,
         }
     });
 }
