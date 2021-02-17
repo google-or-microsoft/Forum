@@ -4,6 +4,9 @@ import com.teamgorm.projectforum.dto.PostDTO;
 import com.teamgorm.projectforum.model.Post;
 import com.teamgorm.projectforum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,15 +46,27 @@ public class PostController {
         return postService.getById(id);
     }
 
+//    /**
+//     * Get posts by userId
+//     *
+//     * @param id
+//     * @return
+//     */
+//    @GetMapping("/user/{id}")
+//    public List<Post> getByUserId(@PathVariable(value = "id") String id) {
+//        return postService.getByUserId(id);
+//    }
+
     /**
-     * Get posts by username
+     * Get paged posts by userId
      *
      * @param id
      * @return
      */
     @GetMapping("/user/{id}")
-    public List<Post> getByUserId(@PathVariable(value = "id") String id) {
-        return postService.getByUserId(id);
+    public Page<Post> getByUserId(@PathVariable(value = "id") String id,
+                                  @PageableDefault(size = 8) Pageable pageable) {
+        return postService.getByUserId(id, pageable);
     }
 
     /**
@@ -60,8 +75,8 @@ public class PostController {
      * @return
      */
     @GetMapping
-    public List<PostDTO> getAll() {
-        return postService.getAll();
+    public Page<PostDTO> getAll(@PageableDefault(size = 8) Pageable pageable) {
+        return postService.getAll(pageable);
     }
 
     /**
@@ -82,7 +97,8 @@ public class PostController {
      *
      * @param id
      */
-    @PreAuthorize("@authController.getId() == @postServiceImpl.getById(#id).getUserId()")//@postServiceImpl.getById(#id).getUserId()
+    @PreAuthorize("@authController.getId() == @postServiceImpl.getById(#id).getUserId()")
+//@postServiceImpl.getById(#id).getUserId()
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
         postService.deleteById(id);

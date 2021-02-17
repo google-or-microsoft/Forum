@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {getUserByName, getUserPosts} from "../api";
+import {getUserByName, getUserPagedPosts} from "../api";
 
 
 const UserProfile = (props) => {
@@ -10,9 +10,9 @@ const UserProfile = (props) => {
     useEffect(() => {
         getUserByName(props.match.params.username)
             .then(user => {
-                    setUser(user);
-                    getUserPosts(user.id) //Cookies.get('username')
-                        .then(posts => setPosts(posts))
+                setUser(user);
+                getUserPagedPosts(user.id) //Cookies.get('username')
+                    .then(pagedPosts => setPosts(pagedPosts.content))
                 }
             )
     }, []);

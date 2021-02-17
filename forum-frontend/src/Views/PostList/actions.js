@@ -1,13 +1,13 @@
-import {deletePost, getPosts} from "./api";
+import {deletePost, getPagedPosts} from "./api";
 import {LOADING_POSTS_FAILURE, LOADING_POSTS_SUCCESS, STOP_LOADING_POSTS} from "./constants";
 import history from "../../history";
 
 export const loadPostsAction = () => {
 
     return (dispatch) => {
-        getPosts()
+        getPagedPosts()
             .then(data => {
-                dispatch({type: LOADING_POSTS_SUCCESS, payload: data})
+                dispatch({type: LOADING_POSTS_SUCCESS, payload: data.content})
             })
             .catch(() => dispatch({type: LOADING_POSTS_FAILURE}))
             .finally(() => dispatch({type: STOP_LOADING_POSTS}));
