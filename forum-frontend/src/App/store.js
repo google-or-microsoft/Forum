@@ -13,7 +13,7 @@ import {userReducer} from "../Views/User/reducers";
 const persistConfig = {
     key: "root",
     storage: new CookieStorage(Cookies/*, options */),
-    whitelist: ['login']
+    whitelist: ['login','posts']
 }
 
 // root reducer for app
