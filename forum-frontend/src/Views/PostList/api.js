@@ -1,7 +1,7 @@
 import axiosRequest from '../../Utils/axiosRequest';
 import Cookies from 'js-cookie';
 
-export const getPagedPosts = () => {
+export const getPagedPosts = (pageIndex, pageSize) => {
     return axiosRequest({
         url: `/posts`,
         method: 'get',
@@ -9,8 +9,8 @@ export const getPagedPosts = () => {
             "Authorization": `Basic ${Cookies.get("token")}`
         },
         params: {
-            page: 0,
-            size: 3,
+            page: pageIndex,
+            size: pageSize
         }
     });
 }

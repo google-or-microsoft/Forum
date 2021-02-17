@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Button,
     Container,
@@ -12,23 +12,26 @@ import {
 } from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
-import {loadPostsAction} from "./actions";
+import {changePageAction, loadPostsAction} from "./actions";
 import Paper from "@material-ui/core/Paper";
 import {makeStyles} from "@material-ui/core/styles";
+import {Pagination} from "@material-ui/lab";
 
 
 const PostList = () => {
 
-    const {posts, loading, error} = useSelector(state => ({
-        posts: state.posts.posts,
+    const {pagedPosts, loading, error, page} = useSelector(state => ({
+        pagedPosts: state.posts.pagedPosts,
         loading: state.posts.loading,
-        error: state.posts.error
+        error: state.posts.error,
+        page: state.posts.page
     }));
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadPostsAction());
+        console.log(pagedPosts.number);
+        dispatch(loadPostsAction(pagedPosts.number,3));
     }, []);
 
     const StyledTableRow = withStyles((theme) => ({
@@ -46,8 +49,13 @@ const PostList = () => {
     });
     const classes = useStyles();
 
+    const handleChange = (e,value) =>{
+        e.preventDefault();
+        dispatch(changePageAction(value - 1));
+    }
+
     const renderPostList = () => {
-        if (!posts) return null;
+        if (!pagedPosts.content) return null;
         return (
             <TableContainer component={Paper}>
                 <Table className={classes.table} aria-label="customized table">
@@ -58,7 +66,7 @@ const PostList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {posts.map((post) => (
+                        {pagedPosts.content.map((post) => (
                             <StyledTableRow key={post.title}>
                                 <TableCell component="th" scope="row">
                                     <Link to={"/posts/" + post.id} className="w-1/3">{post.title}</Link>
@@ -90,7 +98,11 @@ const PostList = () => {
                         {renderPostList()}
                     </div>
                 </Container>}
+            <div>
+                <Pagination count={pagedPosts.totalPages} onChange={handleChange}/>
+            </div>
         </div>
+
     );
 }
 

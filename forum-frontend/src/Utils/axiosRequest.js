@@ -2,6 +2,7 @@ import axios from 'axios';
 import history from '../history';
 import Cookies from 'js-cookie';
 
+
 // const baseUrl = process.env.REACT_APP_API_BASE_URL;
 /**
  * Create an axios instance
