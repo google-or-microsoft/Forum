@@ -42,7 +42,7 @@ export const modifyPostAction = (id, post) => {
             .catch(() => dispatch({type: MODIFYING_POST_FAILURE}))
             .finally(() => {
                 dispatch({type: STOP_MODIFYING_POST})
-                history.push('/posts/'+ post.id);
+                history.push('/posts/' + post.id);
             });
     };
 }

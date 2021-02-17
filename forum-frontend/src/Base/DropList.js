@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
         marginRight: theme.spacing(1),
     },
-    avatar:{
+    avatar: {
         marginRight: theme.spacing(2)
     }
 }));
@@ -83,8 +83,8 @@ const DropList = () => {
                             <Paper className={classes.paper}>
                                 <ClickAwayListener onClickAway={handleClose}>
                                     <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                        <MenuItem onClick={(e)=> {
-                                            history.push('/users/'+username);
+                                        <MenuItem onClick={(e) => {
+                                            history.push('/users/' + username);
                                             handleClose(e);
                                         }}>Profile</MenuItem>
                                         <MenuItem onClick={(e) => {

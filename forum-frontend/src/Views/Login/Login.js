@@ -45,6 +45,11 @@ const Login = () => {
                     <br/>
                     <input type="submit" value="Submit"/>
                 </form>
+                <div>
+                    <p>
+                        Not a member of us? Click <a href={"/register"}> here </a> to sign up.
+                    </p>
+                </div>
             </div>
 
         </Container>
