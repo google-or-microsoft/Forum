@@ -65,7 +65,7 @@ public class PostController {
      */
     @GetMapping("/user/{id}")
     public Page<Post> getByUserId(@PathVariable(value = "id") String id,
-                                  @PageableDefault(size = 5) Pageable pageable) {
+                                  @PageableDefault(size = 8) Pageable pageable) {
         return postService.getByUserId(id, pageable);
     }
 
@@ -75,8 +75,8 @@ public class PostController {
      * @return
      */
     @GetMapping
-    public List<PostDTO> getAll() {
-        return postService.getAll();
+    public Page<PostDTO> getAll(@PageableDefault(size = 8) Pageable pageable) {
+        return postService.getAll(pageable);
     }
 
     /**

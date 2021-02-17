@@ -4,6 +4,7 @@ import com.teamgorm.projectforum.dto.PostDTO;
 import com.teamgorm.projectforum.exception.CustomizeException;
 import com.teamgorm.projectforum.exception.ErrorCode;
 import com.teamgorm.projectforum.model.Post;
+import com.teamgorm.projectforum.repository.PostAggregationRepository;
 import com.teamgorm.projectforum.repository.PostRepository;
 import com.teamgorm.projectforum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
 
-    @Resource
-    private MongoTemplate mongoTemplate;
+    @Autowired
+    private PostAggregationRepository postAggregationRepository;
 
     @Override
     public Post create(Post post) {
@@ -37,28 +38,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getByUserId(String id) {
-        return postRepository.findByUserId(id);
-    }
-
-    @Override
     public Page<Post> getByUserId(String id, Pageable pageable) {
         return postRepository.findByUserId(id, pageable);
     }
 
-
     @Override
-    public List<PostDTO> getAll() {
-        AddFieldsOperation addFieldsOperation = new AddFieldsOperation("userId",ConvertOperators.ToObjectId.toObjectId("$userId"));
-        LookupOperation lookupOperation = LookupOperation.newLookup()
-                .from("users")
-                .localField("userId")
-                .foreignField("_id")
-                .as("user");
-        UnwindOperation unwind = Aggregation.unwind("user");
-        Aggregation aggregation = Aggregation.newAggregation(addFieldsOperation, lookupOperation, unwind);
-        return mongoTemplate.aggregate(aggregation, "posts", PostDTO.class)
-                .getMappedResults();
+    public Page<PostDTO> getAll(Pageable pageable) {
+        return postAggregationRepository.findAllWithUser(pageable);
     }
 
     @Override

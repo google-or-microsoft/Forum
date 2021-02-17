@@ -13,11 +13,9 @@ public interface PostService {
 
     Post getById(String id);
 
-    List<Post> getByUserId(String id);
-
     Page<Post> getByUserId(String id, Pageable pageable);
 
-    List<PostDTO> getAll();
+    Page<PostDTO> getAll(Pageable pageable);
 
     Post update(String id, Post post);
 
