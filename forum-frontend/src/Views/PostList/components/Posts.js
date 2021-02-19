@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
-  Button,
-  Container,
   Table,
   TableBody,
   TableCell,
@@ -12,14 +10,17 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { changePageAction, loadPostsAction } from "./actions";
+import { changePageAction, loadPostsAction } from "../actions";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import { Pagination } from "@material-ui/lab";
+import styled from "styled-components";
 
-import Header from "./components/Header.js";
+const StyledPosts = styled.div`
+  padding: 15px;
+`;
 
-const PostList = () => {
+const Posts = () => {
   const { pagedPosts, loading, error, page } = useSelector((state) => ({
     pagedPosts: state.posts.pagedPosts,
     loading: state.posts.loading,
@@ -44,7 +45,9 @@ const PostList = () => {
 
   const useStyles = makeStyles({
     table: {
-      minWidth: 700,
+      width: 1300,
+      minWidth: 300,
+      maxWidth: 1200,
     },
   });
   const classes = useStyles();
@@ -88,29 +91,11 @@ const PostList = () => {
 
   return (
     <div>
-      {loading ? (
-        <p>Loading Content...</p>
-      ) : (
-        <Container>
-          <div className="float-right">
-            <Button
-              variant="outlined"
-              color="primary"
-              component={Link}
-              to="/posts/new/edit"
-            >
-              Add Post
-            </Button>
-          </div>
-          <h3>My Post List</h3>
-          <div className="flex flex-col">{renderPostList()}</div>
-        </Container>
-      )}
-      <div>
-        <Pagination count={pagedPosts.totalPages} onChange={handleChange} />
-      </div>
+      <StyledPosts>{renderPostList()}</StyledPosts>
+
+      <Pagination count={pagedPosts.totalPages} onChange={handleChange} />
     </div>
   );
 };
 
-export default PostList;
+export default Posts;
